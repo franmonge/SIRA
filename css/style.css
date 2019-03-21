@@ -1,0 +1,53 @@
+.navbar{
+	background-color: #00002F;
+	padding: 20px;
+}
+
+.rounded {
+	width: 70%;
+}
+
+.mr-auto{
+	margin: auto;
+  	width: 60%;  	
+}
+
+.nav-item{
+	padding-left: 10px;
+	font-size: 18px;
+}
+
+.page-footer{	
+	background-color: #00002F;
+	border-color: #00002F;
+	border-width: 10px;	
+	border-style: solid;
+}
+
+.page-footer .row {
+	background-color: #00002F;
+	border-color: #00002F;
+	border-width: 10px;
+	border-style: solid;
+	margin: auto; 	
+}
+
+.list-unstyled{
+	margin-left: 70px;
+}
+
+.fa-user{
+	color: white;
+	size: 150%;
+	font-size: 20px;
+}
+
+.fas{
+	color: white;
+	size: 150%;
+}
+
+/* Only for snippet */
+.double-nav .breadcrumb-dn {
+  color: #fff;
+}

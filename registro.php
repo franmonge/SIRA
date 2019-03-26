@@ -33,14 +33,14 @@
     <!-- Extended default form grid -->
 <form id="form-registro" action="BD_Consultas\registrar.php" method="POST">  
   <!-- Default input -->
-  <div class="form-row ">
+  <!-- <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="inputPassword4">Grupo al que solicita ingreso</label>
       <select class="browser-default custom-select" name="GrupoRegistro" id="Grupo">
-        <?php dropdownGrupos()?>
+        <?php //dropdownGrupos()?>
       </select>
     </div>
-  </div>
+  </div> -->
 
   <!-- Grid row -->
   <div class="form-row">
@@ -140,12 +140,12 @@
   <!-- Default input -->
   <div class="form-group col-md-3">
     <label for="inputAddress">Estatura (metros)</label>
-    <input type="Number" class="form-control" id="Estatura" name="EstaturaRegistro" placeholder="Estatura (metros)" required/>
+    <input type="Number" step="0.01" class="form-control" id="Estatura" name="EstaturaRegistro" placeholder="Estatura (metros)" required/>
   </div>
   <!-- Default input -->
   <div class="form-group col-md-3">
     <label for="inputAddress">Talla de Calzado</label>
-    <input type="Number" class="form-control" id="TallaCalzado" name="TallaCalzadoRegistro" placeholder="Talla de Calzado" required/>
+    <input type="Number" step="0.01" class="form-control" id="TallaCalzado" name="TallaCalzadoRegistro" placeholder="Talla de Calzado" required/>
   </div>
   <!-- Default input -->
   <div class="form-group  col-md-3">
@@ -155,13 +155,13 @@
   <!-- Default input -->
   <div class="form-group  col-md-3">
     <label for="inputAddress">Talla de Pantalón</label>
-    <input type="Number" class="form-control" id="TallaPantalon" name="TallaPantalonRegistro" placeholder="Talla de Pantalón" required/>
+    <input type="Number" step="0.01" class="form-control" id="TallaPantalon" name="TallaPantalonRegistro" placeholder="Talla de Pantalón" required/>
   </div>
   </div>
   <!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Enfermedades</label>
-    <input type="text" class="form-control" id="Enfermedades" name="Enfermedades">
+    <input type="text" class="form-control" id="Enfermedades" name="EnfermedadesRegistro">
   </div>
   <!--Material textarea-->
   <div class="form-group">

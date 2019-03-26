@@ -26,7 +26,7 @@
 <body>
 
   <!-- Start your project here-->
-<?php include('Components\Navbar.php')?> 
+<?php include('Componentes\Navbar.php')?> 
 <?php include('Componentes\footer.php')?>
   <!-- /Start your project here-->
 

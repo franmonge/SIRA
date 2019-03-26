@@ -362,7 +362,7 @@
   <footer class="blockquote-footer mb-3">Someone famous in <cite title="Source Title">Source Title</cite></footer>
 </blockquote>
 
-<?php include('Components\footer.php')?>
+<?php include('Componentes\footer.php')?>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

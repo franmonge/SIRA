@@ -52,8 +52,10 @@
 		}
 		$conn->close();
 	}
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if(isset($_POST['btnRegistrar'])){
+			require('Conexion.php');
 			$Grupo = filter_input(INPUT_POST, 'GrupoRegistro');
 			$Nombre = filter_input(INPUT_POST, 'NombreRegistro');
 			$Apellidos = filter_input(INPUT_POST, 'ApellidosRegistro');
@@ -73,6 +75,25 @@
 			$Pantalon = filter_input(INPUT_POST, 'TallaPantalonRegistro');
 			$Enfermedades = filter_input(INPUT_POST, 'EnfermedadesRegistro');
 			$Observaciones = filter_input(INPUT_POST, 'ObservacionesRegistro');
+
+			$id_Carrera = consultaCarrera($Carrera, $conn);
+			// echo "<div class=\"container flex-center\">
+			// 	    <button type=\"submit\" class=\"btn btn-dark btn-block btn-md\" name=\"btnRegistrar\">".$id_Carrera."</button>
+			// 	  </div>";
+			// $id_Dimension
+			// $id_Direccion
+			// $id_Telefono
+			// $id_TipoSangre
 		}	
 	}
+
+	function consultaCarrera($Carrera, $conn){
+		$sql = "SELECT ID FROM carrera WHERE Nombre = '$Carrera'";
+		$result = mysqli_query($conn, $sql);
+		$result2 = $result->fetch_array(MYSQLI_NUM);
+		$id_Carrera = $result2[0];
+		return $id_Carrera;
+	}
+
+	function consultaDimension($)
  ?>

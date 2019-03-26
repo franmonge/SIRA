@@ -21,13 +21,13 @@
   integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
   crossorigin="anonymous"
 />
-  <?php include 'getGrupos.php'?>
+  <?php include 'BD_Consultas\IndexGruposPreview.php'?>
 </head>
 
 <body>
 
   <!-- Start your project here-->
-<?php include('Navbar.php')?>
+<?php include('Componentes\Navbar.php')?>
 
   <!--Carousel Wrapper-->
 <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
@@ -181,9 +181,11 @@
 
   <!-- Section heading -->
   <h2 class="h1-responsive font-weight-bold text-center my-5">Grupos Artísticos</h2>
-
+ <div class="container">
+    <div class="card-deck">
       <?php getGrupos()?>
-
+  </div>
+</div>
 </section>
 <!-- Section: Blog v.1 -->
 
@@ -360,62 +362,7 @@
   <footer class="blockquote-footer mb-3">Someone famous in <cite title="Source Title">Source Title</cite></footer>
 </blockquote>
 
-  <br>
-  
-
-  <!-- Footer -->
-    <footer class="page-footer font-small pt-4">
-    <!-- Footer Links -->
-      <!-- Grid row -->
-      <div class="row">
-      <div class="row">
-        <!-- Grid column -->
-        <div class="col-md-3">
-          <!-- Content -->
-          <img src="img/logoTECBLANCO.png" class="rounded">
-        </div>
-        <!-- Grid column -->       
-
-        <!-- Grid column -->
-        <div class="col-md-6 text-center">
-            <!-- Links -->
-            <h1>SIRA</h1>
-            <h5>Sistema Institucional de Registro Artístico</h5>
-        </div>
-
-        <!-- Grid column -->
-        <div class="col-md-3 text-center">
-          <!-- Links -->
-          <h5>Seguinos en Redes Sociales</h5>
-          <ul class="list-unstyled mb-5 flex-center">
-            <li>
-              <a class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-3x" href="https://www.facebook.com/tierraycosecha/"></a>
-            </li>
-            <li>
-              <a class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-3x" href="#!"></a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-      <a href="https://www.tec.ac.cr/"> www.tec.ac.cr </a>
-    </div>
-    <!-- Copyright -->
-   
-    </footer>
-    <!-- Footer -->
-
-
-    <!-- /Start your project here-->
-
-
+<?php include('Components\footer.php')?>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>

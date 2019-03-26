@@ -15,13 +15,14 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+  <?php include('BD_Consultas\registrar.php')?>
 </head>
 
 <body>
 
   <!-- Start your project here-->
 
-  <?php include('Navbar.php')?>  
+  <?php include('Componentes\Navbar.php')?>  
     
    <!-- Container -->
   <div class="container">
@@ -30,16 +31,13 @@
     <h2>Por favor ingrese sus datos</h2>
     <br>
     <!-- Extended default form grid -->
-<form>  
+<form id="form-registro" action="BD_Consultas\registrar.php" method="POST">  
   <!-- Default input -->
   <div class="form-row ">
     <div class="form-group col-md-6">
       <label for="inputPassword4">Grupo al que solicita ingreso</label>
-      <select class="browser-default custom-select">
-        <option selected>Grupo al que solicita ingreso</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="browser-default custom-select" name="GrupoRegistro" id="Grupo">
+        <?php dropdownGrupos()?>
       </select>
     </div>
   </div>
@@ -49,12 +47,12 @@
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputEmail4">Nombre</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Nombre">
+      <input type="text" class="form-control" id="Nombre" name="NombreRegistro" placeholder="Nombre" required/>
     </div>
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Apellidos</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Apellidos">
+      <input type="text" class="form-control" id="Apellidos" name="ApellidosRegistro" placeholder="Apellidos" required/>
     </div>
   </div>
   <!-- Grid row -->
@@ -63,12 +61,12 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+      <input type="email" class="form-control" id="Email" name="EmailRegistro" placeholder="Email" required/>
     </div>
 
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Password</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
+      <label for="inputPassword4">Contraseña</label>
+      <input type="password" class="form-control" id="Password" name="PasswordRegistro" placeholder="Password" required/>
     </div>
   </div>
   <!-- Grid row -->
@@ -78,12 +76,12 @@
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Pasaporte</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Pasaporte">
+      <input type="text" class="form-control" id="Pasaporte" name="PasaporteRegistro" placeholder="Pasaporte" required/>
     </div>
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Fecha de Vencimiento </label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Fecha de Vencimiento">
+      <input type="month" class="form-control" name="start" min="2019-01" max="2080-01" value="2019-04" id="FechaVencimiento" name="FechaVencimientoRegistro" required/>
     </div>
   </div>
   <!-- Grid row -->
@@ -93,17 +91,19 @@
     <!-- Default input -->
     <div class="form-group col-md-4">
       <label for="inputEmail4">Fecha de Nacimiento</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="Fecha de Nacimiento">
+      <input type="date" id="FechaNacimiento" name="FechaNacimientoRegistro" class="form-control" required/>
+
+      <!-- <input type="email" class="form-control" id="inputEmail4" placeholder="Fecha de Nacimiento"> -->
     </div>
     <!-- Default input -->
     <div class="form-group col-md-4">
       <label for="inputPassword4">Teléfono Celular</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Teléfono Celular">
+      <input type="text" class="form-control" id="TelefonoCelular" name="TelefonoCelularRegistro" placeholder="Teléfono Celular" required/>
     </div>
     <!-- Default input -->
     <div class="form-group col-md-4">
       <label for="inputPassword4">Teléfono Domicilio</label>
-      <input type="password" class="form-control" id="inputPassword4" placeholder="Teléfono Domicilio">
+      <input type="text" class="form-control" id="TelefonoDomicilio" name="TelefonoDomicilioRegistro" placeholder="Teléfono Domicilio" required/>
     </div>
   </div>
   <!-- Grid row -->
@@ -113,21 +113,15 @@
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Carrera</label>
-      <select class="browser-default custom-select">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="browser-default custom-select" name="CarreraRegistro" id="Carrera">
+        <?php dropdownCarreras()?>
       </select>
     </div>
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Tipo de Sangre</label>
-      <select class="browser-default custom-select">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="browser-default custom-select" name="TipoSangreRegistro" id="TipoSangre">
+        <?php dropdownTiposSanges()?>
       </select>
     </div>
   </div>
@@ -136,113 +130,53 @@
   <!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Dirección de Domicilio</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Dirección de Domicilio">
+    <input type="text" class="form-control" id="DireccionDomicilio" name="DireccionDomicilioRegistro" placeholder="Dirección de Domicilio" required/>
   </div><!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Dirección de Tiempo Lectivo</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Dirección de Tiempo Lectivo">
+    <input type="text" class="form-control" id="DireccionLectiva" name="DireccionLectivaRegistro" placeholder="Dirección de Tiempo Lectivo" required/>
   </div>  
   <div class="form-row">
   <!-- Default input -->
   <div class="form-group col-md-3">
     <label for="inputAddress">Estatura (metros)</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Estatura (metros)">
+    <input type="Number" class="form-control" id="Estatura" name="EstaturaRegistro" placeholder="Estatura (metros)" required/>
   </div>
   <!-- Default input -->
   <div class="form-group col-md-3">
     <label for="inputAddress">Talla de Calzado</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Talla de Calzado">
+    <input type="Number" class="form-control" id="TallaCalzado" name="TallaCalzadoRegistro" placeholder="Talla de Calzado" required/>
   </div>
   <!-- Default input -->
   <div class="form-group  col-md-3">
     <label for="inputAddress">Talla de Blusa/Camisa</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Talla de Blusa/Camisa">
+    <input type="text" class="form-control" id="TallaBlusa" name="TallaBlusaRegistro" placeholder="Talla de Blusa/Camisa" required/>
   </div>
   <!-- Default input -->
   <div class="form-group  col-md-3">
     <label for="inputAddress">Talla de Pantalón</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Talla de Pantalón">
+    <input type="Number" class="form-control" id="TallaPantalon" name="TallaPantalonRegistro" placeholder="Talla de Pantalón" required/>
   </div>
   </div>
   <!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Enfermedades</label>
-    <input type="text" class="form-control" id="inputAddress" placeholder="Enfermedades">
+    <input type="text" class="form-control" id="Enfermedades" name="Enfermedades">
   </div>
   <!--Material textarea-->
-  <label for="inputAddress">Observaciones</label>
-  <div class="md-form md-outline">    
-    <textarea id="form75" class="form-control" rows="3" placeholder="Observaciones"></textarea>
+  <div class="form-group">
+    <label for="inputAddress">Observaciones</label>
+    <textarea class="form-control" rows="4" cols="50" id="Observaciones" name="ObservacionesRegistro"></textarea>
   </div>
+  
   <div class="container flex-center">
-    <button type="submit" class="btn btn-dark btn-block btn-md">Registrarme</button>
+    <button type="submit" class="btn btn-dark btn-block btn-md" name="btnRegistrar">Registrarme</button>
   </div>
 </form>
-<!-- Extended default form grid -->
-
-
-<br>
-
-
   <br>
   
   </div>
-  <br>
-
-  
-   <!-- Footer -->
-  <footer class="page-footer font-small pt-4">
-  <!-- Footer Links -->
-    <!-- Grid row -->
-    <div class="row">
-    <div class="row">
-      <!-- Grid column -->
-      <div class="col-md-3">
-        <!-- Content -->
-        <img src="img/logoTECBLANCO.png" class="rounded">
-      </div>
-      <!-- Grid column -->       
-
-      <!-- Grid column -->
-      <div class="col-md-6 text-center">
-          <!-- Links -->
-          <h1>SIRA</h1>
-          <h5>Sistema Institucional de Registro Artístico</h5>
-      </div>
-
-      <!-- Grid column -->
-      <div class="col-md-3 text-center">
-        <!-- Links -->
-        <h5>Seguinos en Redes Sociales</h5>
-        <ul class="list-unstyled mb-5 flex-center">
-          <li>
-            <a class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-3x" href="https://www.facebook.com/tierraycosecha/"></a>
-          </li>
-          <li>
-            <a class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-3x" href="#!"></a>
-          </li>
-        </ul>
-      </div>
-      <!-- Grid column -->
-
-    </div>
-    <!-- Grid row -->
-  </div>
-  <!-- Footer Links -->
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2019 Copyright:
-    <a href="https://www.tec.ac.cr/"> www.tec.ac.cr </a>
-  </div>
-  <!-- Copyright -->
- 
-  </footer>
-  <!-- Footer -->
-  
-
-    <!-- /Start your project here-->
-
-
+  <?php include('Componentes\footer.php')?>
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -266,6 +200,7 @@
 />
 
 <script>var Alert = ReactBootstrap.Alert;</script>
+
 </body>
 
 </html>

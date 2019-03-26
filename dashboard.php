@@ -26,63 +26,9 @@
 <body>
 
   <!-- Start your project here-->
-<?php include('Navbar.php')?> 
-
-  <br>
-  
-
-  <!-- Footer -->
-    <footer class="page-footer font-small pt-4">
-    <!-- Footer Links -->
-      <!-- Grid row -->
-      <div class="row">
-      <div class="row">
-        <!-- Grid column -->
-        <div class="col-md-3">
-          <!-- Content -->
-          <img src="img/logoTECBLANCO.png" class="rounded">
-        </div>
-        <!-- Grid column -->       
-
-        <!-- Grid column -->
-        <div class="col-md-6 text-center">
-            <!-- Links -->
-            <h1>SIRA</h1>
-            <h5>Sistema Institucional de Registro Artístico</h5>
-        </div>
-
-        <!-- Grid column -->
-        <div class="col-md-3 text-center">
-          <!-- Links -->
-          <h5>Seguinos en Redes Sociales</h5>
-          <ul class="list-unstyled mb-5 flex-center">
-            <li>
-              <a class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-3x" href="https://www.facebook.com/tierraycosecha/"></a>
-            </li>
-            <li>
-              <a class="fab fa-youtube fa-lg white-text mr-md-5 mr-3 fa-3x" href="#!"></a>
-            </li>
-          </ul>
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2019 Copyright:
-      <a href="https://www.tec.ac.cr/"> www.tec.ac.cr </a>
-    </div>
-    <!-- Copyright -->
-   
-    </footer>
-    <!-- Footer -->
-
-
-    <!-- /Start your project here-->
-
+<?php include('Components\Navbar.php')?> 
+<?php include('Componentes\footer.php')?>
+  <!-- /Start your project here-->
 
     <!-- SCRIPTS -->
     <!-- JQuery -->

@@ -20,9 +20,8 @@
 												<p align=\"justify\">" .$row['Descripcion']. "
 												</p>
 												<div class=\"text-center text-md-left\">
-													<a href=\"#!\" class=\"dark-blue-text d-flex flex-row-reverse p-2\">
-														<h5>Ver más<i class=\"fas fa-angle-double-right ml-2\"></i></h5>
-													</a>
+													<input type=\"submit\" class=\"btn btn-success btn-md\" name=\"" .$row['Nombre'] . "\" value=\"Ver Más\"></button>
+													
 												</div>
 											</div>
 										</div>       
@@ -32,6 +31,10 @@
 							</div>
 						</form>
 						";
+
+					//// <a href=\"#!\" class=\"dark-blue-text d-flex flex-row-reverse p-2\" name=\"."$row['Nombre']".>
+													// 	<h5>Ver más<i class=\"fas fa-angle-double-right ml-2\"></i></h5>
+													// </a>
 					// echo
 					// 	"<form action=\"grupoEspecifico.php\" method=\"post\">
 					// 		<div class=\"row\">
@@ -54,5 +57,6 @@
 				}
 			}
 	}
+	$conn->close();
 }
 ?>

@@ -21,7 +21,7 @@
   integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
   crossorigin="anonymous"
 />
-
+  <?php include 'getGrupos.php'?>
 </head>
 
 <body>
@@ -220,80 +220,7 @@
     esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
     qui officia deserunt mollit anim id est laborum.</p>
 
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-5">
-
-      <!-- Featured image -->
-      <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
-        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(27).jpg" alt="Sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-7">
-
-
-      <!-- Post title -->
-      <h3 class="font-weight-bold mb-3"><strong>Tierra y Cosecha</strong></h3>
-      <!-- Excerpt -->
-      <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime
-        placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus et aut officiis debitis.</p>
-      <a class="btn btn-success btn-md">Read more</a>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
-  <hr class="my-5">
-
-  <!-- Grid row -->
-  <div class="row">
-
-    <!-- Grid column -->
-    <div class="col-lg-7">
-
-
-      <!-- Post title -->
-      <h3 class="font-weight-bold mb-3"><strong>Danza-TEC</strong></h3>
-      <!-- Excerpt -->
-      <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-        deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-        provident.</p>
-      <a class="btn btn-pink btn-md mb-lg-0 mb-4">Read more</a>
-
-    </div>
-    <!-- Grid column -->
-
-    <!-- Grid column -->
-    <div class="col-lg-5">
-
-      <!-- Featured image -->
-      <div class="view overlay rounded z-depth-2">
-        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/img%20(34).jpg" alt="Sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
-      </div>
-
-    </div>
-    <!-- Grid column -->
-
-  </div>
-  <!-- Grid row -->
-
-  <hr class="my-5">
-
-
+      <?php getGrupos()?>
 
 </section>
 <!-- Section: Blog v.1 -->

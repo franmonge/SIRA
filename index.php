@@ -27,41 +27,7 @@
 <body>
 
   <!-- Start your project here-->
-
-  <!--Navbar -->
-  <nav class="mb-1 navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="./index.html"><b><h2>SIRA</h2></b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-      aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarButtons">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="./index.html"><b>Inicio</b>
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./grupos.html"><b>Grupos</b></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./presentaciones.html"><b>Presentaciones</b></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./galeria.html"><b>Galería</b></a>
-        </li>
-      </ul>
-
-      <li class="navbar-nav ml-auto nav-flex-icons">
-        <a class="fas fa-user" href="./sesion.html"><b>  Iniciar Sesión</b></a>
-      </li>
-    </div>
-  </nav>
-  <!--/.Navbar -->
-
-
+<?php include('Navbar.php')?>
 
   <!--Carousel Wrapper-->
 <div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
@@ -215,10 +181,6 @@
 
   <!-- Section heading -->
   <h2 class="h1-responsive font-weight-bold text-center my-5">Grupos Artísticos</h2>
-  <!-- Section description -->
-  <p class="text-center w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in voluptate velit
-    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-    qui officia deserunt mollit anim id est laborum.</p>
 
       <?php getGrupos()?>
 

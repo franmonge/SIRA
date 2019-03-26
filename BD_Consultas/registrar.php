@@ -66,6 +66,7 @@
 				$Password = filter_input(INPUT_POST, 'PasswordRegistro');
 				$Pasaporte = filter_input(INPUT_POST, 'PasaporteRegistro');
 				$FechaNacimiento = filter_input(INPUT_POST, 'FechaNacimientoRegistro');
+				$FechaVencimiento = filter_input(INPUT_POST, 'FechaVencimientoRegistro');
 				$TelefonoCelular = filter_input(INPUT_POST, 'TelefonoCelularRegistro');
 				$TelefonoDomicilio = filter_input(INPUT_POST, 'TelefonoDomicilioRegistro');
 				$Carrera = filter_input(INPUT_POST, 'CarreraRegistro');
@@ -85,10 +86,12 @@
 				$id_Direccion = consultaDireccion($DireccionDomicilio, $DireccionLectiva, $conn);
 				$id_Telefono = consultaTelefono($TelefonoCelular, $TelefonoDomicilio, $conn);
 				$id_TipoSangre = consultaTipoSangre($TipoSangre, $conn);
+				$start = '2014-06-01 14:00:00';
+				$timestamp = date('Y-m-d H:i',strtotime('+1 hour +20 minutes',strtotime($start)));
 				$Estado = "Pendiente";
-				$sql = "INSERT INTO usuario(Apellidos, Email, Enfermedad, FecNacimiento, FecVencimiento, id_Carrera, id_Dimension, id_Direccion, id_Telefono, id_TipoSangre, Estado, Nombre, Observacion, Pasaporte, Password) VALUES ($Apellidos, $Email, $Enfermedades, $FechaNacimiento, $id_Carrera, $id_Dimension, $id_Direccion, $id_Telefono, $id_TipoSangre, $Estado, $Nombre, $Observaciones, $Pasaporte, $Password)";
+				$sql = "INSERT INTO usuario(Apellidos, Email, Enfermedad, FecNacimiento, FecVencimiento, id_Carrera, id_Dimension, id_Direccion, id_Telefono, id_TipoSangre, Estado, Nombre, Observacion, Pasaporte, Password) VALUES ('$Apellidos', '$Email', '$Enfermedades', '$timestamp', '$timestamp', '$id_Carrera', '$id_Dimension', '$id_Direccion', '$id_Telefono', '$id_TipoSangre', '$Estado', '$Nombre', '$Observaciones', '$Pasaporte', '$Password')";
 				if(mysqli_query($conn, $sql)){
-					include("index.php");
+					header("Location: ../index.php");
 				}else{
 					echo "Error" .mysqli_error($conn);
 				}

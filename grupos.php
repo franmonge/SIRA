@@ -15,6 +15,7 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous"/>
+  <?php include('getGrupos.php') ?>
 </head>
 
 <body>
@@ -42,62 +43,8 @@
   <!-- Grid column -->
   <div >
     <!--Panel-->
-    <div class="card mb-3">
-      <h3 class="card-header indigo white-text text-uppercase text-center">Tierra y Cosecha</h3>
-      <div class="card-body">
-        <div class="media d-block d-md-flex mt-md-0 mt-4 mb-4">
-          <img class="d-flex mb-md-0 mb-3 avatar-2 z-depth-1 mx-auto" src="https://mdbootstrap.com/img/Others/documentation/img (3)-mini.jpg"
-            alt="Generic placeholder image">
-          <div class="media-body ml-md-3 ml-0">
-            <p align="justify">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-              deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-              provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
-              fuga.
-            </p>
-            <div class="text-center text-md-left">
-              <a href="#!" class="dark-blue-text d-flex flex-row-reverse p-2">
-                <h5>Ver más<i class="fas fa-angle-double-right ml-2"></i></h5>
-              </a>
-            </div>
-          </div>
-        </div>       
-      </div>
-    </div>
-    <!--/.Panel-->
-  </div>
+    <?php getGrupos() ?>
   <!-- Grid column -->
-
-
-
-  <br>
-
-
-  <!-- Card -->
-  <div class="card card-cascade wider reverse">
-    <!-- Card image -->
-    <div class="view view-cascade overlay">
-      <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Slides/img%20(70).jpg" alt="Card image cap">
-      <a href="#!">
-        <div class="mask rgba-white-slight"></div>
-      </a>
-    </div>
-
-    <!-- Card content -->
-    <div class="card-body card-body-cascade text-center">
-      <!-- Title -->
-      <h4 class="card-title"><strong>My adventure</strong></h4>
-      <!-- Text -->
-      <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem perspiciatis voluptatum a, quo nobis, non commodi quia repellendus sequi nulla voluptatem dicta reprehenderit, placeat laborum ut beatae ullam suscipit veniam.
-      </p>
-      <a href="#!" class="dark-blue-text d-flex flex-row-reverse p-2">
-        <h5 class="waves-effect waves-light">Ver más<i class="fas fa-angle-double-right ml-2"></i></h5>
-      </a>
-    </div>
-  </div>
-  <!-- Card -->
-
-  <br>
-  
 
 
   

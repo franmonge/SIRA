@@ -205,12 +205,11 @@ $conn->close();
     <?php include('adminNav.php')?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-       <!-- Main content -->
-
-       <!-- Content Header (Page header) -->
-       <section class=\"content-header\">
-          <h1>Miembros</h1>
-        </section>
+      <!-- Main content -->
+      <!-- Content Header (Page header) -->
+      <section class=\"content-header\">
+         <h1>Miembros</h1>
+       </section>
 
        <?php miembrosActivos();
              miembrosInactivos();?>

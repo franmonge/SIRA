@@ -35,7 +35,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Mi Perfil</a>
+                <a href="/SIRA-ADMIN/pages/examples/profile.php" class="btn btn-default btn-flat">Mi Perfil</a>
               </div>
               <div class="pull-right">
                 <a href="/SIRA/logOut.php" class="btn btn-default btn-flat">Cerrar Sesión</a>
@@ -76,7 +76,23 @@
       <li <?php echo $e; ?>>
         <a href="adminSolicitudes.php"><i class="fa fa-plus"></i><span>Solicitudes</span>
           <span class="pull-right-container">
-            <span class="label label-primary pull-right">4</span>
+            <?php
+            function getSolicitudes(){
+              require('BD_Consultas/Conexion.php');
+            if ($conn->connect_error){
+              die("Connection failed: " . $conn->connect_error);
+            }else{
+              $query = "select count(*) as counter FROM usuario WHERE estado=\"Pendiente\"";
+              $result = mysqli_query($conn, $query);
+              $row = $result->fetch_assoc();
+              $result = $row['counter'];
+              $conn->close();
+              if ($result != "0" ){
+                echo "<span class=\"label label-primary pull-right\">$result</span>";
+              }
+          } }
+          getSolicitudes();
+          ?>
           </span>
         </a>
       </li>

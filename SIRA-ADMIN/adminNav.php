@@ -2,41 +2,41 @@
   $archivo_actual = $_SERVER['PHP_SELF'] ; //Regresa el nombre del archivo actual
   switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de selección
   {
-    case "/sira-admin/admin.php":
+    case "/sira/SIRA-ADMIN/admin.php":
       $a = "class=\"active\"";
-      $b = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";
+      $b = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminGrupos.php":
+    case "/sira/SIRA-ADMIN/adminGrupos.php":
       $b = "class=\"active\"";
-      $a = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";
+      $a = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminPresentaciones.php":
+    case "/sira/SIRA-ADMIN/adminPresentaciones.php":
       $c = "class=\"active\"";
-      $a = "";$b = "";$d = "";$e = "";$f = "";$g = "";$h = "";
+      $a = "";$b = "";$d = "";$e = "";$f = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminMiembros.php":
+    case "/sira/SIRA-ADMIN/adminMiembros.php":
       $d = "class=\"active\"";
-      $a = "";$b = "";$c = "";$e = "";$f = "";$g = "";$h = "";
+      $a = "";$b = "";$c = "";$e = "";$f = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminSolicitudes.php":
+    case "/sira/SIRA-ADMIN/adminSolicitudes.php":
       $e = "class=\"active\"";
-      $a = "";$b = "";$c = "";$d = "";$f = "";$g = "";$h = "";
+      $a = "";$b = "";$c = "";$d = "";$f = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminAsistencia.php":
+    case "/sira/SIRA-ADMIN/adminAsistencia.php":
       $f = "class=\"active\"";
-      $a = "";$b = "";$c = "";$d = "";$e = "";$g = "";$h = "";
+      $a = "";$b = "";$c = "";$d = "";$e = "";$g = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminReportes.php":
+    case "/sira/SIRA-ADMIN/adminReportes.php":
       $g = "class=\"active\"";
-      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$h = "";
+      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$h = "";$i = "";
       break;
-    case "/sira-admin/adminGaleria.php":
+    case "/sira/SIRA-ADMIN/adminGaleria.php":
       $h = "class=\"active\"";
-      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$g = "";
+      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$g = "";$i = "";
       break;
-    case "/sira-admin/adminAdministradores.php":
-      $h = "class=\"active\"";
-      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$g = "";
+    case "/sira/SIRA-ADMIN/adminAdministradores.php":
+      $i = "class=\"active\"";
+      $a = "";$b = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";
       break;
   }
 ?>
@@ -130,11 +130,11 @@
         <a href="#"> <i class="fa fa-file"></i> <span>Reportes</span></a>
       </li>
 
-      <li <?php echo $g; ?>>
+      <li <?php echo $h; ?>>
         <a href="#"> <i class="fa fa-image"></i> <span>Galería</span></a>
       </li>
 
-      <li <?php echo $g; ?>>
+      <li <?php echo $i; ?>>
         <a href="adminAdministradores.php"> <i class="fa fa-shield"></i> <span>Administradores</span></a>
       </li>
 

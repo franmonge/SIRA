@@ -1,3 +1,38 @@
+<?php require('sesion.php')?>
+<?php 
+  if(isset($_POST['Usuario']) && (isset($_POST['Password']))){
+    $Usuario = filter_input(INPUT_POST, 'Usuario');
+    $Password = filter_input(INPUT_POST, 'Password');
+    verificarLogIn($Usuario, $Password);
+  }
+
+  function verificarLogIn($Usuario, $Password){
+    require('BD_Consultas\Conexion.php');
+    if ($conn->connect_error){
+			die("Connection failed: " . $conn->connect_error);
+		}else{
+			$resultado = existeUsuario($Usuario, $Password, $conn);
+			if($resultado == 1){
+        $_SESSION['user'] = $Usuario;
+      }
+      $conn->close();
+    }
+  }
+
+  function existeUsuario($Usuario, $Password){
+    require('BD_Consultas\Conexion.php');
+    if ($conn->connect_error){
+			die("Connection failed: " . $conn->connect_error);
+		}else{
+      $sql = "SELECT CASE WHEN EXISTS(SELECT 1 FROM usuario WHERE Email = '$Usuario' AND Password = '$Password') THEN 1 ELSE 0 END";
+      $resultado = mysqli_query($conn, $sql);
+      $resultado2 = $resultado->fetch_array(MYSQLI_NUM);
+      $conn->close();
+      return $resultado2[0];
+    }
+  }
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -372,6 +407,8 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="js/mdb.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
 </body>
 
 </html>

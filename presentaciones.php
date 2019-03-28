@@ -1,3 +1,4 @@
+<?php require('sesion.php')?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +19,7 @@
 </head>
 
 <body>
-
+  <?php //require('sesion.php')?>
   <!-- Start your project here-->
 
   <?php include('Componentes\Navbar.php')?>

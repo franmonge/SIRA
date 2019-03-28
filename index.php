@@ -14,6 +14,8 @@
 			$resultado = existeUsuario($Usuario, $Password, $conn);
 			if($resultado == 1){
         $_SESSION['user'] = $Usuario;
+      }else{
+         header("Location: ./logIn.php");
       }
       $conn->close();
     }

@@ -1,4 +1,5 @@
 <?php
+  $a = ""; $b = "";$c = "";$d = "";$e = "";$f = "";$g = "";$h = "";$i = "";
   $archivo_actual = $_SERVER['PHP_SELF'] ; //Regresa el nombre del archivo actual
   switch($archivo_actual) //Valido en que archivo estoy para generar mi CSS de selección
   {

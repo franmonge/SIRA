@@ -16,22 +16,26 @@
                <div class=\"box-body\">
                  <table id=\"table-Solicitudes\" class=\"table table-bordered table-striped\">
                    <thead>
-                   <tr>
-                     <th>Nombre</th>
-                     <th>Apellidos</th>
-                     <th>Email</th>
-                     <th>Opciones</th>
-                   </tr>
-                   </thead>
-                   <tbody>";
+                     <tr>
+                       <th>Nombre</th>
+                       <th>Apellidos</th>
+                       <th>Email</th>
+                       <th>Grupo</th>
+                       <th>Opciones</th>
+                     </tr>
+                     </thead>
+                     <tbody>";
       while($row = $result->fetch_assoc()){
         $Codigo .= "<tr>";
         $Codigo .= "<td>" .$row["nombre"] . "</td>";
         $Codigo .= "<td>" .$row["apellidos"] . "</td>";
         $Codigo .= "<td>" .$row["email"] . "</td>";
+        $Codigo .= "<form action=\"BD_Consultas\miembros.php\" method=\"post\">";
+        $Codigo .= "<td><select  name=\"Grupos\" id=\"Grupos\">";
+        $Codigo .= dropdownGrupos();
+        $Codigo .= "</select></td>";
         $Codigo .= "<td>" .
                     "<div class=\"input-group-btn\">
-                      <form action=\"BD_Consultas\miembros.php\" method=\"post\">
                         <input type=\"hidden\" name=\"acceptId\" value=\"".$row["id"]."\" >
                         <input type=\"submit\"  class=\"btn btn-block btn-success btn-flat\" value=\"Aceptar\">
                       </form>
@@ -45,14 +49,6 @@
       }
       $Codigo .= "
       </tbody>
-        <tfoot>
-          <tr>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Email</th>
-            <th>Opciones</th>
-          </tr>
-        </tfoot>
       </table>
       </div>
           <!-- /.box-body -->
@@ -88,9 +84,29 @@
   }
   $conn->close();
   }
+
+  function dropdownGrupos(){
+    $out = "";
+    require('BD_Consultas\Conexion.php');
+    if ($conn->connect_error){
+      die("Connection failed: " . $conn->connect_error);
+    }else{
+      $sql = "SELECT Nombre FROM grupo";
+      $result = mysqli_query($conn, $sql);
+      if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+          $out .= "<option>" .$row['Nombre']."</option>";
+        }
+      }else{
+        $out .= "<option>No hay grupos</option>";
+      }
+    $conn->close();
+    }
+    return $out;
+  }
 ?>
 
-
+<!-- class=\"browser-default custom-select\" -->
 
  <!DOCTYPE html>
  <html>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 	function dropdownGrupos(){
 		require('Conexion.php');
 		if($conn->connect_error){
@@ -26,7 +26,7 @@
 			$sql = "SELECT Nombre, Descripcion FROM grupo WHERE Estado = '1'";
 			$result = mysqli_query($conn, $sql);
 			if($result->num_rows > 0){
-				
+
       $Codigo = "
       <!-- Content Header (Page header) -->
       <section class=\"content-header\">
@@ -56,9 +56,10 @@
         $Codigo .= "<td>" .$row["Descripcion"] . "</td>";
         $Codigo .= "<td>" .
         			"<div class=\"input-group-btn\">
-                  		<button id=\"edit-group\" type=\"button\" class=\"btn btn-block btn-warning btn-flat\">Editar</button>
-                  		<button id=\"delete-group\" type=\"button\" class=\"btn btn-block btn-danger btn-flat\">Eliminar</button>
-                	</div>" 
+							<button type=\"button\" class=\"btn  btn-block btn-info btn-flat\" data-toggle=\"modal\" data-target=\"#member-modal\">Miembros</button>
+                  		<button id=\"edit-group\" type=\"button\" class=\"btn btn-block btn-warning btn-flat\" data-toggle=\"modal\" data-target=\"#editGroup-modal\">Editar</button>
+                  		<button id=\"delete-group\" type=\"button\" class=\"btn btn-block btn-danger btn-flat\" data-toggle=\"modal\"data-target=\"#deleteGroup-modal\">Eliminar</button>
+                	</div>"
                 	. "</td>";
         $Codigo .= "</tr>";
       }
@@ -109,7 +110,7 @@
 				}
 			}
 			$conn->close();
-		}	
+		}
 	}
 
  ?>

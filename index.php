@@ -13,12 +13,39 @@
 		}else{
 			$resultado = existeUsuario($Usuario, $Password, $conn);
 			if($resultado == 1){
-        $_SESSION['user'] = $Usuario;
+        $administrador = usuarioAdministrador($Usuario);
+        if($administrador == 1){
+          $_SESSION['user'] = $Usuario;  
+        }else{
+          header("Location: ./logIn.php");
+        }
       }else{
          header("Location: ./logIn.php");
       }
       $conn->close();
     }
+  }
+
+  function usuarioAdministrador($Usuario){
+    require('BD_Consultas\Conexion.php');
+    if ($conn->connect_error){
+      die("Connection failed: " . $conn->connect_error);
+    }else{
+      $idUsuario = consultaUsuario($Usuario, $conn);
+      $sql = "SELECT CASE WHEN EXISTS(SELECT 1 FROM administrador WHERE id_usuario = '$idUsuario') THEN 1 ELSE 0 END";
+      $resultado = mysqli_query($conn, $sql);
+      $resultado2 = $resultado->fetch_array(MYSQLI_NUM);
+      $conn->close();
+      return $resultado2[0];
+    }
+  }
+
+  function consultaUsuario($Usuario, $conn){
+    $sql = "SELECT id FROM usuario WHERE Email = '$Usuario'";
+    $result = mysqli_query($conn, $sql);
+    $result2 = $result->fetch_array(MYSQLI_NUM);
+    $id_Usuario = $result2[0];
+    return $id_Usuario;
   }
 
   function existeUsuario($Usuario, $Password){

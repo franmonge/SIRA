@@ -25,8 +25,8 @@
       </section>
 
       <div class="content-header">
-        
-      
+
+
       <!-- general form elements -->
       <div class="box box-primary">
         <div class="box-header with-border">
@@ -35,7 +35,7 @@
         <!-- /.box-header -->
         <!-- form start -->
         <form role="form" id="form-grupos" action="BD_Consultas\Grupos.php" method="POST">
-          <div class="box-body">         
+          <div class="box-body">
             <div class="form-group ">
               <label for="exampleInputEmail1">Nombre</label>
               <input type="text" class="form-control" placeholder="Nombre" name="NombreGrupo">
@@ -51,7 +51,7 @@
             <div class="form-group">
               <label for="exampleInputFile">Imagen</label>
               <input type="file" id="exampleInputFile" name="ImagenGrupo">
-            </div> 
+            </div>
           </div>
           <!-- /.box-body -->
           <div class="box-footer">
@@ -61,6 +61,72 @@
       </div>
       <!-- /.box -->
       </div>
+
+      <div class="modal modal-info fade" id="member-modal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Info Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-outline">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+
+        <div class="modal modal-warning fade" id="editGroup-modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Info Modal</h4>
+                </div>
+                <div class="modal-body">
+                  <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline">Save changes</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
+
+          <div class="modal modal-danger fade" id="deleteGroup-modal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Info Modal</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline">Save changes</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
 
     </div>
   <!-- ./wrapper -->

@@ -26,18 +26,33 @@ function activate($id){
 }
 }
 
-function accept($id){
+function insertarEstudianteGrupo($id, $gNombre, $conn){
+  $idGrupo = consultaGrupo($gNombre, $conn);
+  $query = "INSERT INTO uxg(id_Grupo, id_Usuario) VALUES ('$idGrupo', '$id')";
+  $result = mysqli_query($conn, $query);
+}
+
+function accept($id, $gNombre){
   require('Conexion.php');
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
     $query = "UPDATE usuario SET estado='Activo' WHERE id='$id'";
     $result = mysqli_query($conn, $query);
+    insertarEstudianteGrupo($id, $gNombre, $conn);
     $conn->close();
     header("Location: ..\adminSolicitudes.php"); /* Redirect browser */
-  exit();
+    exit();
+  }
 }
-}
+
+function consultaGrupo($gNombre, $conn){
+    $sql = "SELECT ID FROM grupo WHERE Nombre = '$gNombre'";
+    $result = mysqli_query($conn, $sql);
+    $result2 = $result->fetch_array(MYSQLI_NUM);
+    $id_grupo = $result2[0];
+    return $id_grupo;
+  }
 
 function reject($id){
   require('Conexion.php');
@@ -80,7 +95,6 @@ function remove($id){
 }
 }
 
-
 if (!empty($_POST["deactivateId"])) {
     $uId = filter_input(INPUT_POST, 'deactivateId');
     deactivate($uId);
@@ -97,7 +111,8 @@ if (!empty($_POST["activateId"])) {
 
 if (!empty($_POST["acceptId"])) {
     $uId = filter_input(INPUT_POST, 'acceptId');
-    accept($uId);
+    $gNombre = filter_input(INPUT_POST, 'Grupos');
+    accept($uId, $gNombre);
 } else {
     echo "No post received";
 }

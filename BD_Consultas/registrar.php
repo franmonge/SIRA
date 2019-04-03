@@ -1,22 +1,4 @@
 <?php 
-	// function dropdownGrupos(){
-	// 	require('Conexion.php');
-	// 	if ($conn->connect_error){
-	// 		die("Connection failed: " . $conn->connect_error);
-	// 	}else{
-	// 		$sql = "SELECT Nombre FROM grupo";
-	// 		$result = mysqli_query($conn, $sql);
-	// 		if($result->num_rows > 0){
-	// 			while($row = $result->fetch_assoc()){
-	// 				echo "<option>" .$row['Nombre']."</option>";
-	// 			}
-	// 		}else{
-	// 			echo "<option>No hay grupos</option>";
-	// 		}
-	// 	$conn->close();
-	// 	}
-	// }
-
 	function dropdownCarreras(){
 		require('Conexion.php');
 		if ($conn->connect_error){

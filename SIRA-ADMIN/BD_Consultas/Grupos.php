@@ -4,11 +4,11 @@
 		if($conn->connect_error){
 			die("Connection failed: ".$conn->connect_error);
 		}else{
-			$sql = "SELECT Nombre FROM grupo WHERE Estado = '1'";
+			$sql = "SELECT id, Nombre FROM grupo WHERE Estado = '1'";
 			$result = mysqli_query($conn, $sql);
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
-					echo "<option>" .$row['Nombre']."</option>";
+					echo "<option value=".$row['id'].">" .$row['Nombre']."</option>";
 				}
 			}else{
 				echo "<option>Error, no se encontraron grupos</option>";

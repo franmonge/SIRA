@@ -38,7 +38,7 @@ if ($conn->connect_error){
       $Codigo .= "<td>" .$row["email"] . "</td>";
       $Codigo .= "<td>" ."<form action=\"BD_Consultas\miembros.php\" method=\"post\">
       <input type=\"hidden\" name=\"deactivateId\" value=\"".$row["id"]."\" >
-      <input type=\"submit\"  class=\"btn btn-block btn-primary btn-flat\" value=\"Desactivar\">
+      <input type=\"submit\"  class=\"btn btn-block btn-danger btn-flat\" value=\"Desactivar\">
       </form></td>";
       $Codigo .= "</tr>";
     }

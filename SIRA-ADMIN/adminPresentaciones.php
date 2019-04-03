@@ -6,9 +6,10 @@
   <title>AdminLTE 2 | Calendar</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  
+
   <?php include('headerLinks.php')?>
   <?php include('BD_Consultas\Grupos.php')?>
+  <?php include('BD_Consultas\presentaciones.php')?>
 
   </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -25,11 +26,13 @@
     </section>
 
     <!-- Main content -->
+
+    <form action="BD_Consultas\presentaciones.php" method="POST">
     <section class="content">
       <div class="col-md-12">
         <div class="form-group col-md-6">
           <label>Seleccione el grupo</label>
-          <select class="form-control select2" name="GruposDisponibles" id="GruposDisponibles" style="width: 100%;">
+          <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
             <?php dropdownGrupos()?>
           </select>
         </div>
@@ -37,17 +40,13 @@
 
       <div class="row">
         <div class="col-md-3">
-          <div class="box box-solid">
+          <!-- <div class="box box-solid">
             <div class="box-header with-border">
               <h4 class="box-title">Presentaciones Creadas</h4>
             </div>
             <div class="box-body">
-              <!-- the events -->
               <div id="external-events">
-                <div class="external-event bg-green">Lunch</div>
-                <div class="external-event bg-yellow">Go home</div>
                 <div class="external-event bg-aqua">Do homework</div>
-                <div class="external-event bg-light-blue">Work on UI design</div>
                 <div class="external-event bg-red">Sleep tight</div>
                 <div class="checkbox">
                   <label for="drop-remove">
@@ -57,9 +56,8 @@
                 </div>
               </div>
             </div>
-            <!-- /.box-body -->
           </div>
-          <!-- /. box -->
+           -->
           <div class="box box-solid">
             <div class="box-header with-border">
               <h3 class="box-title">Crear Presentación</h3>
@@ -68,33 +66,38 @@
               <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
                 <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
                 <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-aqua" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-blue" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-light-blue" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-teal" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-yellow" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-orange" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-green" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-red" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-purple" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-fuchsia" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-navy" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-aqua" onclick="changeColor('#08dfe8');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-blue" onclick="changeColor('#05729e');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-light-blue" onclick="changeColor('#0693b7');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-teal" onclick="changeColor('#08e8de');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-yellow" onclick="changeColor('#f7b412');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-orange" onclick="changeColor('#f77b12');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-green" onclick="changeColor('#06b657');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-red" onclick="changeColor('#b62b06');"  href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-purple" onclick="changeColor('#6c0456');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-fuchsia" onclick="changeColor('#e709b8');" href="#"><i class="fa fa-square"></i></a></li>
+                  <li><a class="text-navy" onclick="changeColor('#26069d');" href="#"><i class="fa fa-square"></i></a></li>
+                  <input id="color" type="hidden" value="00ffff" name="eventColor">
+
                 </ul>
               </div>
               <!-- /btn-group -->
               <div class="input-group">
-                <input id="new-event" type="text" class="form-control" placeholder="Nombre">
-                <input id="new-event" type="text" class="form-control" placeholder="Fecha">
-                <input id="new-event" type="text" class="form-control" placeholder="Hora">
-                <input id="new-event" type="text" class="form-control" placeholder="Lugar">
-                <input id="new-event" type="text" class="form-control" placeholder="Descripción">
+                <input type="text"   class="form-control" name="eventName"   placeholder="Nombre" required>
+                <input type="date"   class="form-control" name="eventDate"   required/>
+                <input type="time"   class="form-control" name="eventTime"   placeholder="Fecha" required/>
+                <input type="text"   class="form-control" name="eventPlace"  placeholder="Lugar" required>
+                <input type="number" class="form-control" name="eventCost"   placeholder="Costo" required>
+                <textarea rows="4"   class="form-control" name="eventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
               </div>
               <!-- /input-group -->
+              <br>
                 <div class="input-group-btn">
-                  <button id="add-new-event" type="button" class="btn btn-block btn-primary btn-flat">Crear</button>
+                  <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8 ">
                 </div>
                 <!-- /btn-group -->
-              
+              </form>
+
             </div>
           </div>
         </div>
@@ -137,6 +140,7 @@
 <!-- fullCalendar -->
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+
 
 
 <!-- Page specific script -->
@@ -190,53 +194,10 @@
       },
       //Random default events
       events    : [
-        {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954' //red
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          url            : 'http://google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        }
+        <?php getPresentaciones(); ?>
       ],
-      editable  : true,
-      droppable : true, // this allows things to be dropped onto the calendar !!!
+      editable  : false,
+      droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { // this function is called when something is dropped
 
         // retrieve the dropped element's stored Event Object
@@ -279,6 +240,7 @@
       e.preventDefault()
       //Get value and make sure it is not null
       var val = $('#new-event').val()
+      console.log(val);
       if (val.length == 0) {
         return
       }
@@ -300,6 +262,13 @@
       $('#new-event').val('')
     })
   })
+</script>
+<script>function changeColor(color){
+  var c = document.getElementById('color');
+  c.value = color;
+  var s = document.getElementById('submitButton');
+  s.style = "background:"+color;
+}
 </script>
 </body>
 </html>

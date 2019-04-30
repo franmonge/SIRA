@@ -75,7 +75,7 @@
                   <li><a class="text-purple" onclick="changeColor('#6c0456');" href="#"><i class="fa fa-square"></i></a></li>
                   <li><a class="text-fuchsia" onclick="changeColor('#e709b8');" href="#"><i class="fa fa-square"></i></a></li>
                   <li><a class="text-navy" onclick="changeColor('#26069d');" href="#"><i class="fa fa-square"></i></a></li>
-                  <input id="color" type="hidden" value="00ffff" name="eventColor">
+                  <input id="color" type="hidden" value="#08dfe8" name="eventColor">
 
                 </ul>
               </div>
@@ -91,7 +91,7 @@
               <!-- /input-group -->
               <br>
                 <div class="input-group-btn">
-                  <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8 ">
+                  <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8">
                 </div>
                 <!-- /btn-group -->
               </form>

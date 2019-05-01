@@ -69,6 +69,10 @@
         <a href="adminPresentaciones.php"> <i class="fa fa-calendar"></i> <span>Presentaciones</span></a>
       </li>
 
+      <li <?php echo $j; ?>>
+        <a href="adminCoreografias.php"> <i class="fa fa-folder"></i> <span>Coreografias</span></a>
+      </li>
+
       <li <?php echo $d; ?>>
         <a href="adminMiembros.php"><i class="fa fa-user"></i><span>Miembros</span></a>
       </li>

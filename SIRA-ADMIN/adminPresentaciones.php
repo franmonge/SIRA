@@ -11,10 +11,10 @@
   <?php include('BD_Consultas\Grupos.php')?>
   <?php include('BD_Consultas\presentaciones.php')?>
 
-  </head>
+</head>
 <body class="hold-transition skin-blue sidebar-mini">
 
-<?php include('adminNav.php')?>
+  <?php include('adminNav.php')?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -58,66 +58,64 @@
   </form>
 
     <form action="BD_Consultas\presentaciones.php" method="POST">
-    <section class="content">
-      <div class="col-md-12">
-        <div class="form-group col-md-6">
-          <label>Seleccione el grupo</label>
-          <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
-            <?php dropdownGrupos()?>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-3">
-          <div class="box box-solid">
-            <div class="box-header with-border">
-              <h3 class="box-title">Crear Presentación</h3>
-            </div>
-            <div class="box-body">
-              <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
-                <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
-                <ul class="fc-color-picker" id="color-chooser">
-                  <li><a class="text-aqua" onclick="changeColor('#08dfe8');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-blue" onclick="changeColor('#05729e');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-light-blue" onclick="changeColor('#0693b7');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-teal" onclick="changeColor('#08e8de');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-yellow" onclick="changeColor('#f7b412');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-orange" onclick="changeColor('#f77b12');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-green" onclick="changeColor('#06b657');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-red" onclick="changeColor('#b62b06');"  href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-purple" onclick="changeColor('#6c0456');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-fuchsia" onclick="changeColor('#e709b8');" href="#"><i class="fa fa-square"></i></a></li>
-                  <li><a class="text-navy" onclick="changeColor('#26069d');" href="#"><i class="fa fa-square"></i></a></li>
-                  <input id="color" type="hidden" value="#08dfe8" name="eventColor">
-
-                </ul>
-              </div>
-              <!-- /btn-group -->
-              <div class="input-group">
-                <input type="text"   class="form-control" name="eventName"   placeholder="Nombre" required>
-                <input type="date"   class="form-control" name="eventDate"   required/>
-                <input type="time"   class="form-control" name="eventTime"   placeholder="Fecha" required/>
-                <input type="text"   class="form-control" name="eventPlace"  placeholder="Lugar" required>
-                <input type="number" class="form-control" name="eventCost"   placeholder="Costo" required>
-                <textarea rows="4"   class="form-control" name="eventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
-              </div>
-              <!-- /input-group -->
-              <br>
-                <div class="input-group-btn">
-                  <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8">
-                </div>
-                <!-- /btn-group -->
-              </form>
-
-            </div>
+      <section class="content">
+        <div class="col-md-12">
+          <div class="form-group col-md-6">
+            <label>Seleccione el grupo</label>
+            <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
+              <?php dropdownGrupos()?>
+            </select>
           </div>
         </div>
+
+        <div class="row">
+        <div class="col-md-3">
+        <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title">Crear Presentación</h3>
+          </div>
+          <div class="box-body">
+            <div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+              <!--<button type="button" id="color-chooser-btn" class="btn btn-info btn-block dropdown-toggle" data-toggle="dropdown">Color <span class="caret"></span></button>-->
+              <ul class="fc-color-picker" id="color-chooser">
+                <li><a class="text-aqua" onclick="changeColor('#08dfe8');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-blue" onclick="changeColor('#05729e');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-light-blue" onclick="changeColor('#0693b7');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-teal" onclick="changeColor('#08e8de');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-yellow" onclick="changeColor('#f7b412');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-orange" onclick="changeColor('#f77b12');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-green" onclick="changeColor('#06b657');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-red" onclick="changeColor('#b62b06');"  href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-purple" onclick="changeColor('#6c0456');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-fuchsia" onclick="changeColor('#e709b8');" href="#"><i class="fa fa-square"></i></a></li>
+                <li><a class="text-navy" onclick="changeColor('#26069d');" href="#"><i class="fa fa-square"></i></a></li>
+                <input id="color" type="hidden" value="#08dfe8" name="eventColor">
+              </ul>
+            </div>
+            <!-- /btn-group -->
+            <div class="input-group">
+              <input type="text"   class="form-control" name="eventName"   placeholder="Nombre" required>
+              <input type="date"   class="form-control" name="eventDate"   required/>
+              <input type="time"   class="form-control" name="eventTime"   placeholder="Fecha" required/>
+              <input type="text"   class="form-control" name="eventPlace"  placeholder="Lugar" required>
+              <input type="number" class="form-control" name="eventCost"   placeholder="Costo" required>
+              <textarea rows="4"   class="form-control" name="eventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+            </div>
+            <!-- /input-group -->
+            <br>
+            <div class="input-group-btn">
+              <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8">
+            </div>
+            <!-- /btn-group -->
+    </form>
+
+    </div>
+    </div>
+    </div>
         <!-- /.col -->
         <div class="col-md-9">
           <div class="box box-primary">
             <div class="box-body no-padding">
-              <!-- THE CALENDAR -->
               <div id="calendar"></div>
             </div>
             <!-- /.box-body -->
@@ -132,10 +130,7 @@
   </div>
   <!-- /.content-wrapper -->
 
-
-
-  <?php include('adminFooter.php')?>
-
+<?php include('adminFooter.php')?>
 
 <!-- jQuery 3 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
@@ -163,7 +158,7 @@
   $(function () {
 
     /* initialize the external events
-     -----------------------------------------------------------------*/
+    -----------------------------------------------------------------*/
     function init_events(ele) {
       ele.each(function () {
 
@@ -189,12 +184,12 @@
     init_events($('#external-events div.external-event'))
 
     /* initialize the calendar
-     -----------------------------------------------------------------*/
+    -----------------------------------------------------------------*/
     //Date for the calendar events (dummy data)
     var date = new Date()
     var d    = date.getDate(),
-        m    = date.getMonth(),
-        y    = date.getFullYear()
+    m    = date.getMonth(),
+    y    = date.getFullYear()
     $('#calendar').fullCalendar({
 
       header    : {
@@ -210,7 +205,7 @@
       },
       //Random default events
       events    : [
-        <?php getPresentaciones(); ?>
+      <?php getPresentaciones(); ?>
       ],
       eventClick: function(event) {
 

@@ -30,7 +30,7 @@
             <!-- User image -->
             <li class="user-header">
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-              <p>Marvin Santos - Web Developer<small>Member since Nov. 2012</small></p>
+              <p>Marvin Santos - Profesor<small>Member since May 2019</small></p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
@@ -69,6 +69,10 @@
         <a href="adminPresentaciones.php"> <i class="fa fa-calendar"></i> <span>Presentaciones</span></a>
       </li>
 
+      <li <?php echo $j; ?>>
+        <a href="adminCoreografias.php"> <i class="fa fa-folder"></i> <span>Coreografias</span></a>
+      </li>
+
       <li <?php echo $d; ?>>
         <a href="adminMiembros.php"><i class="fa fa-user"></i><span>Miembros</span></a>
       </li>
@@ -98,7 +102,7 @@
       </li>
 
       <li <?php echo $f; ?>>
-        <a href="#"> <i class="fa fa-check"></i> <span>Asistencia</span></a>
+        <a href="adminAsistencia.php"> <i class="fa fa-check"></i> <span>Asistencia</span></a>
       </li>
 
       <li <?php echo $g; ?>>

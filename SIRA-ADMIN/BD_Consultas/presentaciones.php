@@ -116,6 +116,7 @@ if (!empty($_POST["group"])) {
 			}
 		}
 	}
+
 }
 
 // update event values
@@ -151,9 +152,4 @@ if (!empty($_POST["inEventName"])) {
 		}
 	}
 }
-
-
-
-
-
  ?>

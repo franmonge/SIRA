@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>SIRA - Galería</title>
+  <title>SIRA - Registro</title>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -129,9 +129,15 @@
 
   <!-- Default input -->
   <div class="form-group">
+    <label for="inputAddress">Carnet</label>
+    <input type="text" class="form-control" id="Carnet" name="CarnetRegistro" placeholder="Carnet"/>
+  </div>
+  <!-- Default input -->
+  <div class="form-group">
     <label for="inputAddress">Dirección de Domicilio</label>
     <input type="text" class="form-control" id="DireccionDomicilio" name="DireccionDomicilioRegistro" placeholder="Dirección de Domicilio" required/>
-  </div><!-- Default input -->
+  </div>
+  <!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Dirección de Tiempo Lectivo</label>
     <input type="text" class="form-control" id="DireccionLectiva" name="DireccionLectivaRegistro" placeholder="Dirección de Tiempo Lectivo" required/>

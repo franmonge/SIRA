@@ -146,7 +146,7 @@
   <!-- Default input -->
   <div class="form-group col-md-3">
     <label for="inputAddress">Estatura (metros)</label>
-    <input type="Number" step="0.01" class="form-control" id="Estatura" name="EstaturaRegistro" placeholder="Estatura (metros)" required/>
+    <input type="Number" step="0.01" class="form-control" value="1.0" id="Estatura" name="EstaturaRegistro" placeholder="Estatura (metros)" required/>
   </div>
   <!-- Default input -->
   <div class="form-group col-md-3">
@@ -156,7 +156,13 @@
   <!-- Default input -->
   <div class="form-group  col-md-3">
     <label for="inputAddress">Talla de Blusa/Camisa</label>
-    <input type="text" class="form-control" id="TallaBlusa" name="TallaBlusaRegistro" placeholder="Talla de Blusa/Camisa" required/>
+    <select class="browser-default custom-select" name="TallaBlusaRegistro" id="TallaBlusa">
+      <option>XL</option>
+      <option>L</option>
+      <option>M</option>
+      <option>S</option>
+      <option>XS</option>
+    </select>
   </div>
   <!-- Default input -->
   <div class="form-group  col-md-3">

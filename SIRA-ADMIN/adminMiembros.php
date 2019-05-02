@@ -1,5 +1,25 @@
 <?php
 
+function dropdownCarreras(){
+    require('Conexion.php');
+    if ($conn->connect_error){
+      die("Connection failed: " . $conn->connect_error);
+    }else{
+      $sql = "SELECT Nombre FROM carrera";
+      $result = mysqli_query($conn, $sql);
+      $resultado = "";
+      if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+          $resultado."<option>" .$row['Nombre']."</option>";
+        }
+      }else{
+        $resultado."<option>No hay carreras registradas</option>";
+      }
+      return $resultado;
+    $conn->close();
+    }
+  }
+
 function miembrosActivos(){
 require('BD_Consultas\Conexion.php');
 if ($conn->connect_error){
@@ -17,6 +37,30 @@ if ($conn->connect_error){
              <div class=\"box-header\">
                <h3 class=\"box-title\">Activos</h3>
              </div>
+              <span style=\"margin-left:10px; margin-right:10px\">Filtrar por:</span>
+                <select id=\"PrimerFiltro\">
+                  <option value=\"Carrera\">Carrera</option>
+                  <option value=\"Grupo\">Grupo</option>
+                </select>
+                <select id=\"SegundoFiltro\">
+                </select>
+                <script>
+                  var dropdown1 = document.getElementById(\"PrimerFiltro\");
+                  var dropdown2 = document.getElementById(\"SegundoFiltro\");
+                  onchange();
+                  dropdown1.onchange = onchange;
+
+                  function onchange(){
+                      var opcionDropdown2 = \"\";
+                      if(dropdown1.value == \"Grupo\"){
+                        var opcionDropdown2 = \"<option>Grupo</option>\";
+                      }
+                      if(dropdown1.value == \"Carrera\"){
+                        var opcionDropdown2 = '<?php echo dropdownCarreras()?>';
+                      }
+                      dropdown2.innerHTML = opcionDropdown2;
+                  }
+                </script>
              <!-- /.box-header -->
              <div class=\"box-body\">
 
@@ -91,7 +135,6 @@ if ($conn->connect_error){
 }
 $conn->close();
 }
-
 
 function miembrosInactivos(){
 require('BD_Consultas\Conexion.php');
@@ -237,11 +280,11 @@ $conn->close();
   $(function () {
     $('#example1').DataTable()
     $('#table-Miembros').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'lengthChange': true,
-      'searching'   : true,
+      'searching'   : false,
       'ordering'    : true,
-      'info'        : true,
+      'info'        : false,
       'autoWidth'   : true
     })
   })

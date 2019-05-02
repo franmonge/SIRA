@@ -47,6 +47,15 @@
 		// $sheet->getStyle('A1:D1')->getFont()->setBold(true)->setSize(14);
 		// Insert product data
 		// Autosize the columns
+		$phpExcel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$phpExcel->getActiveSheet()->getStyle('A2:I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$phpExcel->getActiveSheet()->getStyle('F4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$phpExcel->getActiveSheet()->getStyle('A5:I5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('00008B');
+		$phpExcel->getActiveSheet()->getStyle('F4')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('00008B');
+		$phpExcel->getActiveSheet()->getStyle('F4')->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
+		$phpExcel->getActiveSheet()->getStyle('A5:I5')->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
+		$phpExcel->getActiveSheet()->getStyle('A5:I5')->getFont()->setBold(true);
+		$phpExcel->getActiveSheet()->getStyle('F4')->getFont()->setBold(true);
 		$sheet->getColumnDimension('A')->setAutoSize(true);
 		$sheet->getColumnDimension('B')->setAutoSize(true);
 		$sheet->getColumnDimension('C')->setAutoSize(true);

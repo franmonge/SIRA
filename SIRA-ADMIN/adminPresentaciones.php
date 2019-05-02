@@ -24,6 +24,38 @@
     </section>
 
     <!-- Main content -->
+    <form action="BD_Consultas\presentaciones.php" method="POST">
+    <div class="modal modal-info fade" role="dialog"  id="viewPresentation-modal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Presentación</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                      <input id="inName" type="text"   class="form-control" name="inEventName"   placeholder="Nombre" required>
+                      <input id="inDate" type="date"   class="form-control" name="inEventDate"   required/>
+                      <input id="inTime" type="time"   class="form-control" name="inEventTime"   placeholder="Fecha" required/>
+                      <input id="inPlace" type="text"   class="form-control" name="inEventPlace"  placeholder="Lugar" required>
+                      <input id="inCost" type="number" class="form-control" name="inEventCost"   placeholder="Costo" required>
+                      <textarea id="inDescription" rows="4"   class="form-control" name="inEventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+                      <input id="inId" type="hidden" name="inEventId">
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+              <input type="submit" class="btn btn-outline" name="ACTION" value="Eliminar" >
+              <input type="submit" class="btn btn-outline" name="ACTION" value="Guardar" >
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+  </form>
 
     <form action="BD_Consultas\presentaciones.php" method="POST">
       <section class="content">
@@ -76,6 +108,7 @@
             </div>
             <!-- /btn-group -->
     </form>
+    <!--  -->
 
     </div>
     </div>
@@ -92,9 +125,11 @@
         </div>
         <!-- /.col -->
       </div>
-    <!-- /.row -->
-    </div></div>
-    <!-- /.content-wrapper -->
+      <!-- /.row -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
 
 <?php include('adminFooter.php')?>
 
@@ -115,6 +150,7 @@
 <!-- fullCalendar -->
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src='"bower_components/fullcalendar/dist/locale/es.js'></script>
 
 
 
@@ -156,21 +192,33 @@
     m    = date.getMonth(),
     y    = date.getFullYear()
     $('#calendar').fullCalendar({
+
       header    : {
         left  : 'prev,next today',
         center: 'title',
         right : 'month,agendaWeek,agendaDay'
       },
       buttonText: {
-        today: 'today',
-        month: 'month',
-        week : 'week',
-        day  : 'day'
+        today: 'Hoy',
+        month: 'Mes',
+        week : 'Semana',
+        day  : 'Día'
       },
       //Random default events
       events    : [
       <?php getPresentaciones(); ?>
       ],
+      eventClick: function(event) {
+
+          $(inName).val(event.title);
+          $(inDescription).val(event.description);
+          $(inDate).val(event.start.toISOString().substr(0, 10));
+          $(inTime).val(event.time);
+          $(inPlace).val(event.place);
+          $(inCost).val(event.cost);
+          $(inId).val(event.id);
+          $("#viewPresentation-modal").modal('show');
+      },
       editable  : false,
       droppable : false, // this allows things to be dropped onto the calendar !!!
       drop      : function (date, allDay) { // this function is called when something is dropped
@@ -197,7 +245,7 @@
           $(this).remove()
         }
 
-      }
+    }
     })
 
     /* ADDING EVENTS */
@@ -215,7 +263,6 @@
       e.preventDefault()
       //Get value and make sure it is not null
       var val = $('#new-event').val()
-      console.log(val);
       if (val.length == 0) {
         return
       }
@@ -232,6 +279,7 @@
 
       //Add draggable funtionality
       init_events(event)
+
 
       //Remove event from text input
       $('#new-event').val('')

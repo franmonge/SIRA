@@ -11,6 +11,7 @@
   <?php include('BD_Consultas\Grupos.php')?>
   <?php include('BD_Consultas\presentaciones.php')?>
 
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
@@ -102,9 +103,17 @@
               <textarea rows="4"   class="form-control" name="eventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
             </div>
             <!-- /input-group -->
+            <div class="box-header with-border">
+              <h3 class="box-title">Coreografias</h3> <br>
+            </div>
+            <?php fetch_coreo()?> <br>
+            <div class="box-header with-border">
+              <h3 class="box-title">Participantes</h3> <br>
+            </div>
+            <?php fetch_participante()?> <br>
             <br>
             <div class="input-group-btn">
-              <input id="submitButton" type="submit" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8">
+              <input id="submitButton" type="submit" name="Crearbtn" class="btn btn-block  btn-flat" value="Crear" style="background:#08dfe8">
             </div>
             <!-- /btn-group -->
     </form>

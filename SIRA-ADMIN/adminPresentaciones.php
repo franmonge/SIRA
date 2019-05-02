@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Calendar</title>
+  <title>SIRA | Presentaciones</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -21,7 +21,7 @@
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>Calendar</h1>
+      <h1>Presentaciones</h1>
     </section>
 
     <!-- Main content -->
@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
               <input type="submit" class="btn btn-outline" name="ACTION" value="Eliminar" >
               <input type="submit" class="btn btn-outline" name="ACTION" value="Guardar" >
             </div>

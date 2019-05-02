@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php require('BD_Consultas\IndexPresentacionesPreview.php')?>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -23,10 +24,10 @@
   <!-- Start your project here-->
 
   <?php include('Componentes\Navbar.php')?>
-    
+
    <!-- Container -->
   <div class="container">
- 
+
   <br>
 
 
@@ -37,201 +38,17 @@
 
 
   <!-- Card deck -->
-  <div class="container">
+<div class="container">
     <div class="card-deck">
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
+        <?php getPresentacionesFull(); ?>
 
     </div>
-    </div>
+</div>
 
-
-    <br><br>
-
-    <!-- Card deck -->
-  <div class="container">
-    <div class="card-deck">
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-    </div>
-    </div>
 
 
 
-    </div>  
+    </div>
     <?php include('Componentes\footer.php')?>
 
 

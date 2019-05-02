@@ -1,5 +1,5 @@
 <?php require('sesion.php')?>
-<?php 
+<?php
   if(isset($_POST['Usuario']) && (isset($_POST['Password']))){
     $Usuario = filter_input(INPUT_POST, 'Usuario');
     $Password = filter_input(INPUT_POST, 'Password');
@@ -15,7 +15,7 @@
 			if($resultado == 1){
         $administrador = usuarioAdministrador($Usuario);
         if($administrador == 1){
-          $_SESSION['user'] = $Usuario;  
+          $_SESSION['user'] = $Usuario;
         }else{
           header("Location: ./logIn.php");
         }
@@ -60,7 +60,7 @@
       return $resultado2[0];
     }
   }
-  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +86,7 @@
   crossorigin="anonymous"
 />
   <?php include 'BD_Consultas\IndexGruposPreview.php'?>
+  <?php include 'BD_Consultas\IndexPresentacionesPreview.php'?>
 </head>
 
 <body>
@@ -156,84 +157,15 @@
   <!-- Section heading -->
   <h2 class="h1-responsive font-weight-bold text-center my-5">Próximas Presentaciones</h2>
   <!-- Section description -->
-  <p class="text-center w-responsive mx-auto mb-5">Duis aute irure dolor in reprehenderit in voluptate velit
-    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
-    qui officia deserunt mollit anim id est laborum.</p>
+
+
   
-  <br>
 
 
   <!-- Card deck -->
   <div class="container">
     <div class="card-deck">
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-      <!-- Card Wider -->
-      <div class="card card-cascade wider">
-        <!-- Card image -->
-        <div class="view view-cascade overlay">
-          <img  class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/photo6.jpg" alt="Card image cap">
-          <a href="#!">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!-- Card content -->
-        <div class="card-body card-body-cascade text-center">
-          <!-- Title -->
-          <h4 class="card-title"><strong>Alison Belmont</strong></h4>
-          <!-- Subtitle -->
-          <h5 class="blue-text pb-2"><i class="fas fa-calendar"></i> 26/03/2019 </h5>
-          <!-- Text -->
-          <p class="card-text">Sed ut perspiciatis unde omnis iste natus sit voluptatem accusantium doloremque laudantium, totam rem aperiam. </p>
-          <button type="button" class="btn btn-light-blue btn-md">Read more</button>
-        </div>
-      </div>
-      <!-- Card Wider -->
-
-
+     <?php getPresentaciones(); ?>
     </div>
   </div>
   <!-- Card deck -->

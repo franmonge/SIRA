@@ -28,9 +28,11 @@
           <a class=\"nav-link\" href=\"./galeria.php\"><b>Galería</b></a>
         </li>
         <li class=\"nav-item\">
-          <a class=\"nav-link\" href=\"SIRA-ADMIN/admin.php\"><b>Administrador</b></a>
+
+          <a class=\"nav-link\" href=\"SIRA-ADMIN/adminPresentaciones.php\"><b>Administrador</b></a>
         </li> </ul>":"";
     $out.="<li class=\"navbar-nav ml-auto nav-flex-icons\">
+
         <a class=\"fas fa-user\" href=\"./logOut.php\" ><b> Cerrar Sesión</b></a>
       </li>
     </div>

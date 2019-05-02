@@ -59,7 +59,7 @@
 	  exit();
 	}
 	}
-
+// 
 function updateEvent($id,$name, $detail, $timestamp, $place,$cost){
 	require('Conexion.php');
 	if ($conn->connect_error){

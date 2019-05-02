@@ -15,7 +15,7 @@
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-
+<!--  -->
   <?php include('userNav.php')?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">

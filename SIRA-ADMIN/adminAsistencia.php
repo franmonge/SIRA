@@ -42,7 +42,6 @@
       </form>
 
       <?php
-        echo 'alert('.$_SESSION["CargarEstudiantes"].')';
         if (isset($_SESSION["CargarEstudiantes"]) && !empty($_SESSION["CargarEstudiantes"])) {
           miembrosPresentes($_SESSION["CargarEstudiantes"]);
           miembrosAusentes($_SESSION["CargarEstudiantes"]);       

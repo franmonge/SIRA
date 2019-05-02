@@ -102,11 +102,15 @@
       </li>
 
       <li <?php echo $g; ?>>
-        <a href="#"> <i class="fa fa-file"></i> <span>Reportes</span></a>
+        <a href="adminReportes.php"> <i class="fa fa-file"></i> <span>Reportes</span></a>
       </li>
 
       <li <?php echo $h; ?>>
         <a href="#"> <i class="fa fa-image"></i> <span>Galería</span></a>
+      </li>
+
+      <li <?php echo $i; ?>>
+        <a href="adminAdministradores.php"> <i class="fa fa-shield"></i> <span>Administradores</span></a>
       </li>
 
       <li <?php echo $i; ?>>

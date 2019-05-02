@@ -48,11 +48,14 @@
 				$Password = filter_input(INPUT_POST, 'PasswordRegistro');
 				$Pasaporte = filter_input(INPUT_POST, 'PasaporteRegistro');
 				$FechaNacimiento = filter_input(INPUT_POST, 'FechaNacimientoRegistro');
-				$FechaVencimiento = filter_input(INPUT_POST, 'FechaVencimientoRegistro');
+				$Nacimiento = date('Y-m-d', strtotime($FechaNacimiento));
+				$FechaVencimiento = (filter_input(INPUT_POST, 'FechaVencimientoRegistro'))."-1";
+				$Vencimiento = date('Y-m-d', strtotime($FechaVencimiento));
 				$TelefonoCelular = filter_input(INPUT_POST, 'TelefonoCelularRegistro');
 				$TelefonoDomicilio = filter_input(INPUT_POST, 'TelefonoDomicilioRegistro');
 				$Carrera = filter_input(INPUT_POST, 'CarreraRegistro');
 				$TipoSangre = filter_input(INPUT_POST, 'TipoSangreRegistro');
+				$Carnet = filter_input(INPUT_POST, 'CarnetRegistro');
 				$DireccionDomicilio = filter_input(INPUT_POST, 'DireccionDomicilioRegistro');
 				$DireccionLectiva = filter_input(INPUT_POST, 'DireccionLectivaRegistro');
 				$Estatura = filter_input(INPUT_POST, 'EstaturaRegistro');
@@ -60,18 +63,20 @@
 				$Blusa = filter_input(INPUT_POST, 'TallaBlusaRegistro');
 				$Pantalon = filter_input(INPUT_POST, 'TallaPantalonRegistro');
 				$Enfermedades = filter_input(INPUT_POST, 'EnfermedadesRegistro');
-				$Enfermedades = "Ninguno";
+				if(empty($Enfermedades)){
+					$Enfermedades = "Ninguno";
+				}
 				$Observaciones = filter_input(INPUT_POST, 'ObservacionesRegistro');
-				$Observaciones = "Ninguno";
+				if(empty($Observaciones)){
+					$Observaciones = "Ninguno";
+				}
 				$id_Carrera = consultaCarrera($Carrera, $conn);
 				$id_Dimension = consultaDimension($Estatura, $Calzado, $Blusa, $Pantalon, $conn);
 				$id_Direccion = consultaDireccion($DireccionDomicilio, $DireccionLectiva, $conn);
 				$id_Telefono = consultaTelefono($TelefonoCelular, $TelefonoDomicilio, $conn);
 				$id_TipoSangre = consultaTipoSangre($TipoSangre, $conn);
-				$start = '2014-06-01 14:00:00';
-				$timestamp = date('Y-m-d H:i',strtotime('+1 hour +20 minutes',strtotime($start)));
 				$Estado = "Pendiente";
-				$sql = "INSERT INTO usuario(Apellidos, Email, Enfermedad, FecNacimiento, FecVencimiento, id_Carrera, id_Dimension, id_Direccion, id_Telefono, id_TipoSangre, Estado, Nombre, Observacion, Pasaporte, Password) VALUES ('$Apellidos', '$Email', '$Enfermedades', '$timestamp', '$timestamp', '$id_Carrera', '$id_Dimension', '$id_Direccion', '$id_Telefono', '$id_TipoSangre', '$Estado', '$Nombre', '$Observaciones', '$Pasaporte', '$Password')";
+				$sql = "INSERT INTO usuario(Apellidos, Email, Enfermedad, FecNacimiento, FecVencimiento, id_Carrera, id_Dimension, id_Direccion, id_Telefono, id_TipoSangre, Estado, Nombre, Observacion, Pasaporte, Password, Carnet) VALUES ('$Apellidos', '$Email', '$Enfermedades', '$Nacimiento', '$Vencimiento', '$id_Carrera', '$id_Dimension', '$id_Direccion', '$id_Telefono', '$id_TipoSangre', '$Estado', '$Nombre', '$Observaciones', '$Pasaporte', '$Password', '$Carnet')";
 				if(mysqli_query($conn, $sql)){
 					header("Location: ../index.php");
 				}else{

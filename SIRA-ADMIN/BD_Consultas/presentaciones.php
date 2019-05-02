@@ -71,7 +71,7 @@
 	  exit();
 	}
 	}
-// 
+//
 function updateEvent($id,$name, $detail, $timestamp, $place,$cost){
 	require('Conexion.php');
 	if ($conn->connect_error){
@@ -178,7 +178,7 @@ function fetch_coreo(){
 				echo "<input type=\"checkbox\" name=\"Coreografias[]\" value = ".$row['id']." >".$row['nombre']."<br>";
 			}
 		}else{
-			echo "<option>Error, no se encontraron coreografias</option>";
+			echo "<option>No se encontraron coreografías</option>";
 		}
 	}
 	$conn->close();

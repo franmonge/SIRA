@@ -206,17 +206,16 @@
     m    = date.getMonth(),
     y    = date.getFullYear()
     $('#calendar').fullCalendar({
-
       header    : {
         left  : 'prev,next today',
         center: 'title',
         right : 'month,agendaWeek,agendaDay'
       },
       buttonText: {
-        today: 'Hoy',
-        month: 'Mes',
-        week : 'Semana',
-        day  : 'Día'
+        today: 'today',
+        month: 'month',
+        week : 'week',
+        day  : 'day'
       },
       //Random default events
       events    : [
@@ -263,7 +262,7 @@
           $(this).remove()
         }
 
-    }
+      }
     })
 
     /* ADDING EVENTS */
@@ -281,6 +280,7 @@
       e.preventDefault()
       //Get value and make sure it is not null
       var val = $('#new-event').val()
+      console.log(val);
       if (val.length == 0) {
         return
       }
@@ -297,7 +297,6 @@
 
       //Add draggable funtionality
       init_events(event)
-
 
       //Remove event from text input
       $('#new-event').val('')

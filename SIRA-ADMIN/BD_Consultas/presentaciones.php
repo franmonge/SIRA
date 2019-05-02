@@ -10,7 +10,6 @@
 			$count = 0;
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
-					$id = $row['id'];
 					$color = $row['Color'];
 					$groupId = $row['id_Grupo'];
 		            $date= new DateTime($row['Fecha']) ;
@@ -24,8 +23,7 @@
 					$timeAux = $hour.":".$minute;
 					$out .= ($count>0) ? "," : "" ;
 					$out .= "{
-                id          : '".$row['id']."',
-				title          : '".$row['Nombre']."',
+                title          : '".$row['Nombre']."',
                 start          : new Date(".$year.", ".$month.", ".$day.",".$hour.",".$minute."),
 				description    : '".$row['Descripcion']."',
 				date    : '".$dateAux."',
@@ -103,20 +101,9 @@ function updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Cor
 	}
 }
 
-function deleteEvent($id){
-	require('Conexion.php');
-	if ($conn->connect_error){
-		die("Connection failed: " . $conn->connect_error);
-		echo "Connection failed";
-  	}else{
-		$query = "DELETE FROM presentacion WHERE presentacion.id = $id";
-		$result = mysqli_query($conn, $query);
-		$conn->close();
-		header("Location: ../adminPresentaciones.php");
-  		exit();
-	}
-}
 
+	if (!empty($_POST["group"])) {
+			$groupId = filter_input(INPUT_POST, 'group');
 
 if (!empty($_POST["group"])) {
 	$groupId = filter_input(INPUT_POST, 'group');
@@ -146,9 +133,11 @@ if (!empty($_POST["group"])) {
 		}
 	}
 
-}
+							if (!empty($_POST["eventTime"])) {
+									$time = filter_input(INPUT_POST, 'eventTime');
 
-// update event values
+									if (!empty($_POST["eventPlace"])) {
+											$place = filter_input(INPUT_POST, 'eventPlace');
 
 
 if (!empty($_POST["inEventName"])) {
@@ -179,11 +168,8 @@ if (!empty($_POST["inEventName"])) {
 									}
 								}
 							}
-						}
 					}
-				}
 			}
-		}
 	}
 }
 

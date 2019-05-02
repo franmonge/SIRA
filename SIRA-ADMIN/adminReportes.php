@@ -14,7 +14,10 @@
     <?php include('adminNav.php')?>
     <?php include('BD_Consultas\Reportes.php')?>
     <?php include('BD_Consultas\Grupos.php')?>
+
+
     <!-- Content Wrapper. Contains page content -->
+
     <div class="content-wrapper">
       <!-- Main content -->
       <section class="content-header">
@@ -25,38 +28,60 @@
             <div class="col-xs-12">
               <div class="box">
                 <form action="BD_Consultas\Reportes.php" method="POST">
-                <div class="box-header">
-                  <h3 class="box-title">Seleccione grupo: </h3>
-                  <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
-                    <?php dropdownGrupos()?>
-                  </select>
-                </div>
-                <div class="box-body">
-                  <table id = "table-Miembros" class = "table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Reportes</th>
-                        <th>Generar</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                      <tr>
-                          <td>Excel de becas</td>
-                          <td><input type="submit" name="GenerarBecas" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
-                      </tr>
-                      <tr>
-                        <td>Asistencia mensuales</td>
-                        <td><input type="submit" name="GenerarAsistencias" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
-                      </tr>
-                      <tr>
-                        <td>Presentaciones realizadas</td>
-                        <td><input type="submit" name="GenerarPresentaciones" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
-                      </tr>
-                      
-                    </tbody>
-                  </table>
-                </div>
+                  <div class="modal modal-info fade" role="dialog" id="ReportePresentaciones-modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Por favor seleccionar un año</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                              <label>Por favor seleccionar un año:</label>
+                              <input type="number" style="color:black;" name="Annio" min="2019" max="2099" step="1" value="2019" placeholder="2019" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                          <input type="submit" class="btn btn-outline" name="GenerarPresentacionesbtn" value="Generar">
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>
+                  <div class="box-header">
+                    <h3 class="box-title">Seleccione grupo: </h3>
+                    <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
+                      <?php dropdownGrupos()?>
+                    </select>
+                  </div>
+                  <div class="box-body">
+                    <table id = "table-Miembros" class = "table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Reportes</th>
+                          <th>Generar</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>Excel de becas</td>
+                            <td><input type="submit" name="GenerarBecas" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
+                        </tr>
+                        <tr>
+                          <td>Asistencia mensuales</td>
+                          <td><input type="submit" name="GenerarAsistencias" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
+                        </tr>
+                        <tr>
+                          <td>Presentaciones realizadas</td>
+                          <td><input type="button" name="GenerarPresentaciones" data-target="#ReportePresentaciones-modal" data-toggle="modal" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
+                        </tr>
+                        
+                      </tbody>
+                    </table>
+                  </div>
                 </form>
               </div>
             </div>

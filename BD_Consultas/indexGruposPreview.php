@@ -8,8 +8,7 @@
 			$result = mysqli_query($conn, $sql);
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
-					echo
-						"<div class=\"card card-cascade wider\">
+					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
 				          <img  class=\"card-img-top\" src=\"https://mdbootstrap.com/img/Photos/Others/photo6.jpg\" alt=\"Card image cap\">
 
@@ -19,9 +18,7 @@
 				        </div>
 				      </div>";
 				}
-				echo
-					"
-					<div class=\"card card-cascade wider\">
+				echo "<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
 							<button type=\"button\" class=\"btn btn-light-blue btn-md\" onclick=\"location.href='grupos.php';\">+Ver Más</button>
 						</div>

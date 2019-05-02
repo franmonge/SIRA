@@ -57,16 +57,12 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header"></li>
 
-      <li <?php echo $a; ?>>
-        <a href="admin.php"> <i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+      <li <?php echo $c; ?>>
+        <a href="adminPresentaciones.php"> <i class="fa fa-calendar"></i> <span>Presentaciones</span></a>
       </li>
 
       <li <?php echo $b; ?>>
         <a href="adminGrupos.php"> <i class="fa fa-group"></i> <span>Grupos</span></a>
-      </li>
-
-      <li <?php echo $c; ?>>
-        <a href="adminPresentaciones.php"> <i class="fa fa-calendar"></i> <span>Presentaciones</span></a>
       </li>
 
       <li <?php echo $j; ?>>

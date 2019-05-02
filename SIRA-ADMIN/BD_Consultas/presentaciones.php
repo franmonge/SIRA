@@ -43,15 +43,27 @@
 		$conn->close();
     echo $out;
 	}
-	function addEvent($groupId, $name, $detail, $timestamp, $place, $cost, $color){
+	function addEvent($groupId, $name, $detail, $timestamp, $place, $cost, $color, $Coreografias, $Participantes ){
 	  require('Conexion.php');
 	  if ($conn->connect_error){
 	    die("Connection failed: " . $conn->connect_error);
 			echo "Connection failed";
 	  }else{
+			//$query1 = "INSERT INTO cxp(id_Coreografia, id_Presentacion) VALUES ($Coreografias[0],$Participantes[2])";
+			//$result = mysqli_query($conn, $query1);
 	    $query = "INSERT INTO presentacion(id_Grupo, Nombre, Descripcion, Fecha, Lugar, Costo, Color) VALUES ($groupId, '$name', '$detail', '$timestamp', '$place', '$cost', '$color')";
 			echo "query";
-	    $result = mysqli_query($conn, $query);
+			if(mysqli_query($conn, $query)){
+				$ultimoID = mysqli_insert_id($conn);
+			}
+			for ($i=0; $i<count($Coreografias); $i++) {
+				$query = "INSERT INTO cxp(id_Coreografia, id_Presentacion) VALUES ($Coreografias[$i],$ultimoID)";
+				mysqli_query($conn, $query);
+			}
+			for ($i=0; $i<count($Participantes); $i++) {
+				$query = "INSERT INTO UxP(id_Usuario, id_Presentacion) VALUES ($Participantes[$i],$ultimoID)";
+				mysqli_query($conn, $query);
+			}
 			echo "result";
 	    $conn->close();
 			echo "close";
@@ -90,7 +102,6 @@ function deleteEvent($id){
 }
 
 
-
 if (!empty($_POST["group"])) {
 	$groupId = filter_input(INPUT_POST, 'group');
 	if (!empty($_POST["eventName"])) {
@@ -108,7 +119,9 @@ if (!empty($_POST["group"])) {
 							$cost = filter_input(INPUT_POST, 'eventCost');
 							if (!empty($_POST["eventDetail"])){
 								$color = filter_input(INPUT_POST, 'eventColor');
-								addEvent($groupId, $name, $detail, $timestamp, $place,$cost, $color );
+								$Coreografias = $_POST['Coreografias'];
+								$Participantes = $_POST['Participantes'];
+								addEvent($groupId, $name, $detail, $timestamp, $place,$cost, $color, $Coreografias, $Participantes );
 							}
 						}
 					}
@@ -152,4 +165,41 @@ if (!empty($_POST["inEventName"])) {
 		}
 	}
 }
+
+function fetch_coreo(){
+	require('Conexion.php');
+	if($conn->connect_error){
+		die("Connection failed: ".$conn->connect_error);
+	}else{
+		$sql = "SELECT id, nombre FROM coreografia";
+		$result = mysqli_query($conn, $sql);
+		if($result->num_rows > 0){
+			while($row = $result->fetch_assoc()){
+				echo "<input type=\"checkbox\" name=\"Coreografias[]\" value = ".$row['id']." >".$row['nombre']."<br>";
+			}
+		}else{
+			echo "<option>Error, no se encontraron coreografias</option>";
+		}
+	}
+	$conn->close();
+}
+
+function fetch_participante(){
+	require('Conexion.php');
+	if($conn->connect_error){
+		die("Connection failed: ".$conn->connect_error);
+	}else{
+		$sql = "SELECT id, Nombre FROM usuario";
+		$result = mysqli_query($conn, $sql);
+		if($result->num_rows > 0){
+			while($row = $result->fetch_assoc()){
+				echo "<input type=\"checkbox\" name=\"Participantes[]\" value = ".$row['id']." >".$row['Nombre']."<br>";
+			}
+		}else{
+			echo "<option>Error, no se encontraron participantes</option>";
+		}
+	}
+	$conn->close();
+}
+
  ?>

@@ -1,14 +1,11 @@
 <?php
 
-function ausente($id, $gNombre){
-  require('Conexion.php');  
+function ausente($UserId, $EnsayoId){
+  require('Conexion.php'); 
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $idGrupo = consultaGrupo($gNombre, $conn);
-    #$query = "INSERT INTO uxg(id_Grupo, id_Usuario) VALUES ('$idGrupo', '$id')";
-    #$result = mysqli_query($conn, $query);
-    $query = "UPDATE usuario SET estado='Inactivo' WHERE id='$id'";
+    $query = "UPDATE asistenciaensayos as A INNER JOIN ensayo as E SET estado = 'Ausente' WHERE A.idPersona = '$UserId' AND A.id = '$EnsayoId'";
     $result = mysqli_query($conn, $query);
     $conn->close();
     header("Location: ..\adminAsistencia.php"); /* Redirect browser */
@@ -16,12 +13,12 @@ function ausente($id, $gNombre){
 }
 }
 
-function presente($id){
+function presente($UserId,$EnsayoId){
   require('Conexion.php');
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $query = "UPDATE usuario SET estado='Activo' WHERE id='$id'";
+    $query = "UPDATE asistenciaensayos as A INNER JOIN ensayo as E SET estado = 'Presente' WHERE A.idPersona = '$UserId' AND A.id = '$EnsayoId'";
     $result = mysqli_query($conn, $query);
     $conn->close();
     header("Location: ..\adminAsistencia.php"); /* Redirect browser */
@@ -29,18 +26,6 @@ function presente($id){
 }
 }
 
-function consultaGrupo($gNombre){
-  require('Conexion.php');
-  if ($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-  }else{
-    $sql = "SELECT ID FROM grupo WHERE Nombre = '$gNombre'";
-    $result = mysqli_query($conn, $sql);
-    $result2 = $result->fetch_array(MYSQLI_NUM);
-    $id_grupo = $result2[0];
-    return $id_grupo;
-  }
-}
 
 function crearEnsayo($idGrupo,$fecha){
   require('Conexion.php');
@@ -50,9 +35,43 @@ function crearEnsayo($idGrupo,$fecha){
   }else{
   $query = "INSERT INTO ensayo(idGrupo, fecha) VALUES ('$idGrupo','$fecha')";
   $result = mysqli_query($conn, $query);
+
+  $query2 = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = '$fecha'";
+  $result2 = mysqli_query($conn, $query2);
+  $row2 = $result2->fetch_array(MYSQLI_NUM);
+  $idEnsayo = $row2[0];
+
+  $query3 = "SELECT U.id FROM usuario as U INNER JOIN uxg as A ON u.id = a.id_Usuario where U.estado='Activo' and a.id_Grupo = '$idGrupo'";
+  $result3 = mysqli_query($conn, $query3);
+
+  if($result3->num_rows > 0){
+    while($row = $result3->fetch_assoc()){
+      $x = $row['id'];
+
+    echo "alert('$x')";
+      $query4 = "INSERT INTO asistenciaensayos(idEnsayo, idPersona, Estado) VALUES ('$idEnsayo', '$x','Presente')";
+      $result4 = mysqli_query($conn, $query4);
+    }
+  }else{
+    echo "<option>Error en crearEnsayo a partir query3</option>";
+  }
   $conn->close();
   $_SESSION["CargarEstudiantes"] = $idGrupo;
   header("Location: ..\adminAsistencia.php"); /* Redirect browser */
+  }
+}
+
+function getEnsayoId($idGrupo, $fecha){
+  require('Conexion.php');
+  require('..\..\sesion.php');
+  if ($conn->connect_error){
+    die("Connection failed: " . $conn->connect_error);
+  }else{
+    $query = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = '$fecha'";
+    $result = mysqli_query($conn, $query);
+    $row = $result->fetch_array(MYSQLI_NUM);
+    $idEnsayo = $row[0];
+    return $idEnsayo;
   }
 }
 
@@ -63,16 +82,16 @@ if (!empty($_POST["ensayo"])) {
 } 
 
 if (!empty($_POST["IdAusente"])) {
+    require('..\..\sesion.php');
+    $fecha = date("Y/m/d");
     $uId = filter_input(INPUT_POST, 'IdAusente');
-    $gNombre = $_POST['Grupos'];
-    echo $gNombre;
-    ausente($uId,$gNombre);
+    ausente($uId,getEnsayoId($_SESSION["CargarEstudiantes"],$fecha));
 } 
 
 if (!empty($_POST["IdPresente"])) {
+    require('..\..\sesion.php');
     $uId = filter_input(INPUT_POST, 'IdPresente');    
-    $gNombre = filter_input(INPUT_POST, 'Grupos');
-    presente($uId,$gNombre);
+    presente($uId,$_SESSION["CargarEstudiantes"]);
 } 
 
 
@@ -81,7 +100,7 @@ function miembrosPresentes($idGrupo){
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $query = "SELECT U.id, U.nombre, U.apellidos, U.email FROM usuario as U INNER JOIN uxg as A WHERE U.estado='Activo' ";
+    $query = "SELECT U.id, U.nombre, U.apellidos, U.email FROM usuario as U INNER JOIN uxg as A INNER JOIN asistenciaensayos as E WHERE U.estado='Activo' AND U.id = A.id AND A.id_Grupo = '$idGrupo' AND E.Estado = 'Presente'";
     $result = mysqli_query($conn, $query);
     if($result->num_rows > 0){
       $Codigo = "
@@ -171,7 +190,7 @@ function miembrosAusentes($idGrupo){
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $query = "  SELECT id, nombre, apellidos, email FROM usuario WHERE estado='Inactivo'";
+    $query = "SELECT U.id, U.nombre, U.apellidos, U.email FROM usuario as U INNER JOIN uxg as A INNER JOIN asistenciaensayos as E WHERE U.estado='Activo' AND U.id = A.id AND A.id_Grupo = '$idGrupo' AND E.Estado = 'Ausente'";
     $result = mysqli_query($conn, $query);
     if($result->num_rows > 0){
       $Codigo = "

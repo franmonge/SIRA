@@ -46,7 +46,7 @@
 		// Making headers text bold and larger
 		// $sheet->getStyle('A1:D1')->getFont()->setBold(true)->setSize(14);
 		// Insert product data
-		// Autosize the columns 
+		// Autosize the columns
 		$sheet->getColumnDimension('A')->setAutoSize(true);
 		$sheet->getColumnDimension('B')->setAutoSize(true);
 		$sheet->getColumnDimension('C')->setAutoSize(true);
@@ -90,7 +90,25 @@
 					}
 				}
 			}
-		    $writer->save('Postuluantes Becas '.$nombreGrupo.'.xlsx');
+			$fileN = str_replace(' ','_','Postulantes Becas '.$nombreGrupo.'.xls');
+		    $writer->save($fileN);
+			$file = $fileN;
+
+			if (file_exists($file)) {
+			    header('Content-Description: File Transfer');
+			    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			    header('Content-Disposition: attachment; filename='.basename($file));
+			    header('Content-Transfer-Encoding: binary');
+			    header('Expires: 0');
+			    header('Cache-Control: must-revalidate');
+			    header('Pragma: public');
+			    header('Content-Length: ' . filesize($file));
+			    ob_clean();
+			    flush();
+			    readfile($file);
+				unlink($file);
+			    exit;
+			}
 			$conn->close();
 			header("Location: ../adminReportes.php");
 			// header('Content-Type: application/vnd.ms-excel');
@@ -180,12 +198,30 @@
 	  			$celda += 1;
 	  			$contador += 1;
 	  		}
-		    $writer->save('Reporte de '.$nombreGrupo.'.xlsx');
+			$fileN = str_replace(' ','_','Reporte de '.$nombreGrupo.'.xls');
+		    $writer->save($fileN);
+			$file = $fileN;
+
+			if (file_exists($file)) {
+			    header('Content-Description: File Transfer');
+			    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			    header('Content-Disposition: attachment; filename='.basename($file));
+			    header('Content-Transfer-Encoding: binary');
+			    header('Expires: 0');
+			    header('Cache-Control: must-revalidate');
+			    header('Pragma: public');
+			    header('Content-Length: ' . filesize($file));
+			    ob_clean();
+			    flush();
+			    readfile($file);
+				unlink($file);
+			    exit;
+			}
 			$conn->close();
 			header("Location: ../adminReportes.php");
 	 	}
 	}
-		
+
 		// Save the spreadsheet
 		// $writer->save('excel-files/products.xlsx');
 		// We'll be outputting an excel file
@@ -193,6 +229,6 @@
 		// // It will be called file.xls
 		// header('Content-Disposition: attachment; filename="products.xls"');
 		// Write file to the browser
-		
+
 		// $writer->save('php://output');
 ?>

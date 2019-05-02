@@ -1,6 +1,6 @@
 <?php
   if(isset($_SESSION['user'])){
-    echo
+    $out =
   "<!--Navbar -->
   <nav class=\"mb-1 navbar navbar-expand-lg navbar-dark\">
     <a class=\"navbar-brand\" href=\"./index.php\"><b><h2>SIRA</h2></b></a>
@@ -12,7 +12,9 @@
     <div class=\"collapse navbar-collapse\" id=\"navbarButtons\">
       <ul class=\"navbar-nav ml-auto\">
         <li class=\"nav-item active\">
-          <a class=\"nav-link\" href=\"./index.php\"><b>Inicio</b>
+          <a class=\"nav-link\" href=\"";
+    $out .= ($_SESSION['user']==1)?"./index.php":"./indexUser.php";
+    $out .=($_SESSION['isAdmin']==1)?"\"><b>Inicio</b>
             <span class=\"sr-only\">(current)</span>
           </a>
         </li>
@@ -27,16 +29,15 @@
         </li>
         <li class=\"nav-item\">
           <a class=\"nav-link\" href=\"SIRA-ADMIN/admin.php\"><b>Administrador</b></a>
-        </li>
-      </ul>
-
-      <li class=\"navbar-nav ml-auto nav-flex-icons\">
+        </li> </ul>":"";
+    $out.="<li class=\"navbar-nav ml-auto nav-flex-icons\">
         <a class=\"fas fa-user\" href=\"./logOut.php\" ><b> Cerrar Sesión</b></a>
       </li>
     </div>
   </nav>
   <!--/.Navbar -->
   ";
+  echo $out;
   }else{
   echo
   "<!--Navbar -->

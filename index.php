@@ -7,24 +7,22 @@
   }
 
   function verificarLogIn($Usuario, $Password){
-    require('BD_Consultas\Conexion.php');
-    if ($conn->connect_error){
-			die("Connection failed: " . $conn->connect_error);
-		}else{
-			$resultado = existeUsuario($Usuario, $Password, $conn);
-			if($resultado == 1){
-        $administrador = usuarioAdministrador($Usuario);
-        if($administrador == 1){
+      $resultado = existeUsuario($Usuario, $Password, $conn);
+	  if($resultado == 1){
+          $administrador = usuarioAdministrador($Usuario);
           $_SESSION['user'] = $Usuario;
-        }else{
-          header("Location: ./logIn.php");
-        }
+          $_SESSION['isAdmin'] = $administrador;
+          if($administrador == 1){
+              header("Location: ./index.php");
+          }else{
+              header("Location: ./SIRA-ADMIN/indexUser.php");
+          }
       }else{
-         header("Location: ./logIn.php");
+          header("Location: ./logIn.php");
       }
-      $conn->close();
     }
-  }
+
+
 
   function usuarioAdministrador($Usuario){
     require('BD_Consultas\Conexion.php');
@@ -32,6 +30,7 @@
       die("Connection failed: " . $conn->connect_error);
     }else{
       $idUsuario = consultaUsuario($Usuario, $conn);
+      $_SESSION['userID'] = $idUsuario;
       $sql = "SELECT CASE WHEN EXISTS(SELECT 1 FROM administrador WHERE id_usuario = '$idUsuario') THEN 1 ELSE 0 END";
       $resultado = mysqli_query($conn, $sql);
       $resultado2 = $resultado->fetch_array(MYSQLI_NUM);
@@ -159,7 +158,7 @@
   <!-- Section description -->
 
 
-  
+
 
 
   <!-- Card deck -->

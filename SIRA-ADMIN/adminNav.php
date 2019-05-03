@@ -113,30 +113,6 @@
         <a href="adminAdministradores.php"> <i class="fa fa-shield"></i> <span>Administradores</span></a>
       </li>
 
-      <li <?php echo $i; ?>>
-        <a href="adminAdministradores.php"> <i class="fa fa-shield"></i> <span>Administradores</span></a>
-      </li>
-
-      <li>
-        <a href="pages/UI/icons.html">
-          <i class="fa fa-laptop"></i>
-          <span>UI Elements</span>
-        </a>
-      </li>
-
-      <li class="treeview">
-        <a href="#">
-          <i class="fa fa-folder"></i> <span>Examples</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-          <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-        </ul>
-      </li>
-
     </ul>
   </section>
   <!-- /.sidebar -->

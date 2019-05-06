@@ -104,7 +104,7 @@
             </div>
             <!-- /input-group -->
             <div class="box-header with-border">
-              <h3 class="box-title">Coreografias</h3> <br>
+              <h3 class="box-title">Coreografías</h3> <br>
             </div>
             <?php fetch_coreo()?> <br>
             <div class="box-header with-border">

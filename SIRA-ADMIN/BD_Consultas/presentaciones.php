@@ -189,7 +189,7 @@ function fetch_participante(){
 	if($conn->connect_error){
 		die("Connection failed: ".$conn->connect_error);
 	}else{
-		$sql = "SELECT id, Nombre FROM usuario";
+		$sql = "SELECT id, Nombre FROM usuario WHERE estado = 'Activo'";
 		$result = mysqli_query($conn, $sql);
 		if($result->num_rows > 0){
 			while($row = $result->fetch_assoc()){

@@ -66,7 +66,7 @@
       </li>
 
       <li <?php echo $j; ?>>
-        <a href="adminCoreografias.php"> <i class="fa fa-folder"></i> <span>Coreografias</span></a>
+        <a href="adminCoreografias.php"> <i class="fa fa-folder"></i> <span>Coreografías</span></a>
       </li>
 
       <li <?php echo $d; ?>>

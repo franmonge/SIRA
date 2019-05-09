@@ -12,9 +12,7 @@
     <div class=\"collapse navbar-collapse\" id=\"navbarButtons\">
       <ul class=\"navbar-nav ml-auto\">
         <li class=\"nav-item active\">
-          <a class=\"nav-link\" href=\"";
-    $out .= ($_SESSION['user']==1)?"./index.php":"./indexUser.php";
-    $out .=($_SESSION['isAdmin']==1)?"\"><b>Inicio</b>
+          <a class=\"nav-link\" href=\"./index.php\"><b>Inicio</b>
             <span class=\"sr-only\">(current)</span>
           </a>
         </li>
@@ -26,11 +24,12 @@
         </li>
         <li class=\"nav-item\">
           <a class=\"nav-link\" href=\"./galeria.php\"><b>Galería</b></a>
-        </li>
-        <li class=\"nav-item\">
-
+        </li>";
+        $out .= ($_SESSION['isAdmin']==1)?"<li class=\"nav-item\">
           <a class=\"nav-link\" href=\"SIRA-ADMIN/adminPresentaciones.php\"><b>Administrador</b></a>
-        </li> </ul>":"";
+        </li> </ul>":"<li class=\"nav-item\">
+          <a class=\"nav-link\" href=\"SIRA-ADMIN/indexUser.php\"><b>Mis Presentaciones</b></a>
+        </li> </ul>";
     $out.="<li class=\"navbar-nav ml-auto nav-flex-icons\">
 
         <a class=\"fas fa-user\" href=\"./logOut.php\" ><b> Cerrar Sesión</b></a>

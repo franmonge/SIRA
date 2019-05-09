@@ -1,3 +1,4 @@
+  <?php require('../sesion.php'); ?>
  <!-- PRESENTACIONES -->
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->

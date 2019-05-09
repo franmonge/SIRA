@@ -1,6 +1,5 @@
 <?php require('activeSideBar.php') ?>
 
-
 <header class="main-header">
   <!-- Logo -->
   <a href="..\index.php" class="logo">
@@ -23,14 +22,14 @@
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-            <span class="hidden-xs">Marvin Santos</span>
+            <span class="hidden-xs"><?php echo $_SESSION['nombre']; ?></span>
           </a>
 
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-              <p>Marvin Santos - Profesor<small>Member since May 2019</small></p>
+              <p><?php echo $_SESSION['nombreCompleto']; ?><small><?php echo $_SESSION['email'] ?></small></p>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">

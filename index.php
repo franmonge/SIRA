@@ -12,13 +12,11 @@
           $administrador = usuarioAdministrador($Usuario);
           $_SESSION['user'] = $Usuario;
           $_SESSION['isAdmin'] = $administrador;
-          if($administrador == 1){
-              header("Location: ./index.php");
-          }else{
-              header("Location: ./SIRA-ADMIN/indexUser.php");
-          }
+          header("Location: ./index.php");
+          exit();
       }else{
           header("Location: ./logIn.php");
+          exit();
       }
     }
 
@@ -40,10 +38,18 @@
   }
 
   function consultaUsuario($Usuario, $conn){
-    $sql = "SELECT id FROM usuario WHERE Email = '$Usuario'";
+    $sql = "SELECT id, Nombre, Apellidos FROM usuario WHERE Email = '$Usuario'";
     $result = mysqli_query($conn, $sql);
-    $result2 = $result->fetch_array(MYSQLI_NUM);
-    $id_Usuario = $result2[0];
+    // $result2 = $result->fetch_array(MYSQLI_NUM);
+    if($result->num_rows > 0){
+        while($row = $result->fetch_assoc()){
+            $id_Usuario = $row['id'];
+            $_SESSION['test'] = "Test";
+            $_SESSION['nombre'] = $row['Nombre'];
+            $_SESSION['nombreCompleto'] = $row['Nombre'] ." ".$row['Apellidos'];
+            $_SESSION['email'] = $Usuario;
+        }
+    }
     return $id_Usuario;
   }
 

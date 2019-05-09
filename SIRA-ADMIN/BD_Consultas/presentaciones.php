@@ -247,7 +247,7 @@ function fetch_selected_participante($id){
 			$out .=  "";
 		}
 
-		$sql = "SELECT usuario.id as uid, usuario.nombre as unombre FROM usuario WHERE usuario.id NOT IN (SELECT id_Usuario from uxp WHERE id_Presentacion = $id) ";
+		$sql = "SELECT usuario.id as uid, usuario.nombre as unombre FROM usuario WHERE usuario.id NOT IN (SELECT id_Usuario from uxp WHERE id_Presentacion = $id) AND usuario.estado='Activo' ";
 		$result = mysqli_query($conn, $sql);
 		if($result->num_rows > 0){
 			while($row = $result->fetch_assoc()){

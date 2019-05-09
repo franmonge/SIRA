@@ -89,6 +89,8 @@
 <script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src='"bower_components/fullcalendar/dist/locale/es.js'></script>
 
+<script src="bower_components/fullcalendar/dist/locale/es.js"></script>
+
 
 
 <!-- Page specific script -->
@@ -145,6 +147,7 @@
       events    : [
       <?php getPresentaciones(); ?>
       ],
+      locale: "es",
       eventClick: function(event) {
 
           $(inName).val(event.title);

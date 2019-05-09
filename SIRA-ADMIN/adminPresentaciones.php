@@ -35,7 +35,10 @@
               <h4 class="modal-title">Presentación</h4>
             </div>
             <div class="modal-body">
-                <div class="input-group">
+                    <div class="input-group"><label>Seleccione el grupo</label>
+                    <select class="form-control select2" name="inGroup" id="inGroup" style="width: 100%;">
+                     <?php dropdownGrupos()?>
+                    </select>
                       <input id="inName" type="text"   class="form-control" name="inEventName"   placeholder="Nombre" required>
                       <input id="inDate" type="date"   class="form-control" name="inEventDate"   required/>
                       <input id="inTime" type="time"   class="form-control" name="inEventTime"   placeholder="Fecha" required/>
@@ -62,10 +65,6 @@
       <section class="content">
         <div class="col-md-12">
           <div class="form-group col-md-6">
-            <label>Seleccione el grupo</label>
-            <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
-              <?php dropdownGrupos()?>
-            </select>
           </div>
         </div>
 
@@ -95,6 +94,10 @@
             </div>
             <!-- /btn-group -->
             <div class="input-group">
+              <label>Seleccione el grupo</label>
+              <select class="form-control select2" name="group" id="GruposDisponibles" style="width: 100%;">
+               <?php dropdownGrupos()?>
+              </select>
               <input type="text"   class="form-control" name="eventName"   placeholder="Nombre" required>
               <input type="date"   class="form-control" name="eventDate"   required/>
               <input type="time"   class="form-control" name="eventTime"   placeholder="Fecha" required/>
@@ -227,6 +230,7 @@
           $(inPlace).val(event.place);
           $(inCost).val(event.cost);
           $(inId).val(event.id);
+          $(inGroup).val(event.groupId);
           $("#viewPresentation-modal").modal('show');
       },
       editable  : false,

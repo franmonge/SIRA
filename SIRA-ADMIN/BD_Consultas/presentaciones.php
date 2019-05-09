@@ -5,13 +5,14 @@
 		if($conn->connect_error){
 			die("Connection failed: ".$conn->connect_error);
 		}else{
-			$sql = "SELECT id, Nombre, Descripcion, Fecha, Lugar, Costo, Color FROM presentacion";
+			$sql = "SELECT id, Nombre, Descripcion, Fecha, Lugar, Costo, Color, id_Grupo FROM presentacion";
 			$result = mysqli_query($conn, $sql);
 			$count = 0;
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
 					$id = $row['id'];
 					$color = $row['Color'];
+					$groupId = $row['id_Grupo'];
 		            $date= new DateTime($row['Fecha']) ;
 		            $day = $date->format('d');
 		            $month = $date->format('m')-1;
@@ -31,7 +32,8 @@
 				time    : '".$timeAux."',
 				place    : '".$row['Lugar']."',
 				cost    : '".$row['Costo']."',
-                backgroundColor: '$color',
+				backgroundColor: '$color',
+                groupId: '$groupId',
                 borderColor    : '$color'
               }";
 					$count += 1;
@@ -43,6 +45,7 @@
 		$conn->close();
     echo $out;
 	}
+
 	function addEvent($groupId, $name, $detail, $timestamp, $place, $cost, $color, $Coreografias, $Participantes ){
 	  require('Conexion.php');
 	  if ($conn->connect_error){
@@ -71,14 +74,14 @@
 	  exit();
 	}
 	}
-//
-function updateEvent($id,$name, $detail, $timestamp, $place,$cost){
+
+function updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId){
 	require('Conexion.php');
 	if ($conn->connect_error){
 		die("Connection failed: " . $conn->connect_error);
 		echo "Connection failed";
   	}else{
-		$query = "UPDATE presentacion SET Nombre='$name', Descripcion='$detail', Fecha='$timestamp', Lugar='$place', Costo='$cost' WHERE presentacion.id = $id";
+		$query = "UPDATE presentacion SET Nombre='$name', Descripcion='$detail', Fecha='$timestamp', Lugar='$place', Costo='$cost', id_Grupo='$groupId' WHERE presentacion.id = $id";
 		echo "query";
 		$result = mysqli_query($conn, $query);
 		$conn->close();
@@ -151,11 +154,14 @@ if (!empty($_POST["inEventName"])) {
 						if (!empty($_POST["inEventId"])){
 							$id = filter_input(INPUT_POST, 'inEventId');
 							$action = filter_input(INPUT_POST, 'ACTION');
-							if ($action == "Eliminar"){
-								deleteEvent($id);
-							}else{
-								if($action == "Guardar"){
-									updateEvent($id,$name, $detail, $timestamp, $place,$cost);
+							if (!empty($_POST["inGroup"])) {
+								$groupId = filter_input(INPUT_POST, 'inGroup');
+								if ($action == "Eliminar"){
+									deleteEvent($id);
+								}else{
+									if($action == "Guardar"){
+										updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId);
+									}
 								}
 							}
 						}

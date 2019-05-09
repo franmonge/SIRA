@@ -46,6 +46,14 @@
                       <input id="inPlace" type="text"   class="form-control" name="inEventPlace"  placeholder="Lugar" required>
                       <input id="inCost" type="number" class="form-control" name="inEventCost"   placeholder="Costo" required>
                       <textarea id="inDescription" rows="4"   class="form-control" name="inEventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Coreografías</h3> <br>
+                      </div>
+                      <div id="inCoreografias"class=""> </div>
+                      <div class="box-header with-border">
+                        <h3 class="box-title">Participantes</h3> <br>
+                      </div>
+                      <div id="inPartcipantes"class=""> </div>
                       <input id="inId" type="hidden" name="inEventId">
                 </div>
             </div>
@@ -166,7 +174,6 @@
 <script src="bower_components/fullcalendar/dist/locale/es.js"></script>
 
 
-
 <!-- Page specific script -->
 <script>
   $(function () {
@@ -232,6 +239,8 @@
           $(inCost).val(event.cost);
           $(inId).val(event.id);
           $(inGroup).val(event.groupId);
+          $.post('BD_Consultas/presentaciones.php', {inEventCoreo: event.id}, function(returnedData){$(inCoreografias).html(returnedData); });
+          $.post('BD_Consultas/presentaciones.php', {inEventParticipantes: event.id}, function(returnedData){$(inPartcipantes).html(returnedData); });
           $("#viewPresentation-modal").modal('show');
       },
       editable  : false,

@@ -22,7 +22,7 @@
       <!-- Main content -->
       <section class="content-header">
         <h1>Reportes generales</h1>
-        
+
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
@@ -78,7 +78,7 @@
                           <td>Presentaciones realizadas</td>
                           <td><input type="button" name="GenerarPresentaciones" data-target="#ReportePresentaciones-modal" data-toggle="modal" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
                         </tr>
-                        
+
                       </tbody>
                     </table>
                   </div>
@@ -89,6 +89,8 @@
         </section>
       </section>
     </div>
+</div>
+    
   <!-- ./wrapper -->
 
   <?php include('adminFooter.php')?>

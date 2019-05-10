@@ -14,7 +14,7 @@
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<!--  -->
+<div class="wrapper">
   <?php include('userNav.php')?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -66,6 +66,8 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+</div>
+
 
 <?php include('adminFooter.php')?>
 

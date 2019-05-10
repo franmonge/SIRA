@@ -129,6 +129,8 @@
             <!-- /.modal -->
 
     </div>
+</div>
+    
   <!-- ./wrapper -->
 
   <?php include('adminFooter.php')?>

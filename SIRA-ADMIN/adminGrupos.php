@@ -128,6 +128,7 @@
             </div>
             <!-- /.modal -->
 
+        </div>
     </div>
   <!-- ./wrapper -->
 

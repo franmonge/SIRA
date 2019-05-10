@@ -23,6 +23,7 @@
 
 </head>
 <body>
+	<?php require('sesion.php')?>
 	<?php include('Componentes\Navbar.php')?>
 	<?php include('BD_Consultas\muestraGrupoEspecifico.php')?>
 	<?php include('Componentes\footer.php')?>

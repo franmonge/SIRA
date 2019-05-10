@@ -10,7 +10,7 @@
 				while($row = $result->fetch_assoc()){
 					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
-				          <img  class=\"card-img-top\" src=\"https://mdbootstrap.com/img/Photos/Others/photo6.jpg\" alt=\"Card image cap\">
+				          <img  class=\"card-img-top\" src=\"http://localhost/SIRA/FotoSIRA/Screenshot_2016-02-19-10-03-52-1.png\" alt=\"Card image cap\">
 
 				        </div>
 				        <div class=\"card-body card-body-cascade text-center\">

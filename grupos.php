@@ -24,32 +24,21 @@
   <!-- Start your project here-->
   <?php require('sesion.php')?>
   <?php include('Componentes\Navbar.php')?>
-    
+
 
   <br>
 
    <!-- Container -->
-  <div class="container">
- 
-
-  <br>
-
-
-  <div class="container">
-    <h2>Grupos Artísticos</h2>
-    </div>
-  
-  <br>
-
-  <!-- Grid column -->
-  <div >
-    <!--Panel-->
-    <?php getGrupos() ?>
-  <!-- Grid column -->
-
-
-  
-  </div>
+   <div class="container">
+       <br>
+       <div class="container">
+           <h2>Grupos Artísticos</h2>
+       </div>
+       <br>
+       <div >
+           <?php getGrupos() ?>
+       </div>
+   </div>
   <!-- Container -->
   <?php include('Componentes\footer.php')?>
     <!-- SCRIPTS -->

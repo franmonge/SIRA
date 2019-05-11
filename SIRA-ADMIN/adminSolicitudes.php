@@ -131,6 +131,8 @@
        <?php solicitudesPendientes(); ?>
     </div>
   <!-- ./wrapper -->
+</div>
+  
 
   <?php include('adminFooter.php')?>
 

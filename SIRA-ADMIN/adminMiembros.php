@@ -84,6 +84,8 @@ if(isset($_POST['functionname']) && !empty($_POST["functionname"])){
      <?php miembrosInactivos();?>
     </div>
   <!-- ./wrapper -->
+</div>
+  
 
   <?php include('adminFooter.php')?>
 

@@ -9,9 +9,9 @@
 
  <?php require('..\sesion.php')?>
  <?php include('headerLinks.php')?>
- <?php include('BD_Consultas\Grupos.php')?> 
+ <?php include('BD_Consultas\Grupos.php')?>
  <?php include('BD_Consultas\Asistencia.php')?>
- 
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -25,7 +25,7 @@
       </section>
 
       <!-- Main content -->
-      <form action="BD_Consultas\Asistencia.php" method="POST">      
+      <form action="BD_Consultas\Asistencia.php" method="POST">
         <div class="col-md-12">
           <div class="form-group col-md-6">
             <label>Seleccione el grupo</label>
@@ -36,7 +36,7 @@
                 </select>
               </div>
               <input type="submit" class="btn btn-info btn-flat col-md-4" value="Crear Ensayo">
-            </div>            
+            </div>
           </div>
         </div>
       </form>
@@ -44,9 +44,10 @@
       <?php
         if (isset($_SESSION["CargarEstudiantes"]) && !empty($_SESSION["CargarEstudiantes"])) {
           miembrosPresentes($_SESSION["CargarEstudiantes"]);
-          miembrosAusentes($_SESSION["CargarEstudiantes"]);       
+          miembrosAusentes($_SESSION["CargarEstudiantes"]);
         }
       ?>
+  </div>
     </div>
 
     <?php include('adminFooter.php')?>

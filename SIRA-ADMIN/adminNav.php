@@ -33,11 +33,8 @@
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
-              <div class="pull-left">
-                <a href="/SIRA/SIRA-ADMIN/pages/examples/profile.php" class="btn btn-default btn-flat">Mi Perfil</a>
-              </div>
-              <div class="pull-right">
-                <a href="/SIRA/logOut.php" class="btn btn-default btn-flat">Cerrar Sesión</a>
+              <div>
+                <a href="/SIRA/logOut.php" class="btn btn-block btn-primary btn-flat">Cerrar Sesión</a>
               </div>
             </li>
           </ul>

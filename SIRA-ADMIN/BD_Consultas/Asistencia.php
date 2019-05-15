@@ -43,7 +43,6 @@ function crearEnsayo($idGrupo,$fecha){
 
   $query3 = "SELECT U.id FROM usuario as U INNER JOIN uxg as A ON u.id = a.id_Usuario where U.estado='Activo' and a.id_Grupo = '$idGrupo'";
   $result3 = mysqli_query($conn, $query3);
-
   if($result3->num_rows > 0){
     while($row = $result3->fetch_assoc()){
       $x = $row['id'];
@@ -183,7 +182,6 @@ function miembrosPresentes($idGrupo){
   }
   $conn->close();
 }
-
 
 function miembrosAusentes($idGrupo){
   require('BD_Consultas\Conexion.php');

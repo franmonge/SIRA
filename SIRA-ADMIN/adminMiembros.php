@@ -110,7 +110,7 @@ if(isset($_POST['functionname']) && !empty($_POST["functionname"])){
       'paging'      : false,
       'lengthChange': true,
       'searching'   : false,
-      'ordering'    : true,
+      'ordering'    : false,
       'info'        : false,
       'autoWidth'   : true
     })

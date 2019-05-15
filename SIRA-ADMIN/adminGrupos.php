@@ -153,11 +153,11 @@
   $(function () {
     $('#example1').DataTable()
     $('#table-Miembros').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'lengthChange': true,
-      'searching'   : true,
+      'searching'   : false,
       'ordering'    : true,
-      'info'        : true,
+      'info'        : false,
       'autoWidth'   : true
     })
   })

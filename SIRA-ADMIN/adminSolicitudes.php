@@ -154,11 +154,11 @@
   $(function () {
     $('#example1').DataTable()
     $('#table-Solicitudes').DataTable({
-      'paging'      : true,
+      'paging'      : false,
       'lengthChange': true,
-      'searching'   : true,
+      'searching'   : false,
       'ordering'    : true,
-      'info'        : true,
+      'info'        : false,
       'autoWidth'   : true
     })
   })

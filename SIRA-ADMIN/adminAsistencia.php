@@ -8,9 +8,10 @@
  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
  <?php include('headerLinks.php')?>
- <?php include('BD_Consultas\Grupos.php')?> 
+ <?php include('BD_Consultas\Grupos.php')?>
  <?php include('BD_Consultas\Asistencia.php')?>
  
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">

@@ -1,4 +1,43 @@
 <?php require('sesion.php')?>
+<?php function getGallery(){
+
+            require('BD_Consultas/Conexion.php');
+            if ($conn->connect_error){
+              die("Connection failed: " . $conn->connect_error);
+            }else{
+              $query = "SELECT id, image_path FROM galeria ORDER BY id DESC";
+              $result = mysqli_query($conn, $query);
+              $Codigo="";
+              if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                    $Codigo .= " <div class=\"col-lg-4 col-md-12 mb-4\">
+                       <!--Modal: Name-->
+                       <div class=\"modal fade\" id=\"modal".$row['id']."\">
+                         <div class=\"modal-dialog modal-lg\" role=\"document\">
+                           <!--Content-->
+                           <div class=\"modal-content\">
+                             <!--Body-->
+                             <div class=\"modal-body mb-0 p-0\">
+                               <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\" >
+                                 <iframe class=\"embed-responsive-item\" src=\"".$row['image_path']."\"
+                                   allowfullscreen></iframe>
+                               </div>
+                             </div>
+                           </div>
+                           <!--/.Content-->
+                         </div>
+                       </div>
+                       <!--Modal: Name-->
+                       <a><img class=\"img-fluid\" src=\"".$row['image_path']."\"
+                           data-toggle=\"modal\" data-target=\"#modal".$row['id']."\"  style=\"max-width: 300px;max-height: 300px;\"></a>
+                     </div>";
+              }
+          }
+            }
+            $conn->close();
+            echo $Codigo;
+        }
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,10 +62,10 @@
   <!-- Start your project here-->
 
  <?php include('Componentes\Navbar.php')?>
-    
+
    <!-- Container -->
   <div class="container">
- 
+
     <!-- Gallery -->
   <div class="container">
 
@@ -36,296 +75,14 @@
 
       <!-- Grid row -->
     <div class="row">
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-  <!-- Grid column -->
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-  <!-- Grid column -->
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-  <!-- Grid column -->
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-  <!-- Grid column -->
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-  <!-- Grid column -->
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
-  <div class="col-lg-4 col-md-12 mb-4">
-    <!--Modal: Name-->
-    <div class="modal fade" id="modal1">
-      <div class="modal-dialog modal-lg" role="document">
-        <!--Content-->
-        <div class="modal-content">
-          <!--Body-->
-          <div class="modal-body mb-0 p-0">
-            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-              <iframe class="embed-responsive-item" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-                allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-        <!--/.Content-->
-      </div>
-    </div>
-    <!--Modal: Name-->
-    <a><img class="img-fluid" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg"
-        data-toggle="modal" data-target="#modal1"></a>
-  </div>
-
-  <!-- Grid column -->
+        <?php getGallery(); ?>
     </div>
     <!-- Grid row -->
   </div>
   <!-- Gallery -->
-  
+
   </div>
-  
+
   <?php include('Componentes\footer.php')?>
     <!-- SCRIPTS -->
     <!-- JQuery -->

@@ -102,7 +102,7 @@
       </li>
 
       <li <?php echo $h; ?>>
-        <a href="#"> <i class="fa fa-image"></i> <span>Galería</span></a>
+        <a href="adminGaleria.php"> <i class="fa fa-image"></i> <span>Galería</span></a>
       </li>
 
       <li <?php echo $i; ?>>

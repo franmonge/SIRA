@@ -208,6 +208,7 @@
         </section>
 
     </div>
+    </div>
   <!-- ./wrapper -->
 
   <?php include('adminFooter.php')?>

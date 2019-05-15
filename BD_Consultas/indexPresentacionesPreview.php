@@ -10,8 +10,7 @@
 				while($row = $result->fetch_assoc()){
 					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
-				          <img  class=\"card-img-top\" src=\"http://localhost/SIRA/FotoSIRA/Screenshot_2016-02-19-10-03-52-1.png\" alt=\"Card image cap\">
-
+				          <img  class=\"card-img-top\" src=\"https://mdbootstrap.com/img/Photos/Others/photo6.jpg\" alt=\"Card image cap\">
 				        </div>
 				        <div class=\"card-body card-body-cascade text-center\">
 				          <h4 class=\"card-title\"><strong>".$row['Nombre']."</strong></h4>
@@ -20,10 +19,10 @@
 				        </div>
 				      </div>";
 				}
-				echo "<div class=\"card card-cascade wider\">
-				        <div class=\"view view-cascade overlay\">
-							<button type=\"button\" class=\"btn btn-light-blue btn-md\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
-						</div>
+				echo "<div class=\"card card-cascade wider\" >
+								<div class=\"view view-cascade overlay\">
+							<button type=\"button\" class=\"btn btn-light-blue btn-md\" style=\"margin-left:auto;margin-right:auto;display:block;margin-top:50%\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
+							</div>
 					</div>
 					";
 			}else {
@@ -32,7 +31,6 @@
 		}
 		$conn->close();
 	}
-
 
 	function getPresentacionesFull(){
 		require('Conexion.php');

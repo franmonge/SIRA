@@ -19,9 +19,18 @@
 				      </div>";
 				}
 				echo "<div class=\"card card-cascade wider\">
-				        <div class=\"view view-cascade overlay\">
-							<button type=\"button\" class=\"btn btn-light-blue btn-md\" onclick=\"location.href='grupos.php';\">+Ver Más</button>
-						</div>
+								<div class=\"view view-cascade overlay\">
+								<div style=\"margin:50% auto;
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								resize: vertical;
+								overflow: auto;\" >
+								<p style=\"margin:0; padding: 20px;\">
+							<button type=\"button\" class=\"btn btn-light-blue btn-md\" style=\"margin:0 auto; display:block\" onclick=\"location.href='grupos.php';\">+Ver Más</button>
+							</p>
+							</div>
+							</div>
 					</div>
 					";
 			}

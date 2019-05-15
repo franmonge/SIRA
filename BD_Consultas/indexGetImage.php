@@ -32,7 +32,8 @@
           }
           $Codigo .= "<div class=\"card card-cascade wider col-lg-4 col-md-12 mb-4\">
                   <div class=\"view view-cascade overlay\">
-                      <button type=\"button\" class=\"btn btn-light-blue btn-md\" onclick=\"location.href='galeria.php';\">+Ver Más</button>
+                      <button type=\"button\" class=\"btn btn-light-blue btn-md\"
+                      style=\"margin-left:auto;margin-right:auto;display:block;margin-top:50%\" onclick=\"location.href='galeria.php';\">+Ver Más</button>
                   </div>
               </div>
               ";

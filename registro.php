@@ -32,16 +32,6 @@
     <br>
     <!-- Extended default form grid -->
 <form id="form-registro" action="BD_Consultas\registrar.php" method="POST">  
-  <!-- Default input -->
-  <!-- <div class="form-row ">
-    <div class="form-group col-md-6">
-      <label for="inputPassword4">Grupo al que solicita ingreso</label>
-      <select class="browser-default custom-select" name="GrupoRegistro" id="Grupo">
-        <?php //dropdownGrupos()?>
-      </select>
-    </div>
-  </div> -->
-
   <!-- Grid row -->
   <div class="form-row">
     <!-- Default input -->
@@ -113,14 +103,14 @@
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Carrera</label>
-      <select class="browser-default custom-select" name="CarreraRegistro" id="Carrera">
+      <select class="browser-default custom-select" name="CarreraRegistro" id="Carrera" required/>
         <?php dropdownCarreras()?>
       </select>
     </div>
     <!-- Default input -->
     <div class="form-group col-md-6">
       <label for="inputPassword4">Tipo de Sangre</label>
-      <select class="browser-default custom-select" name="TipoSangreRegistro" id="TipoSangre">
+      <select class="browser-default custom-select" name="TipoSangreRegistro" id="TipoSangre" required/>
         <?php dropdownTiposSanges()?>
       </select>
     </div>
@@ -130,7 +120,7 @@
   <!-- Default input -->
   <div class="form-group">
     <label for="inputAddress">Carnet</label>
-    <input type="text" class="form-control" id="Carnet" name="CarnetRegistro" placeholder="Carnet"/>
+    <input type="text" class="form-control" id="Carnet" name="CarnetRegistro" placeholder="Carnet" required/>
   </div>
   <!-- Default input -->
   <div class="form-group">
@@ -156,7 +146,7 @@
   <!-- Default input -->
   <div class="form-group  col-md-3">
     <label for="inputAddress">Talla de Blusa/Camisa</label>
-    <select class="browser-default custom-select" name="TallaBlusaRegistro" id="TallaBlusa">
+    <select class="browser-default custom-select" name="TallaBlusaRegistro" id="TallaBlusa" required>
       <option>XL</option>
       <option>L</option>
       <option>M</option>

@@ -10,8 +10,8 @@
 				while($row = $result->fetch_assoc()){
 					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
-				          <img  class=\"card-img-top\" src=\"".$row['Imagen']."\"  alt=\"No image\">
 
+				          <img  class=\"card-img-top\" src=\"".$row['Imagen']."\"  alt=\"No image\">
 				        </div>
 				        <div class=\"card-body card-body-cascade text-center\">
 				          <h4 class=\"card-title\"><strong>".$row['Nombre']."</strong></h4>
@@ -20,10 +20,10 @@
 				        </div>
 				      </div>";
 				}
-				echo "<div class=\"card card-cascade wider\">
-				        <div class=\"view view-cascade overlay\">
-							<button type=\"button\" class=\"btn btn-light-blue btn-md\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
-						</div>
+				echo "<div class=\"card card-cascade wider\" >
+								<div class=\"view view-cascade overlay\">
+							<button type=\"button\" class=\"btn btn-light-blue btn-md\" style=\"margin-left:auto;margin-right:auto;display:block;margin-top:50%\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
+							</div>
 					</div>
 					";
 			}else {
@@ -32,7 +32,6 @@
 		}
 		$conn->close();
 	}
-
 
 	function getPresentacionesFull(){
 		require('Conexion.php');

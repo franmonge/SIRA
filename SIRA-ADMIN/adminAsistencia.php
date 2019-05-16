@@ -7,47 +7,102 @@
  <!-- Tell the browser to be responsive to screen width -->
  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
- <?php require('..\sesion.php')?>
  <?php include('headerLinks.php')?>
  <?php include('BD_Consultas\Grupos.php')?>
  <?php include('BD_Consultas\Asistencia.php')?>
+ 
 
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
   <div class="wrapper">
     <?php include('adminNav.php')?>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Main content -->
       <section class="content-header">
         <h1>Asistencia</h1>
       </section>
-
-      <!-- Main content -->
-      <form action="BD_Consultas\Asistencia.php" method="POST">
-        <div class="col-md-12">
+      <form action="BD_Consultas\Asistencia.php" method="POST">      
+        <div class="form-row">
           <div class="form-group col-md-6">
             <label>Seleccione el grupo</label>
-            <div class="row">
-              <div class="col-md-8">
-                <select class="form-control select2" name="ensayo" id="Grupos">
-                  <?php dropdownGrupos()?>
-                </select>
-              </div>
-              <input type="submit" class="btn btn-info btn-flat col-md-4" value="Crear Ensayo">
-            </div>
+              <select class="form-control select2" name="ensayo" id="Grupos">
+                <?php dropdownGrupos()?>
+              </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Seleccione la fecha</label>
+            <input type="date" id="FechaNacimiento" name="FechaNacimientoRegistro" class="form-control" required/>
           </div>
         </div>
+        <input type="submit" class="btn btn-info btn-flat col-md-4" value="Consultar Ensayo">
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Presentes</h3>
+                </div>
+                <div class="box-body">
+                  <table id="table-Miembros-Presentes" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Ausentes</th>
+                      </tr>
+                    </thead>
+                  <tbody>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Email</th>
+                      <th>Ausentes</th>
+                    </tr>
+                  </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="content">
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="box">
+                <div class="box-header">
+                  <h3 class="box-title">Ausentes</h3>
+                </div>
+                <div class="box-body">
+                  <table id="table-Miembros-Ausentes" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Email</th>
+                      <th>Presentes</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                      <?php ?>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                      <th>Nombre</th>
+                      <th>Apellidos</th>
+                      <th>Email</th>
+                      <th>Presentes</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </form>
-
-      <?php
-        if (isset($_SESSION["CargarEstudiantes"]) && !empty($_SESSION["CargarEstudiantes"])) {
-          miembrosPresentes($_SESSION["CargarEstudiantes"]);
-          miembrosAusentes($_SESSION["CargarEstudiantes"]);
-        }
-      ?>
-  </div>
     </div>
 
     <?php include('adminFooter.php')?>
@@ -73,19 +128,19 @@
     $(function () {
       $('#example1').DataTable()
       $('#table-Miembros-Presentes').DataTable({
-        'paging'      : true,
+        'paging'      : false,
         'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
+        'searching'   : false,
+        'ordering'    : false,
+        'info'        : false,
         'autoWidth'   : true
       })
       $('#table-Miembros-Ausentes').DataTable({
-        'paging'      : true,
+        'paging'      : false,
         'lengthChange': true,
-        'searching'   : true,
-        'ordering'    : true,
-        'info'        : true,
+        'searching'   : false,
+        'ordering'    : false,
+        'info'        : false,
         'autoWidth'   : true
       })
     })

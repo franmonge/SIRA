@@ -29,7 +29,7 @@
       </section>
 
     <!-- Main content -->
-    <form action="BD_Consultas\presentaciones.php" method="POST">
+    <form action="BD_Consultas\presentaciones.php" method="POST" enctype="multipart/form-data">
     <div class="modal modal-info fade" role="dialog"  id="viewPresentation-modal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -49,6 +49,7 @@
                         <input id="inPlace" type="text"   class="form-control" name="inEventPlace"  placeholder="Lugar" required>
                         <input id="inCost" type="number" class="form-control" name="inEventCost"   placeholder="Costo" required>
                         <textarea id="inDescription" rows="4"   class="form-control" name="inEventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+                        <input type="file" name="inFileToUpload" id="inFileToUpload">
                         <div class="box-header with-border">
                             <h3 class="box-title">Coreografías</h3> <br>
                          </div>
@@ -73,7 +74,7 @@
       <!-- /.modal -->
   </form>
 
-    <form action="BD_Consultas\presentaciones.php" method="POST">
+    <form action="BD_Consultas\presentaciones.php" method="POST" enctype="multipart/form-data">
       <section class="content">
 
         <div class="row">
@@ -112,6 +113,7 @@
                             <input type="text"   class="form-control" name="eventPlace"  placeholder="Lugar" required>
                             <input type="number" class="form-control" name="eventCost"   placeholder="Costo" required>
                             <textarea rows="4"   class="form-control" name="eventDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+                            <input type="file" name="fileToUpload" id="fileToUpload" required>
                         </div>
                         <!-- /input-group -->
                         <div class="box-header with-border">

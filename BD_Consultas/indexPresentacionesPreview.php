@@ -4,13 +4,13 @@
 		if ($conn->connect_error){
 			die("Connection failed: " . $conn->connect_error);
 		}else{
-			$sql = "SELECT Nombre, Date_Format(Fecha,'%d-%m-%Y') as F, Descripcion FROM presentacion WHERE FECHA >= CURRENT_DATE() ORDER by F ASC LIMIT 3;";
+			$sql = "SELECT Nombre, Date_Format(Fecha,'%d-%m-%Y') as F, Descripcion, Imagen FROM presentacion WHERE FECHA >= CURRENT_DATE() ORDER by F ASC LIMIT 3;";
 			$result = mysqli_query($conn, $sql);
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
 					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
-				          <img  class=\"card-img-top\" src=\"http://localhost/SIRA/FotoSIRA/Screenshot_2016-02-19-10-03-52-1.png\" alt=\"Card image cap\">
+				          <img  class=\"card-img-top\" src=\"".$row['Imagen']."\"  alt=\"No image\">
 
 				        </div>
 				        <div class=\"card-body card-body-cascade text-center\">
@@ -39,14 +39,14 @@
 		if ($conn->connect_error){
 			die("Connection failed: " . $conn->connect_error);
 		}else{
-			$sql = "SELECT Nombre, Date_Format(Fecha,'%d-%m-%Y') as F, Descripcion, Lugar FROM presentacion WHERE FECHA >= CURRENT_DATE() ORDER by F ASC;";
+			$sql = "SELECT Nombre, Date_Format(Fecha,'%d-%m-%Y') as F, Descripcion, Lugar, Imagen FROM presentacion WHERE FECHA >= CURRENT_DATE() ORDER by F ASC;";
 			$result = mysqli_query($conn, $sql);
 			$lineBreaker = 1;
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){
 					echo"<div class=\"card card-cascade wider\">
 				        <div class=\"view view-cascade overlay\">
-				          <img  class=\"card-img-top\" src=\"https://mdbootstrap.com/img/Photos/Others/photo6.jpg\" alt=\"Card image cap\">
+				          <img  class=\"card-img-top\" src=\"".$row['Imagen']."\" alt=\"No image\" >
 
 				        </div>
 				        <div class=\"card-body card-body-cascade text-center\">

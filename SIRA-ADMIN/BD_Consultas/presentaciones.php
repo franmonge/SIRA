@@ -46,7 +46,7 @@
     echo $out;
 	}
 
-	function addEvent($groupId, $name, $detail, $timestamp, $place, $cost, $color, $Coreografias, $Participantes ){
+	function addEvent($groupId, $name, $detail, $timestamp, $place, $cost, $color, $Coreografias, $Participantes, $path ){
 	  require('Conexion.php');
 	  if ($conn->connect_error){
 	    die("Connection failed: " . $conn->connect_error);
@@ -54,7 +54,7 @@
 	  }else{
 			//$query1 = "INSERT INTO cxp(id_Coreografia, id_Presentacion) VALUES ($Coreografias[0],$Participantes[2])";
 			//$result = mysqli_query($conn, $query1);
-	    $query = "INSERT INTO presentacion(id_Grupo, Nombre, Descripcion, Fecha, Lugar, Costo, Color) VALUES ($groupId, '$name', '$detail', '$timestamp', '$place', '$cost', '$color')";
+	    $query = "INSERT INTO presentacion(id_Grupo, Nombre, Descripcion, Fecha, Lugar, Imagen, Costo, Color) VALUES ($groupId, '$name', '$detail', '$timestamp', '$place','$path', '$cost', '$color')";
 			echo "query";
 			if(mysqli_query($conn, $query)){
 				$ultimoID = mysqli_insert_id($conn);
@@ -75,13 +75,21 @@
 	}
 	}
 
-function updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Coreografias, $Participantes){
+function updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Coreografias, $Participantes, $image){
 	require('Conexion.php');
 	if ($conn->connect_error){
 		die("Connection failed: " . $conn->connect_error);
 		echo "Connection failed";
   	}else{
-		$query = "UPDATE presentacion SET Nombre='$name', Descripcion='$detail', Fecha='$timestamp', Lugar='$place', Costo='$cost', id_Grupo='$groupId' WHERE presentacion.id = $id";
+		$updateImg = "";
+		if (!is_null($image)) {
+			$query = "SELECT Imagen FROM presentacion WHERE id = '$id'";
+			$result = mysqli_query($conn, $query);
+			$imageLocation = $result->fetch_assoc()['Imagen'];
+			unlink("../../".$imageLocation);
+			$updateImg = "Imagen='$image', ";
+		}
+		$query = "UPDATE presentacion SET Nombre='$name', Descripcion='$detail', Fecha='$timestamp', Lugar='$place',".$updateImg."Costo='$cost', id_Grupo='$groupId' WHERE presentacion.id = $id";
 		if(mysqli_query($conn, $query)){
 			$ultimoID =$id;
 		}
@@ -137,7 +145,43 @@ if (!empty($_POST["group"])) {
 								$color = filter_input(INPUT_POST, 'eventColor');
 								$Coreografias = $_POST['Coreografias'];
 								$Participantes = $_POST['Participantes'];
-								addEvent($groupId, $name, $detail, $timestamp, $place,$cost, $color, $Coreografias, $Participantes );
+								$target_dir = "../../img/presentation/";
+							    $target_file = $target_dir;
+							    if(isset($_FILES["fileToUpload"]["name"])){
+							        $target_file .= basename($_FILES["fileToUpload"]["name"]);
+									$uploadOk = 1;
+							       	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+									$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+							        if($check !== false) {
+							            // echo "File is an image - " . $check["mime"] . ".";
+							            $uploadOk = 1;
+							        } else {
+							            $uploadOk = 0;
+							        }
+
+							        // Check if file already exists
+							        if (file_exists($target_file)) {
+							            $uploadOk = 0;
+							        }
+							        // Check file size
+							        if ($_FILES["fileToUpload"]["size"] > 5000000) {
+							            $uploadOk = 0;
+							        }
+							        // Allow certain file formats
+							        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+							        && $imageFileType != "gif" ) {
+							            $uploadOk = 0;
+							        }
+							        // Check if $uploadOk is set to 0 by an error
+							        if ($uploadOk == 0) {
+							        // if everything is ok, try to upload file
+							        } else {
+							            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+											$path = "../../img/presentation/".basename($_FILES["fileToUpload"]["name"]);
+											addEvent($groupId, $name, $detail, $timestamp, $place,$cost, $color, $Coreografias, $Participantes, $path );
+							            }
+							        }
+								}
 							}
 						}
 					}
@@ -171,11 +215,50 @@ if (!empty($_POST["inEventName"])) {
 								$groupId = filter_input(INPUT_POST, 'inGroup');
 								$Coreografias = $_POST['inCoreografias'];
 								$Participantes = $_POST['inParticipantes'];
+								$target_dir = "../../img/presentation/";
+							    $target_file = $target_dir;
 								if ($action == "Eliminar"){
 									deleteEvent($id);
 								}else{
 									if($action == "Guardar"){
-										updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Coreografias, $Participantes);
+										if(isset($_FILES["inFileToUpload"]["name"])) {
+									        $target_file .= basename($_FILES["inFileToUpload"]["name"]);
+											$uploadOk = 1;
+									       	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+											$check = getimagesize($_FILES["inFileToUpload"]["tmp_name"]);
+									        if($check !== false) {
+									            // echo "File is an image - " . $check["mime"] . ".";
+									            $uploadOk = 1;
+									        } else {
+									            $uploadOk = 0;
+									        }
+
+									        // Check if file already exists
+									        if (file_exists($target_file)) {
+									            $uploadOk = 0;
+									        }
+									        // Check file size
+									        if ($_FILES["inFileToUpload"]["size"] > 5000000) {
+									            $uploadOk = 0;
+									        }
+									        // Allow certain file formats
+									        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+									        && $imageFileType != "gif" ) {
+									            $uploadOk = 0;
+									        }
+									        // Check if $uploadOk is set to 0 by an error
+									        if ($uploadOk == 0) {
+									        // if everything is ok, try to upload file
+									        } else {
+									            if (move_uploaded_file($_FILES["inFileToUpload"]["tmp_name"], $target_file)) {
+													$path = "img/presentation/".basename($_FILES["inFileToUpload"]["name"]);
+													updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Coreografias, $Participantes, $path);
+									            }
+									        }
+
+										}else {
+											updateEvent($id,$name, $detail, $timestamp, $place,$cost,$groupId, $Coreografias, $Participantes, NULL);
+										}
 									}
 								}
 							}

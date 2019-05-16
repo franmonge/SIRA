@@ -96,7 +96,13 @@
 </head>
 
 <body>
-
+<style>
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: scale-down;
+}
+</style>
   <!-- Start your project here-->
 <?php include('Componentes\Navbar.php')?>
 

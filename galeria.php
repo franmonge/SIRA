@@ -29,7 +29,7 @@
                        </div>
                        <!--Modal: Name-->
                        <a><img class=\"img-fluid\" src=\"".$row['image_path']."\"
-                           data-toggle=\"modal\" data-target=\"#modal".$row['id']."\"  style=\"max-width: 300px;max-height: 300px;\"></a>
+                           data-toggle=\"modal\" data-target=\"#modal".$row['id']."\"></a>
                      </div>";
               }
           }
@@ -60,6 +60,13 @@
 <body>
 <?php //require('sesion.php')?>
   <!-- Start your project here-->
+  <style>
+  .card-img-top {
+      width: 100%;
+      height: 15vw;
+      object-fit: cover;
+  }
+  </style>
 
  <?php include('Componentes\Navbar.php')?>
 

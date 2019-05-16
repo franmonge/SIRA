@@ -34,7 +34,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form role="form" id="form-grupos" action="BD_Consultas\Grupos.php" method="POST">
+        <form role="form" id="form-grupos" action="BD_Consultas\Grupos.php" method="POST" enctype="multipart/form-data">
           <div class="box-body">
             <div class="form-group ">
               <label for="exampleInputEmail1">Nombre</label>
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Imagen</label>
-              <input type="file" id="exampleInputFile" name="ImagenGrupo">
+              <input type="file" name="fileToUpload" id="fileToUpload" required>
             </div>
           </div>
           <!-- /.box-body -->

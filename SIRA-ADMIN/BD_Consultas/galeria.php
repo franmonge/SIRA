@@ -16,7 +16,7 @@ if(isset($_POST['imageId'])){
         }
     }
     $conn->close();
-    echo "<br>Archivo cargado con éxito";
+    echo "<br>Archivo eliminado con éxito";
 
 
 }

@@ -17,9 +17,8 @@ if(isset($_POST['imageId'])){
     }
     $conn->close();
     echo "<br>Archivo eliminado con éxito";
-
-
 }
+
 function uploadImage(){
     $target_dir = "../img/";
     $target_file = $target_dir;
@@ -137,7 +136,7 @@ if ($conn->connect_error){
 
 
       $Codigo .= "<td style=\"vertical-align:middle\">" ."<form action=\"adminGaleria.php\" method=\"post\">
-      <input type=\"hidden\" name=\"imageId\" value=\"".$row["id"]."\" >
+      <input type=\"hidden\" name=\"imageId\" value=\"".$row["id"]."\">
       <input type=\"hidden\" name=\"imageName\" value=\"".$row["image_path"]."\" >
       <input type=\"submit\"  class=\"btn btn-block btn-danger btn-flat\" value=\"Eliminar\">
       </form></td>";

@@ -47,11 +47,9 @@
                           <input type="submit" class="btn btn-outline" name="GenerarPresentacionesbtn" value="Generar">
                         </div>
                       </div>
-                      <!-- /.modal-content -->
                     </div>
-                    <!-- /.modal-dialog -->
                   </div>
-                  <div class="modal modal-info fade" role="dialog" id="ReporteAsistencias-modal">
+                  <div class="modal modal-info fade" role="dialog" id="ReporteAsistencia-modal">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">

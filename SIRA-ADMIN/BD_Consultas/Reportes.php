@@ -10,28 +10,17 @@
 		}else{
 		  $Semestre ="I";
 		}
-		// Crea Excel
 		$phpExcel = new PHPExcel;
-		// Setting font to Arial Black
 		$phpExcel->getDefaultStyle()->getFont()->setName('Arial');
-		// Setting font size to 14
 		$phpExcel->getDefaultStyle()->getFont()->setSize(10);
-		//Setting description, creator and title
 		$phpExcel ->getProperties()->setTitle("Postulantes Becas");
-		// Creating PHPExcel spreadsheet writer object
-		// We will create xlsx file (Excel 2007 and above)
 		$writer = PHPExcel_IOFactory::createWriter($phpExcel, "Excel5");
-		// When creating the writer object, the first sheet is also created
-		// We will get the already created sheet
 		$sheet = $phpExcel ->getActiveSheet();
-		// Setting title of the sheet
 		$sheet->setTitle('Postulantes Becas');
 		$phpExcel->getActiveSheet()->mergeCells('A1:I1');
 		$phpExcel->getActiveSheet()->mergeCells('A2:I2');
 		$phpExcel->getActiveSheet()->mergeCells('F4:G4');
-		// add some text
 		$sheet ->getCell('A1')->setValue('ESTUDIANTES POSTULADOS');
-		// $phpExcel->getActiveSheet()->setCellValue('A1','ESTUDIANTES POSTULADOS');
 		$sheet->getCell('A2')->setValue('BECA CULTURAL Y DEPORTIVA');
 		$sheet->getCell('F4')->setValue('RENDIMIENTO '.$Semestre .' SEMESTRE '.$Annio);
 		$sheet->getCell('A5')->setValue('NO.');
@@ -43,10 +32,6 @@
 		$sheet->getCell('G5')->setValue('APROBADOS');
 		$sheet->getCell('H5')->setValue('CATEGORIA BECA');
 		$sheet->getCell('I5')->setValue('OBSERVACIONES');
-		// Making headers text bold and larger
-		// $sheet->getStyle('A1:D1')->getFont()->setBold(true)->setSize(14);
-		// Insert product data
-		// Autosize the columns
 		$phpExcel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$phpExcel->getActiveSheet()->getStyle('A2:I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$phpExcel->getActiveSheet()->getStyle('F4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
@@ -65,8 +50,6 @@
 		$sheet->getColumnDimension('G')->setAutoSize(true);
 		$sheet->getColumnDimension('H')->setAutoSize(true);
 		$sheet->getColumnDimension('I')->setAutoSize(true);
-
-		//Consulta bd
 		if ($conn->connect_error){
 	    	die("Connection failed: " . $conn->connect_error);
 	  	}else{
@@ -87,8 +70,8 @@
 						$nombreUsuario = $row2['nombre']." ".$row2['apellidos'];
 						$carnetUsuario = $row2['carnet'];
 						$celdaNum = 'A'.$celda;
-						$celdaNombre = 'C'.$celda;
 						$celdaCarnet = 'B'.$celda;
+						$celdaNombre = 'C'.$celda;
 						$celdaGrupo = 'D'.$celda;
 						$sheet->getCell($celdaNum)->setValue($contador);
 						$sheet->getCell($celdaNombre)->setValue($nombreUsuario);
@@ -146,11 +129,12 @@
 		$sheet->getCell('A4')->setValue('NO.');
 		$sheet->getCell('B4')->setValue('CARNÉ');
 		$sheet->getCell('C4')->setValue('NOMBRE COMPLETO');
-		$sheet->getCell('D4')->setValue('Asistencia');
+		$sheet->getCell('D4')->setValue('Fecha');
+		$sheet->getCell('E4')->setValue('Asistencia');
 		$phpExcel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$phpExcel->getActiveSheet()->getStyle('A2:I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		$phpExcel->getActiveSheet()->getStyle('A4:D4')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('00008B');
-		$phpExcel->getActiveSheet()->getStyle('A4:D4')->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
+		$phpExcel->getActiveSheet()->getStyle('A4:E4')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('00008B');
+		$phpExcel->getActiveSheet()->getStyle('A4:E4')->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
 		$phpExcel->getActiveSheet()->getStyle('A4:I4')->getFont()->setBold(true);
 		$sheet->getColumnDimension('A')->setAutoSize(true);
 		$sheet->getColumnDimension('B')->setAutoSize(true);
@@ -164,43 +148,51 @@
 		if ($conn->connect_error){
 	    	die("Connection failed: " . $conn->connect_error);
 	  	}else{	
-	  		$fecha = (date($Annio.'-'.$mes.'-1'));
-	  		$query = "SELECT id FROM ensayo Where MONTH(fecha) = 5";
-
-
-		    $query = "SELECT idPersona FROM asistenciaEnsayos WHERE id_Grupo = '$groupId'";
-		    $idUsuario = mysqli_query($conn, $query);
-		    $query = "SELECT nombre FROM grupo WHERE id = '$groupId'";
-		    $result = mysqli_query($conn, $query);
-		    while($row = $result->fetch_assoc()){
+	  		$query = "SELECT nombre FROM grupo WHERE id =".$groupId;
+	  		$result = mysqli_query($conn, $query);
+	  		while($row = $result->fetch_assoc()){
 		    	$nombreGrupo = $row['nombre'];
 		    }
-		    $celda = '5';
-		    $contador = '1';
-				while($row = $idUsuario->fetch_assoc()){
-					$id = $row['id_Usuario'];
-					$query = "SELECT nombre, apellidos, carnet FROM usuario WHERE id = '$id'";
-					$result3 = mysqli_query($conn, $query);
-					while($row2 = $result3->fetch_assoc()){
-						$nombreUsuario = $row2['nombre']." ".$row2['apellidos'];
+	  		$sheet->getCell('A1')->setValue($nombreGrupo);
+	  		$fecha = (date($Annio.'-'.$mes.'-1'));
+	  		$celda = '5';
+	  		$contador = '1';
+	  		$query = "SELECT id, fecha FROM ensayo WHERE MONTH(fecha)='$mes' AND YEAR(fecha)='$Annio' AND idGrupo=".$groupId;
+	  		if($result = mysqli_query($conn, $query)){
+	  			echo "entre!";
+		  		while($row = $result->fetch_assoc()){
+		  			$query2 = "SELECT nombre, apellidos, carnet, asistenciaensayos.Estado FROM usuario JOIN asistenciaensayos ON idPersona = usuario.id AND idEnsayo =".$row['id'];
+		  			$result2 = mysqli_query($conn, $query2);
+		  			while($row2 = $result2->fetch_assoc()){
+		  				$nombreUsuario = $row2['nombre']." ".$row2['apellidos'];
 						$carnetUsuario = $row2['carnet'];
-						$celdaNum = 'A'.$celda;
-						$celdaNombre = 'C'.$celda;
-						$celdaCarnet = 'B'.$celda;
-						$celdaGrupo = 'D'.$celda;
-						$sheet->getCell($celdaNum)->setValue($contador);
-						$sheet->getCell($celdaNombre)->setValue($nombreUsuario);
-						$sheet->getCell($celdaCarnet)->setValue($carnetUsuario);
-						$sheet->getCell($celdaGrupo)->setValue($nombreGrupo);
-						$celda += 1;
-						$contador += 1;
-					}
-				}
-			}
-			$fileN = str_replace(' ','_','Postulantes Becas '.$nombreGrupo.'.xls');
+		  				$fecha = $row['fecha'];
+		  				$asistencia = $row2['Estado'];
+		  				$celdaNum = 'A'.$celda;
+		  				$celdaCarnet = 'B'.$celda;
+		  				$celdaNombre = 'C'.$celda;
+		  				$celdaFecha = 'D'.$celda;
+		  				$celdaAsistencia = 'E'.$celda;
+		  				$sheet->getCell($celdaNum)->setValue($contador);
+		  				$sheet->getCell($celdaCarnet)->setValue($carnetUsuario);
+		  				$sheet->getCell($celdaNombre)->setValue($nombreUsuario);
+		  				$sheet->getCell($celdaFecha)->setValue($fecha);
+		  				$sheet->getCell($celdaAsistencia)->setValue($asistencia);
+		  				$phpExcel->getActiveSheet()->getStyle($celdaAsistencia)->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
+						$phpExcel->getActiveSheet()->getStyle($celdaAsistencia)->getFont()->setBold(true);
+		  				if($sheet->getCell($celdaAsistencia)->getValue() == "Presente"){
+		  					$phpExcel->getActiveSheet()->getStyle($celdaAsistencia)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('008000');
+		  				}else{
+		  					$phpExcel->getActiveSheet()->getStyle($celdaAsistencia)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('FF0000');
+		  				}
+		  				$celda += 1;
+		  				$contador += 1;
+		  			}
+		  		}
+		  	}
+			$fileN = str_replace(' ','_','Reporte de asistencias de '.$nombreGrupo.' del '.$mes.' de '.$Annio.'.xls');
 		    $writer->save($fileN);
 			$file = $fileN;
-
 			if (file_exists($file)) {
 			    header('Content-Description: File Transfer');
 			    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -218,32 +210,22 @@
 			}
 			$conn->close();
 			header("Location: ../adminReportes.php");
-	 }
+	 	}
+	}
 
 	 if(isset($_POST['GenerarPresentacionesbtn'])){
 	 	include('Conexion.php');
 	 	$groupId = filter_input(INPUT_POST, 'group');
 	 	$annio = filter_input(INPUT_POST, 'Annio');
-		// // Crea Excel
 		$phpExcel = new PHPExcel;
-		// Setting font to Arial Black
 		$phpExcel->getDefaultStyle()->getFont()->setName('Arial');
-		// Setting font size to 14
 		$phpExcel->getDefaultStyle()->getFont()->setSize(10);
-		//Setting description, creator and title
 		$phpExcel ->getProperties()->setTitle("REPORTE PRESENTACIONES");
-		// Creating PHPExcel spreadsheet writer object
-		// We will create xlsx file (Excel 2007 and above)
 		$writer = PHPExcel_IOFactory::createWriter($phpExcel, "Excel5");
-		// When creating the writer object, the first sheet is also created
-		// We will get the already created sheet
 		$sheet = $phpExcel ->getActiveSheet();
-		// Setting title of the sheet
 		$sheet->setTitle('Reporte Presentaciones');
 		$phpExcel->getActiveSheet()->mergeCells('A1:I1');
-		// add some text
 		$sheet ->getCell('A1')->setValue('REPORTE DE PRESENTACIONES '.$annio);
-		// $phpExcel->getActiveSheet()->setCellValue('A1','ESTUDIANTES POSTULADOS');
 		$sheet->getCell('A3')->setValue('NO.');
 		$sheet->getCell('B3')->setValue('NOMBRE');
 		$sheet->getCell('C3')->setValue('FECHA');
@@ -257,8 +239,6 @@
 		$sheet->getColumnDimension('D')->setAutoSize(true);
 		$sheet->getColumnDimension('E')->setAutoSize(true);
 		$sheet->getColumnDimension('F')->setAutoSize(true);
-
-		//Consulta bd
 		if ($conn->connect_error){
 	    	die("Connection failed: " . $conn->connect_error);
 	  	}else{
@@ -295,10 +275,9 @@
 	  			$celda += 1;
 	  			$contador += 1;
 	  		}
-			$fileN = str_replace(' ','_','Reporte de '.$nombreGrupo.'.xls');
+			$fileN = str_replace(' ','_','Reporte de '.$nombreGrupo.' '.$annio.'.xls');
 		    $writer->save($fileN);
 			$file = $fileN;
-
 			if (file_exists($file)) {
 			    header('Content-Description: File Transfer');
 			    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');

@@ -1,10 +1,29 @@
+ <?php
+  if(isset($_POST['functionname']) && !empty($_POST["functionname"])){
+    include('BD_Consultas\Asistencia.php');
+    switch($_POST["functionname"]){
+      case 'llenaTablasPresente':
+        consigueEnsayo($_POST['grupo'], $_POST['fecha']);
+        break;
+      case 'llenaTablasAusente':
+        consigueEnsayoAusentes($_POST['grupo'], $_POST['fecha']);
+        break;
+      case 'ponerPresente':
+        presente($_POST['idUsuario'], $_POST['idEnsayo']);
+        break;
+      case 'ponerAusente':
+        ausente($_POST['idUsuario'], $_POST['idEnsayo']);
+        break;
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
  <meta charset="utf-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <title>SIRA | Asistencia</title>
- <!-- Tell the browser to be responsive to screen width -->
  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
  <?php include('headerLinks.php')?>
@@ -21,20 +40,20 @@
       <section class="content-header">
         <h1>Asistencia</h1>
       </section>
-      <form action="BD_Consultas\Asistencia.php" method="POST">
+      <!-- <form action="BD_Consultas\Asistencia.php" method="POST">       -->
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Seleccione el grupo</label>
-              <select class="form-control select2" name="ensayo" id="Grupos">
+              <select class="form-control select2" name="ensayo" id="Grupo">
                 <?php dropdownGrupos()?>
               </select>
           </div>
           <div class="form-group col-md-6">
             <label>Seleccione la fecha</label>
-            <input type="date" id="FechaNacimiento" name="FechaNacimientoRegistro" class="form-control" required/>
+            <input type="date" value="<?php echo date('Y-m-d'); ?>" id="Fecha" name="FechaCreacion" class="form-control" required/>
           </div>
         </div>
-        <input type="submit" class="btn btn-info btn-flat col-md-4" value="Consultar Ensayo">
+        <input type="submit" class="btn btn-info btn-flat col-md-4" id="btnConsultarEnsayo" value="Consultar Ensayo">
         <section class="content">
           <div class="row">
             <div class="col-xs-12">
@@ -49,17 +68,17 @@
                         <th>Nombre</th>
                         <th>Apellidos</th>
                         <th>Email</th>
-                        <th>Ausentes</th>
+                        <th>Presentes</th>
                       </tr>
                     </thead>
-                  <tbody>
+                  <tbody id="tbodyPresentes">
                   </tbody>
                   <tfoot>
                     <tr>
                       <th>Nombre</th>
                       <th>Apellidos</th>
                       <th>Email</th>
-                      <th>Ausentes</th>
+                      <th>Presentes</th>
                     </tr>
                   </tfoot>
                   </table>
@@ -82,18 +101,17 @@
                       <th>Nombre</th>
                       <th>Apellidos</th>
                       <th>Email</th>
-                      <th>Presentes</th>
+                      <th>Ausentes</th>
                     </tr>
                     </thead>
-                    <tbody>
-                      <?php ?>
+                    <tbody id="tbodyAusentes">
                     </tbody>
                     <tfoot>
                     <tr>
                       <th>Nombre</th>
                       <th>Apellidos</th>
                       <th>Email</th>
-                      <th>Presentes</th>
+                      <th>Ausentes</th>
                     </tr>
                     </tfoot>
                   </table>
@@ -102,7 +120,7 @@
             </div>
           </div>
         </section>
-      </form>
+      <!-- </form> -->
     </div>
 
 
@@ -143,6 +161,72 @@
         'autoWidth'   : true
       })
     })
+  </script>
+  <script>
+    document.getElementById("btnConsultarEnsayo").addEventListener("click", consultar);
+    var tablePresentes = document.getElementById("table-Miembros-Presentes").getElementsByTagName('tbody')[0];
+    var tableAusentes = document.getElementById("table-Miembros-Ausentes").getElementsByTagName('tbody')[0];
+
+    function consultar(){
+      var idGrupo = document.getElementById("Grupo").value;
+      var fecha = document.getElementById("Fecha").value;
+      jQuery.ajax({
+        type:"POST",
+        url:'adminAsistencia.php',
+        data: {functionname:'llenaTablasPresente', grupo: idGrupo, fecha: fecha},
+        success: function(data){
+          data = data.split('<!DOCTYPE')[0];
+          var tbody = data;
+          tablePresentes.innerHTML = tbody;
+        }
+      });
+      jQuery.ajax({
+        type:"POST",
+        url:'adminAsistencia.php',
+        data: {functionname:'llenaTablasAusente', grupo: idGrupo, fecha: fecha},
+        success: function(data){
+          data = data.split('<!DOCTYPE')[0];
+          var tbody = data;
+          tableAusentes.innerHTML = tbody;
+        }
+      });
+    }
+
+    function recargaTabla(idBtn){
+      idBtn = idBtn.split('onclick=')[0];
+      var btnEnsayo = 'idEnsayoAusente'+idBtn;
+      var ensayoId = document.getElementById(btnEnsayo).value;
+      jQuery.ajax({
+      type:"POST",
+      url:'adminAsistencia.php',
+      data: {functionname:'ponerPresente', idUsuario: idBtn, idEnsayo: ensayoId},
+      success: function(data){
+        $("#tbodyPresentes").empty();
+        $("#tbodyAusentes").empty();
+        consultar();
+        $("#tbdoyPresentes").html(result);
+        $("#tbodyAusentes").html(result);
+      }
+    });
+  }
+
+  function recargaTablaAusente(idBtn){
+    idBtn = idBtn.split('onclick=')[0];
+    var btnEnsayo = 'idEnsayoPresente'+idBtn;
+    var ensayoId = document.getElementById(btnEnsayo).value;
+    jQuery.ajax({
+      type:"POST",
+      url:'adminAsistencia.php',
+      data: {functionname:'ponerAusente', idUsuario: idBtn, idEnsayo: ensayoId},
+      success: function(data){
+        $("#tbodyPresentes").empty();
+        $("#tbodyAusentes").empty();
+        consultar();
+        $("#tbdoyPresentes").html(result);
+        $("#tbodyAusentes").html(result);
+      }
+    });
+  }
   </script>
 </body>
 </html>

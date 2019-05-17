@@ -20,9 +20,17 @@
 				        </div>
 				      </div>";
 				}
-				echo "<div class=\"card card-cascade wider\" >
+				echo "<div class=\"card card-cascade wider\">
 								<div class=\"view view-cascade overlay\">
-							<button type=\"button\" class=\"btn btn-light-blue btn-md\" style=\"margin-left:auto;margin-right:auto;display:block;margin-top:50%\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
+								<div style=\"
+								display: flex;
+								flex-direction: column;
+								justify-content: center;
+								overflow: auto;\" >
+								<p style=\"margin:0; padding: 20px;\">
+							<button type=\"button\" class=\"btn btn-light-blue btn-md\" style=\"margin:35% auto; display:block\" onclick=\"location.href='presentaciones.php';\">+Ver Más</button>
+							</p>
+							</div>
 							</div>
 					</div>
 					";

@@ -10,7 +10,7 @@
  <?php include('headerLinks.php')?>
  <?php include('BD_Consultas\Grupos.php')?>
  <?php include('BD_Consultas\Asistencia.php')?>
- 
+
 
 </head>
 
@@ -21,7 +21,7 @@
       <section class="content-header">
         <h1>Asistencia</h1>
       </section>
-      <form action="BD_Consultas\Asistencia.php" method="POST">      
+      <form action="BD_Consultas\Asistencia.php" method="POST">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Seleccione el grupo</label>
@@ -105,7 +105,6 @@
       </form>
     </div>
 
-    <?php include('adminFooter.php')?>
 
   <!-- jQuery 3 -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

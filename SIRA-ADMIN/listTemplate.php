@@ -108,7 +108,6 @@ $conn->close();
      <!-- /.content -->
    </div>
    <!-- /.content-wrapper -->
-   <?php include('adminFooter.php')?>
 
 
    <!-- Add the sidebar's background. This div must be placed

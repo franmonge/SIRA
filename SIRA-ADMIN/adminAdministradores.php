@@ -211,7 +211,7 @@
     </div>
   <!-- ./wrapper -->
 
-  <?php include('adminFooter.php')?>
+ 
 
   <!-- jQuery 3 -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

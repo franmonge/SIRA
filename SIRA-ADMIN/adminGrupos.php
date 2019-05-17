@@ -12,9 +12,8 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-  <div class="wrapper">
-    <?php include('adminNav.php')?>
-
+      <?php include('adminNav.php')?>
+<div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
       <!-- Main content -->
@@ -28,7 +27,7 @@
 
 
       <!-- general form elements -->
-      <div class="box box-primary">
+        <div class="box box-primary">
         <div class="box-header with-border">
           <h3 class="box-title">Ingrese los datos solicitados</h3>
         </div>
@@ -62,7 +61,7 @@
       <!-- /.box -->
       </div>
 
-      <div class="modal modal-info fade" id="member-modal">
+    <div class="modal modal-info fade" id="member-modal">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -84,7 +83,7 @@
         </div>
         <!-- /.modal -->
 
-        <div class="modal modal-warning fade" id="editGroup-modal">
+    <div class="modal modal-warning fade" id="editGroup-modal">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -103,10 +102,10 @@
               <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-          </div>
+    </div>
           <!-- /.modal -->
 
-          <div class="modal modal-danger fade" id="deleteGroup-modal">
+    <div class="modal modal-danger fade" id="deleteGroup-modal">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -127,12 +126,9 @@
               <!-- /.modal-dialog -->
             </div>
             <!-- /.modal -->
-
-        </div>
-    </div>
+            </div>
   <!-- ./wrapper -->
 
-  <?php include('adminFooter.php')?>
 
   <!-- jQuery 3 -->
   <script src="bower_components/jquery/dist/jquery.min.js"></script>

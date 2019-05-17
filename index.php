@@ -93,6 +93,7 @@
   <?php include 'BD_Consultas\IndexGruposPreview.php'?>
   <?php include 'BD_Consultas\IndexPresentacionesPreview.php'?>
   <?php include 'BD_Consultas\indexGetImage.php'?>
+  <?php include 'BD_Consultas\getCarousel.php'?>
 </head>
 
 <body>
@@ -107,56 +108,25 @@
 <?php include('Componentes\Navbar.php')?>
 
   <!--Carousel Wrapper-->
-<div id="carousel-example-2" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel">
+<div id="carouselSira" class="carousel slide carousel-fade z-depth-1-half" data-ride="carousel" style="width:100%; background-color:#00002F">
   <!--Indicators-->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-2" data-slide-to="1"></li>
-    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+    <li data-target="#carouselSira" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselSira" data-slide-to="1"></li>
+    <li data-target="#carouselSira" data-slide-to="2"></li>
   </ol>
   <!--/.Indicators-->
   <!--Slides-->
-  <div class="carousel-inner" role="listbox">
-    <div class="carousel-item active">
-      <div class="view">
-        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(105).jpg" alt="First slide">
-        <div class="mask rgba-black-light"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">This is the first title</h3>
-        <p>First text</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <!--Mask color-->
-      <div class="view">
-        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(115).jpg" alt="Second slide">
-        <div class="mask rgba-black-light"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">Thir is the second title</h3>
-        <p>Secondary text</p>
-      </div>
-    </div>
-    <div class="carousel-item">
-      <!--Mask color-->
-      <div class="view">
-        <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(108).jpg" alt="Third slide">
-        <div class="mask rgba-black-light"></div>
-      </div>
-      <div class="carousel-caption">
-        <h3 class="h3-responsive">This is the third title</h3>
-        <p>Third text</p>
-      </div>
-    </div>
+  <div class="carousel-inner"  role="listbox">
+      <?php getCarouselImages(); ?>
   </div>
   <!--/.Slides-->
   <!--Controls-->
-  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+  <a class="carousel-control-prev" href="#carouselSira" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#carouselSira" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
@@ -199,16 +169,25 @@
 
 
     <br>
+
+    <section class="my-5">
+
+      <!-- Section heading -->
+      <h2 class="h1-responsive font-weight-bold text-center my-5">Galería de Fotos</h2>
+     <div class="container">
+        <div class="card-deck">
+          <?php getPreviewImages()?>
+      </div>
+    </div>
+    </section>
     <!-- Section heading -->
-    <h2 class="h1-responsive font-weight-bold text-center my-5">Galería de Fotos</h2>
+    <!-- <h2 class="h1-responsive font-weight-bold text-center my-5">Galería de Fotos</h2>
     <br>
 
-      <!-- Grid row -->
     <div class="container">
         <div class="row">
-            <?php getPreviewImages() ?>
         </div>
-    </div>
+    </div> -->
   <br>
 
   <!-- <blockquote class="blockquote text-center">

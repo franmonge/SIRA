@@ -1,279 +1,113 @@
 <?php
 
-function ausente($UserId, $EnsayoId){
-  require('Conexion.php'); 
-  if ($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-  }else{
-    $query = "UPDATE asistenciaensayos as A INNER JOIN ensayo as E SET estado = 'Ausente' WHERE A.idPersona = '$UserId' AND A.id = '$EnsayoId'";
-    $result = mysqli_query($conn, $query);
-    $conn->close();
-    header("Location: ..\adminAsistencia.php"); /* Redirect browser */
-  exit();
-}
-}
-
-function presente($UserId,$EnsayoId){
+function consigueEnsayo($idGrupo, $fecha){
   require('Conexion.php');
-  if ($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
+  if($conn->connect_error){
+    die("Connection failed: " . "$conn->connect_error");
   }else{
-    $query = "UPDATE asistenciaensayos as A INNER JOIN ensayo as E SET estado = 'Presente' WHERE A.idPersona = '$UserId' AND A.id = '$EnsayoId'";
+    $query = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = (SELECT STR_TO_DATE('$fecha', '%Y-%m-%d'))";
     $result = mysqli_query($conn, $query);
-    $conn->close();
-    header("Location: ..\adminAsistencia.php"); /* Redirect browser */
-  exit();
-}
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $idEnsayo = $row['id'];
+        mostraTablaEnsayosPresentes($conn, $idEnsayo);
+      }
+    }else{
+      $idEnsayo = crearEnsayo($idGrupo, $fecha, $conn);
+      llenaAsistenciaEnsayo($idEnsayo, $idGrupo, $conn);
+      mostraTablaEnsayosPresentes($conn, $idEnsayo);
+    }
+  }
+  $conn->close();
 }
 
-
-function crearEnsayo($idGrupo,$fecha){
+function consigueEnsayoAusentes($idGrupo, $fecha){
   require('Conexion.php');
-  require('..\..\sesion.php');
-  if ($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
+  if($conn->connect_error){
+    die("Connection failed: " . "$conn->connect_error");
   }else{
-  $query = "INSERT INTO ensayo(idGrupo, fecha) VALUES ('$idGrupo','$fecha')";
+    $query = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = (SELECT STR_TO_DATE('$fecha', '%Y-%m-%d'))";
+    $result = mysqli_query($conn, $query);
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $idEnsayo = $row['id'];
+        mostraTablaEnsayosAusentes($conn, $idEnsayo, $idGrupo);
+      }
+    }
+  }
+  $conn->close();
+}
+
+function mostraTablaEnsayosPresentes($conn, $idEnsayo){
+  $query = "SELECT usuario.id, nombre, apellidos, email from usuario join asistenciaensayos on asistenciaensayos.idEnsayo = '$idEnsayo' and asistenciaensayos.idPersona = usuario.id and asistenciaensayos.Estado = 'Presente'";
   $result = mysqli_query($conn, $query);
-
-  $query2 = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = '$fecha'";
-  $result2 = mysqli_query($conn, $query2);
-  $row2 = $result2->fetch_array(MYSQLI_NUM);
-  $idEnsayo = $row2[0];
-
-  $query3 = "SELECT U.id FROM usuario as U INNER JOIN uxg as A ON u.id = a.id_Usuario where U.estado='Activo' and a.id_Grupo = '$idGrupo'";
-  $result3 = mysqli_query($conn, $query3);
-  if($result3->num_rows > 0){
-    while($row = $result3->fetch_assoc()){
-      $x = $row['id'];
-
-    echo "alert('$x')";
-      $query4 = "INSERT INTO asistenciaensayos(idEnsayo, idPersona, Estado) VALUES ('$idEnsayo', '$x','Presente')";
-      $result4 = mysqli_query($conn, $query4);
+  if($result->num_rows>0){
+    while($row = $result->fetch_assoc()){
+      echo "<tr><td>".$row['nombre']."</td><td>".$row['apellidos']."</td><td>".$row['email']."</td><td>
+      <input type=\"hidden\" name=\"CambiarAusente\" value=\"".$row['id']."\">
+      <input type=\"hidden\" id=\"idEnsayoPresente".$row['id']."\" value=\"".$idEnsayo."\">
+      <button id=\"".$row['id']."\" onclick=\"recargaTablaAusente(this.id)\" class=\"btn btn-block btn-danger btn-flat\">Ausente</td></tr>";
     }
-  }else{
-    echo "<option>Error en crearEnsayo a partir query3</option>";
-  }
-  $conn->close();
-  $_SESSION["CargarEstudiantes"] = $idGrupo;
-  header("Location: ..\adminAsistencia.php"); /* Redirect browser */
   }
 }
 
-function getEnsayoId($idGrupo, $fecha){
-  require('Conexion.php');
-  require('..\..\sesion.php');
-  if ($conn->connect_error){
-    die("Connection failed: " . $conn->connect_error);
-  }else{
-    $query = "SELECT id FROM ensayo WHERE idGrupo = '$idGrupo' AND fecha = '$fecha'";
-    $result = mysqli_query($conn, $query);
-    $row = $result->fetch_array(MYSQLI_NUM);
-    $idEnsayo = $row[0];
-    return $idEnsayo;
+function mostraTablaEnsayosAusentes($conn, $idEnsayo){
+  $query = "SELECT usuario.id, nombre, apellidos, email from usuario join asistenciaensayos on asistenciaensayos.idEnsayo = '$idEnsayo' and asistenciaensayos.idPersona = usuario.id and asistenciaensayos.Estado = 'Ausente'";
+  $result = mysqli_query($conn, $query);
+  if($result->num_rows>0){
+    while($row = $result->fetch_assoc()){
+      echo "<tr><td>".$row['nombre']."</td><td>".$row['apellidos']."</td><td>".$row['email']."</td><td>
+      <input type=\"hidden\" name=\"CambiarPresente\" value=\"".$row['id']."\">
+      <input type=\"hidden\" id=\"idEnsayoAusente".$row['id']."\" value=\"".$idEnsayo."\">
+      <button id=\"".$row['id']."\" onclick=\"recargaTabla(this.id)\" class=\"btn btn-block btn-info btn-flat\">Presente</button></td></tr>";
+    }
   }
 }
 
-if (!empty($_POST["ensayo"])) {
-    $idGrupo = filter_input(INPUT_POST, 'ensayo');
-    $fecha = date("Y/m/d");
-    crearEnsayo($idGrupo,$fecha);
-} 
+function llenaAsistenciaEnsayo($idEnsayo, $idGrupo, $conn){
+  $query = "SELECT usuario.id FROM usuario JOIN uxg ON usuario.Estado='Activo' AND uxg.id_Grupo = '$idGrupo' AND uxg.id_Usuario = usuario.id";
+  $result = mysqli_query($conn, $query);
+  if($result->num_rows > 0){
+    while($row = $result->fetch_assoc()){
+      $id_Usuario = $row['id'];
+      $query2 = "INSERT INTO asistenciaensayos(Estado, idEnsayo, idPersona) VALUES('Presente','$idEnsayo','$id_Usuario')";
+      if(mysqli_query($conn, $query2)){
+      }else{
+        echo "Error al insertar asistentes";
+      }
+    }
+  }
+}
 
-if (!empty($_POST["IdAusente"])) {
-    require('..\..\sesion.php');
-    $fecha = date("Y/m/d");
-    $uId = filter_input(INPUT_POST, 'IdAusente');
-    ausente($uId,getEnsayoId($_SESSION["CargarEstudiantes"],$fecha));
-} 
+function crearEnsayo($idGrupo, $fecha, $conn){
+  $query = "INSERT INTO ensayo(idGrupo, fecha) VALUES('$idGrupo', '$fecha')";
+  if (mysqli_query($conn, $query)){
+    $ultimoID = mysqli_insert_id($conn);
+  }
+  return $ultimoID;
+}
 
-if (!empty($_POST["IdPresente"])) {
-    require('..\..\sesion.php');
-    $uId = filter_input(INPUT_POST, 'IdPresente');    
-    presente($uId,$_SESSION["CargarEstudiantes"]);
-} 
-
-
-function miembrosPresentes($idGrupo){
+function presente($idUsuario, $idEnsayo){
   require('Conexion.php');
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $query = "SELECT U.id, U.nombre, U.apellidos, U.email FROM usuario as U INNER JOIN uxg as A INNER JOIN asistenciaensayos as E WHERE U.estado='Activo' AND U.id = A.id AND A.id_Grupo = '$idGrupo' AND E.Estado = 'Presente'";
-    $result = mysqli_query($conn, $query);
-    if($result->num_rows > 0){
-      $Codigo = "
-      <section class=\"content\">
-      <div class=\"row\">
-      <div class=\"col-xs-12\">
-      <div class=\"box\">
-      <div class=\"box-header\">
-      <h3 class=\"box-title\">Presentes</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class=\"box-body\">
-      <table id=\"table-Miembros-Presentes\" class=\"table table-bordered table-striped\">
-      <thead>
-      <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Email</th>
-      <th>Ausentes</th>
-      </tr>
-      </thead>
-      <tbody>";
-
-      while($row = $result->fetch_assoc()){
-        $Codigo .= "<tr>";
-        $Codigo .= "<td>".$row["nombre"]."</td>";
-        $Codigo .= "<td>" .$row["apellidos"] . "</td>";
-        $Codigo .= "<td>" .$row["email"] . "</td>";
-        $Codigo .= "<td>" ."<form action=\"BD_Consultas\Asistencia.php\" method=\"post\">
-        <input type=\"hidden\" name=\"IdAusente\" value=\"".$row["id"]."\" >
-        <input type=\"submit\"  class=\"btn btn-block btn-danger btn-flat\" value=\"Ausente\">
-        </form></td>";
-        $Codigo .= "</tr>";
-      }
-      $Codigo .= "
-      </tbody>
-      <tfoot>
-      <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Email</th>
-      <th>Ausentes</th>
-      </tr>
-      </tfoot>
-      </table>
-      </div>
-      <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </section>
-      <!-- /.content -->";
-      echo $Codigo;
-    }else {
-      $Codigo = "<section class=\"content\">
-      <div class=\"row\">
-      <div class=\"col-xs-12\">
-      <div class=\"box\">
-      <div class=\"box-header\">
-      <h3 class=\"box-title\">Presentes</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class=\"box-body\">
-      <h2> No hay miembros presentes</h2>
-      </div>
-      <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </section>
-      <!-- /.content -->";
-      echo $Codigo;
+    $query = "UPDATE asistenciaensayos SET estado = 'Presente' WHERE idPersona = '$idUsuario' AND idEnsayo = '$idEnsayo'";
+    if(mysqli_query($conn, $query)){
+      return true;
     }
   }
-  $conn->close();
 }
 
-function miembrosAusentes($idGrupo){
-  require('BD_Consultas\Conexion.php');
+function ausente($idUsuario, $idEnsayo){
+  require('Conexion.php');
   if ($conn->connect_error){
     die("Connection failed: " . $conn->connect_error);
   }else{
-    $query = "SELECT U.id, U.nombre, U.apellidos, U.email FROM usuario as U INNER JOIN uxg as A INNER JOIN asistenciaensayos as E WHERE U.estado='Activo' AND U.id = A.id AND A.id_Grupo = '$idGrupo' AND E.Estado = 'Ausente'";
-    $result = mysqli_query($conn, $query);
-    if($result->num_rows > 0){
-      $Codigo = "
-      <!-- Main content -->
-      <section class=\"content\">
-      <div class=\"row\">
-      <div class=\"col-xs-12\">
-      <div class=\"box\">
-      <div class=\"box-header\">
-      <h3 class=\"box-title\">Ausentes</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class=\"box-body\">
-
-      <table id=\"table-Miembros-Ausentes\" class=\"table table-bordered table-striped\">
-      <thead>
-      <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Email</th>
-      <th>Presentes</th>
-      </tr>
-      </thead>
-      <tbody>";
-
-      while($row = $result->fetch_assoc()){
-        $Codigo .= "<tr>";
-        $Codigo .= "<td>".$row["nombre"]."</td>";
-        $Codigo .= "<td>" .$row["apellidos"] . "</td>";
-        $Codigo .= "<td>" .$row["email"] . "</td>";
-        $Codigo .= "<td>" ."<form action=\"BD_Consultas\Asistencia.php\" method=\"post\">
-        <input type=\"hidden\" name=\"IdPresente\" value=\"".$row["id"]."\" >
-        <input type=\"submit\"  class=\"btn btn-block btn-primary btn-flat\" value=\"Presente\">
-        </form></td>";
-        $Codigo .= "</tr>";
-      }
-      $Codigo .= "
-
-      </tbody>
-      <tfoot>
-      <tr>
-      <th>Nombre</th>
-      <th>Apellidos</th>
-      <th>Email</th>
-      <th>Presentes</th>
-      </tr>
-      </tfoot>
-      </table>
-      </div>
-      <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </section>
-      <!-- /.content -->";
-      echo $Codigo;
-    }else {
-      $Codigo = " <!-- Main content -->
-      <section class=\"content\">
-      <div class=\"row\">
-      <div class=\"col-xs-12\">
-      <div class=\"box\">
-      <div class=\"box-header\">
-      <h3 class=\"box-title\">Ausentes</h3>
-      </div>
-      <!-- /.box-header -->
-      <div class=\"box-body\">
-      <h2> No hay miembros ausentes </h2>
-      </div>
-      <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-      </div>
-      <!-- /.col -->
-      </div>
-      <!-- /.row -->
-      </section>
-      <!-- /.content -->";
-      echo $Codigo;
+    $query = "UPDATE asistenciaensayos SET estado = 'Ausente' WHERE idPersona = '$idUsuario' AND idEnsayo = '$idEnsayo'";
+    if(mysqli_query($conn, $query)){
+      return true;
     }
   }
-  $conn->close();
 }
-
 ?>

@@ -120,12 +120,104 @@
 			}
 			$conn->close();
 			header("Location: ../adminReportes.php");
-			// header('Content-Type: application/vnd.ms-excel');
-   //  		header('Content-Disposition: attachment; filename="Spreadsheet.xls"');
-			// ob_get_clean();
-			// echo file_get_contents($filename);
-			// ob_end_flush();
-			// $writer->save('php://output');
+	 }
+
+	 if(isset($_POST['GenerarAsistenciasbtn'])){
+	 	include('Conexion.php');
+		$groupId = filter_input(INPUT_POST, 'group');
+		$Annio = date('Y');
+		$mes = filter_input(INPUT_POST, 'mes');
+		if($mes < 07){
+		  $Semestre = "I";
+		}else{
+		  $Semestre ="II";
+		}
+		$phpExcel = new PHPExcel;
+		$phpExcel->getDefaultStyle()->getFont()->setName('Arial');
+		$phpExcel->getDefaultStyle()->getFont()->setSize(10);
+		$phpExcel ->getProperties()->setTitle("Postulantes Becas");
+		$writer = PHPExcel_IOFactory::createWriter($phpExcel, "Excel5");
+		$sheet = $phpExcel ->getActiveSheet();
+		$sheet->setTitle('Reporte de Asistencia');
+		$phpExcel->getActiveSheet()->mergeCells('A1:I1');
+		$phpExcel->getActiveSheet()->mergeCells('A2:I2');
+		$phpExcel->getActiveSheet()->mergeCells('F4:G4');
+		$sheet->getCell('A2')->setValue('Reporte de asistencia - '.$Semestre .' Semestre '.$Annio);
+		$sheet->getCell('A4')->setValue('NO.');
+		$sheet->getCell('B4')->setValue('CARNÉ');
+		$sheet->getCell('C4')->setValue('NOMBRE COMPLETO');
+		$sheet->getCell('D4')->setValue('Asistencia');
+		$phpExcel->getActiveSheet()->getStyle('A1:I1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$phpExcel->getActiveSheet()->getStyle('A2:I2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+		$phpExcel->getActiveSheet()->getStyle('A4:D4')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('00008B');
+		$phpExcel->getActiveSheet()->getStyle('A4:D4')->getFont()->setColor(new PHPExcel_Style_Color( PHPExcel_Style_Color::COLOR_WHITE));
+		$phpExcel->getActiveSheet()->getStyle('A4:I4')->getFont()->setBold(true);
+		$sheet->getColumnDimension('A')->setAutoSize(true);
+		$sheet->getColumnDimension('B')->setAutoSize(true);
+		$sheet->getColumnDimension('C')->setAutoSize(true);
+		$sheet->getColumnDimension('D')->setAutoSize(true);
+		$sheet->getColumnDimension('E')->setAutoSize(true);
+		$sheet->getColumnDimension('F')->setAutoSize(true);
+		$sheet->getColumnDimension('G')->setAutoSize(true);
+		$sheet->getColumnDimension('H')->setAutoSize(true);
+		$sheet->getColumnDimension('I')->setAutoSize(true);
+		if ($conn->connect_error){
+	    	die("Connection failed: " . $conn->connect_error);
+	  	}else{	
+	  		$fecha = (date($Annio.'-'.$mes.'-1'));
+	  		$query = "SELECT id FROM ensayo Where MONTH(fecha) = 5";
+
+
+		    $query = "SELECT idPersona FROM asistenciaEnsayos WHERE id_Grupo = '$groupId'";
+		    $idUsuario = mysqli_query($conn, $query);
+		    $query = "SELECT nombre FROM grupo WHERE id = '$groupId'";
+		    $result = mysqli_query($conn, $query);
+		    while($row = $result->fetch_assoc()){
+		    	$nombreGrupo = $row['nombre'];
+		    }
+		    $celda = '5';
+		    $contador = '1';
+				while($row = $idUsuario->fetch_assoc()){
+					$id = $row['id_Usuario'];
+					$query = "SELECT nombre, apellidos, carnet FROM usuario WHERE id = '$id'";
+					$result3 = mysqli_query($conn, $query);
+					while($row2 = $result3->fetch_assoc()){
+						$nombreUsuario = $row2['nombre']." ".$row2['apellidos'];
+						$carnetUsuario = $row2['carnet'];
+						$celdaNum = 'A'.$celda;
+						$celdaNombre = 'C'.$celda;
+						$celdaCarnet = 'B'.$celda;
+						$celdaGrupo = 'D'.$celda;
+						$sheet->getCell($celdaNum)->setValue($contador);
+						$sheet->getCell($celdaNombre)->setValue($nombreUsuario);
+						$sheet->getCell($celdaCarnet)->setValue($carnetUsuario);
+						$sheet->getCell($celdaGrupo)->setValue($nombreGrupo);
+						$celda += 1;
+						$contador += 1;
+					}
+				}
+			}
+			$fileN = str_replace(' ','_','Postulantes Becas '.$nombreGrupo.'.xls');
+		    $writer->save($fileN);
+			$file = $fileN;
+
+			if (file_exists($file)) {
+			    header('Content-Description: File Transfer');
+			    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			    header('Content-Disposition: attachment; filename='.basename($file));
+			    header('Content-Transfer-Encoding: binary');
+			    header('Expires: 0');
+			    header('Cache-Control: must-revalidate');
+			    header('Pragma: public');
+			    header('Content-Length: ' . filesize($file));
+			    ob_clean();
+			    flush();
+			    readfile($file);
+				unlink($file);
+			    exit;
+			}
+			$conn->close();
+			header("Location: ../adminReportes.php");
 	 }
 
 	 if(isset($_POST['GenerarPresentacionesbtn'])){
@@ -159,10 +251,6 @@
 		$sheet->getCell('E3')->setValue('LUGAR');
 		$sheet->getCell('F3')->setValue('COSTO');
 		$sheet->getCell('G3')->setValue('DESCRIPCIÓN');
-		// Making headers text bold and larger
-		// $sheet->getStyle('A1:D1')->getFont()->setBold(true)->setSize(14);
-		// Insert product data
-		// Autosize the columns
 		$sheet->getColumnDimension('A')->setAutoSize(true);
 		$sheet->getColumnDimension('B')->setAutoSize(true);
 		$sheet->getColumnDimension('C')->setAutoSize(true);
@@ -230,14 +318,4 @@
 			header("Location: ../adminReportes.php");
 	 	}
 	}
-
-		// Save the spreadsheet
-		// $writer->save('excel-files/products.xlsx');
-		// We'll be outputting an excel file
-		// header('Content-type: application/vnd.ms-excel');
-		// // It will be called file.xls
-		// header('Content-Disposition: attachment; filename="products.xls"');
-		// Write file to the browser
-
-		// $writer->save('php://output');
 ?>

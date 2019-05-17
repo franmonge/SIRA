@@ -47,6 +47,27 @@
                           <input type="submit" class="btn btn-outline" name="GenerarPresentacionesbtn" value="Generar">
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="modal modal-info fade" role="dialog" id="ReporteAsistencia-modal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Por favor seleccionar un mes</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                              <label>Por favor seleccionar un mes:</label>
+                              <input type="number" style="color:black;" name="mes" min="1" max="12" step="1" value="1" placeholder="1" required/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                          <input type="submit" class="btn btn-outline" name="GenerarAsistenciasbtn" value="Generar">
+                        </div>
+                      </div>
                       <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
@@ -72,7 +93,7 @@
                         </tr>
                         <tr>
                           <td>Asistencia mensuales</td>
-                          <td><input type="submit" name="GenerarAsistencias" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
+                          <td><input type="button" name="GenerarAsistencias" data-target="#ReporteAsistencia-modal" data-toggle="modal" class="btn btn-block btn-success btn-flat" value="Descargar"></td>
                         </tr>
                         <tr>
                           <td>Presentaciones realizadas</td>

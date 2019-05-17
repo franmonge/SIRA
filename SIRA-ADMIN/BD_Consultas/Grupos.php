@@ -17,6 +17,24 @@
 		$conn->close();
 	}
 
+	if(isset($_POST['imageId'])){
+    require('Conexion.php');
+    $id = filter_input(INPUT_POST, 'imageId');
+    $name = filter_input(INPUT_POST, 'imageName');
+    if($conn->connect_error){
+        die("Connection failed: ".$conn->connect_error);
+    }else{
+        $sql = "DELETE FROM grupo WHERE grupo.id = $id";
+        if(mysqli_query($conn, $sql)){
+						unlink('../'.$name);
+        }else{
+            echo "Error" .mysqli_error($conn);
+        }
+    }
+    $conn->close();
+    //echo "<br>Archivo eliminado con éxito".$id;
+}
+
 
 	function getGrupos(){
 		require('Conexion.php');
@@ -73,12 +91,14 @@
           <!--Modal: Name-->
           <a><img class=\"img-fluid\" alt=\"\" src=\"../".$row["Imagen"]."\"
               data-toggle=\"modal\" data-target=\"#modal".$row["id"]."\" style=\"max-width: 250px;max-height: 250px;\"></a></td>";
-        $Codigo .= "<td>" .
-        			"<div class=\"input-group-btn\">
+        $Codigo .= "<td>" ."<form action=\"adminGrupos.php\" method=\"post\">
+        			<div class=\"input-group-btn\">
                   		<button id=\"edit-group\" type=\"button\" class=\"btn btn-block btn-warning btn-flat\" data-toggle=\"modal\" data-target=\"#editGroup-modal\">Editar</button>
-                  		<button id=\"delete-group\" type=\"button\" class=\"btn btn-block btn-danger btn-flat\" data-toggle=\"modal\"data-target=\"#deleteGroup-modal\">Eliminar</button>
-                	</div>"
-                	. "</td>";
+											<input type=\"hidden\" name=\"imageId\" value=\"".$row["id"]."\" >
+											<input type=\"hidden\" name=\"imageName\" value=\"".$row["Imagen"]."\" >
+											<input type=\"submit\"  class=\"btn btn-block btn-danger btn-flat\" value=\"Eliminar\">
+                	</div>
+                	 </form></td>";
         $Codigo .= "</tr>";
       }
       $Codigo .= "

@@ -122,8 +122,7 @@ if ($conn->connect_error){
                 <!--Body-->
                 <div class=\"modal-body mb-0 p-0\">
                   <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">
-                    <iframe class=\"embed-responsive-item\" src=\"../".$row["image_path"]."\"
-                      allowfullscreen></iframe>
+                    <img class=\"embed-responsive-item\" src=\"../".$row["image_path"]."\">
                   </div>
                 </div>
               </div>

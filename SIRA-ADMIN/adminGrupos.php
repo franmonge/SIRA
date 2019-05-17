@@ -13,6 +13,41 @@
 
 <body class="hold-transition skin-blue sidebar-mini">
       <?php include('adminNav.php')?>
+
+
+      <div class="modal modal-info fade" role="dialog"  id="editGroup-modal">
+          <!-- <form action="adminGrupos.php" method="POST" enctype="multipart/form-data"> -->
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">Presentación</h4>
+                  </div>
+                  <div class="modal-body">
+                      <div class="input-group">
+                          <input id="inName" type="text"   class="form-control" name="inGroupName"   placeholder="Nombre" required>
+                          <textarea id="inDescription" rows="4"   class="form-control" name="inGroupDetail" placeholder="Descripción" style="resize: none;"   required></textarea>
+                          <textarea id="inHistory" rows="4"   class="form-control" name="inGroupHistory" placeholder="Historia" style="resize: none;"   required></textarea>
+                          <input type="file" name="inFileToUpload" id="inFileToUpload">
+                          <input type="hidden" name="inGroupId" id="inGroupId">
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Guardar</button>
+                    <!-- <input type="submit" class="btn btn-outline" name="ACTION" value="Guardar" > -->
+                 </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+          <!-- </form> -->
+        </div>
+        <!-- /.modal -->
+
+
+
 <div class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -61,71 +96,7 @@
       <!-- /.box -->
       </div>
 
-    <div class="modal modal-info fade" id="member-modal">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Info Modal</h4>
-              </div>
-              <div class="modal-body">
-                <p>One fine body&hellip;</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-outline">Save changes</button>
-              </div>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
 
-    <div class="modal modal-warning fade" id="editGroup-modal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Info Modal</h4>
-                </div>
-                <div class="modal-body">
-                  <p>One fine body&hellip;</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-outline">Save changes</button>
-                </div>
-              </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-    </div>
-          <!-- /.modal -->
-
-    <div class="modal modal-danger fade" id="deleteGroup-modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Info Modal</h4>
-                  </div>
-                  <div class="modal-body">
-                    <p>One fine body&hellip;</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline">Save changes</button>
-                  </div>
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
             </div>
   <!-- ./wrapper -->
 
@@ -146,6 +117,17 @@
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
   <!-- page script -->
+
+  <script>
+      function loadEdit(id){
+          $("#inName").val(document.getElementById('name'+id).innerHTML);
+          $("#inDescription").val(document.getElementById('description'+id).innerHTML);
+          $("#inHistory").val(document.getElementById('history'+id).innerHTML);
+          $("#inGroupId").val(id);
+          $("#editGroup-modal").modal('show');
+
+      }
+  </script>
   <script>
   $(function () {
     $('#example1').DataTable()

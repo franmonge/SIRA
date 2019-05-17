@@ -70,35 +70,39 @@
                    <tbody>";
       while($row = $result->fetch_assoc()){
         $Codigo .= "<tr>";
-        $Codigo .= "<td>".$row["Nombre"]."</td>";
-        $Codigo .= "<td>" .$row["Descripcion"] . "</td>";
-				$Codigo .= "<td>" .$row["Historia"] . "</td>";
+        $Codigo .= "<td> <div id=\"name".$row["id"]."\">".$row["Nombre"]."</div></td>";
+        $Codigo .= "<td><div id=\"description".$row["id"]."\">" .$row["Descripcion"] . "</div></td>";
+				$Codigo .= "<td><div id=\"history".$row["id"]."\">" .$row["Historia"] . "<\div></td>";
 				$Codigo .= "<td style=\"text-align: center;\"> <div class=\"modal fade\" id=\"modal".$row["id"]."\">
-            <div class=\"modal-dialog modal-lg\" role=\"document\">
-              <!--Content-->
-              <div class=\"modal-content\">
-                <!--Body-->
-                <div class=\"modal-body mb-0 p-0\">
-                  <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">
-                    <iframe class=\"embed-responsive-item\" src=\"../".$row["Imagen"]."\"
-                      allowfullscreen></iframe>
-                  </div>
-                </div>
-              </div>
-              <!--/.Content-->
-            </div>
-          </div>
-          <!--Modal: Name-->
-          <a><img class=\"img-fluid\" alt=\"\" src=\"../".$row["Imagen"]."\"
-              data-toggle=\"modal\" data-target=\"#modal".$row["id"]."\" style=\"max-width: 250px;max-height: 250px;\"></a></td>";
-        $Codigo .= "<td>" ."<form action=\"adminGrupos.php\" method=\"post\">
+		              <div class=\"modal-dialog modal-lg\" role=\"document\">
+		                <!--Content-->
+		                <div class=\"modal-content\">
+		                  <!--Body-->
+		                  <div class=\"modal-body mb-0 p-0\">
+		                    <div class=\"embed-responsive embed-responsive-16by9 z-depth-1-half\">
+		                      <img class=\"embed-responsive-item\" src=\"../".$row["Imagen"]."\">
+		                    </div>
+		                  </div>
+		                </div>
+		                <!--/.Content-->
+		              </div>
+		            </div>
+		            <!--Modal: Name-->
+		            <a><img class=\"img-fluid\" src=\"../".$row["Imagen"]."\"
+		                data-toggle=\"modal\" data-target=\"#modal".$row["id"]."\" style=\"max-width: 250px;max-height: 250px;\"></a></td>";
+        $Codigo .= "<td>" ."
         			<div class=\"input-group-btn\">
-                  		<button id=\"edit-group\" type=\"button\" class=\"btn btn-block btn-warning btn-flat\" data-toggle=\"modal\" data-target=\"#editGroup-modal\">Editar</button>
+					<form action=\"#\" method=\"post\">
+                  		<button id=\"".$row["id"]."\" type=\"button\" class=\"btn btn-block btn-warning btn-flat\"
+						 onClick=\"loadEdit(this.id)\">Editar</button>
+						</form>
+										<form action=\"adminGrupos.php\" method=\"post\">
 											<input type=\"hidden\" name=\"imageId\" value=\"".$row["id"]."\" >
 											<input type=\"hidden\" name=\"imageName\" value=\"".$row["Imagen"]."\" >
 											<input type=\"submit\"  class=\"btn btn-block btn-danger btn-flat\" value=\"Eliminar\">
+										</form>
                 	</div>
-                	 </form></td>";
+                	 </td>";
         $Codigo .= "</tr>";
       }
       $Codigo .= "
@@ -129,6 +133,30 @@
 		$conn->close();
 	}
 
+function updateGroup($id,$name,$description,$history,$image){
+	require('Conexion.php');
+	if ($conn->connect_error){
+		die("Connection failed: " . $conn->connect_error);
+		echo "Connection failed";
+  	}else{
+		$updateImg = "";
+		if (!is_null($image)) {
+			$query = "SELECT Imagen FROM grupo WHERE id = '$id'";
+			$result = mysqli_query($conn, $query);
+			$imageLocation = $result->fetch_assoc()['Imagen'];
+			unlink("../../".$imageLocation);
+			$updateImg = ", Imagen='$image'";
+		}
+		$query = "UPDATE grupo SET Nombre='$name', Descripcion='$description', Historia='$history'".$updateImg." WHERE grupo.id = $id";
+		if(mysqli_query($conn, $query)){
+			$ultimoID =$id;
+		}
+		$conn->close();
+		header("Location: ../adminGrupos.php");
+  		exit();
+	}
+
+}
 
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$target_dir = "../../img/groups/";
@@ -188,5 +216,55 @@
 				}
 			}
 	}
+
+if (isset($_POST['ACTION'])) {
+	$id = filter_input(INPUT_POST, 'inGroupId');
+	$name = filter_input(INPUT_POST, 'inName');
+	$description = filter_input(INPUT_POST, 'inDescription');
+	$history = filter_input(INPUT_POST, 'inHistory');
+	$target_dir = "../img/groups/";
+	$target_file = $target_dir;
+	if(!empty($_FILES["inFileToUpload"]["name"])) {
+		$target_file .= basename($_FILES["inFileToUpload"]["name"]);
+		$uploadOk = 1;
+		$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+		$check = getimagesize($_FILES["inFileToUpload"]["tmp_name"]);
+		if($check !== false) {
+			// echo "File is an image - " . $check["mime"] . ".";
+			$uploadOk = 1;
+		} else {
+			$uploadOk = 0;
+		}
+
+		// Check if file already exists
+		if (file_exists($target_file)) {
+			$uploadOk = 0;
+		}
+		// Check file size
+		if ($_FILES["inFileToUpload"]["size"] > 5000000) {
+			$uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+			$uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+		// if everything is ok, try to upload file
+		} else {
+			if (move_uploaded_file($_FILES["inFileToUpload"]["tmp_name"], $target_file)) {
+				$path = "img/groups/".basename($_FILES["inFileToUpload"]["name"]);
+				updateGroup($id,$name,$description,$history,$path);
+			}
+		}
+
+	}else {
+		updateGroup($id,$name,$description,$history,NULL);
+	}
+}
+
+
+
 
  ?>

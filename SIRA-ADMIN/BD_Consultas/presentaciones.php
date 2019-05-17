@@ -221,7 +221,7 @@ if (!empty($_POST["inEventName"])) {
 									deleteEvent($id);
 								}else{
 									if($action == "Guardar"){
-										if(isset($_FILES["inFileToUpload"]["name"])) {
+										if(!empty($_FILES["inFileToUpload"]["name"])) {
 									        $target_file .= basename($_FILES["inFileToUpload"]["name"]);
 											$uploadOk = 1;
 									       	$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
